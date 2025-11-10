@@ -1,0 +1,194 @@
+Demo
+
+Install (first time):
+
+  Download .Net8
+  Download sqlcmd
+  Download sqlserver Express
+  Download eLibSetup from msht.ir
+  Install eLib (default path)
+
+
+Run
+  Add local servers
+  Add remote personal server (optional) 
+  Add two new user2 to eLibA (user1 1111 , user2 2222)
+
+
+Login to eLibA as user1
+-pass cmd (change password)
+
+[Projects and subProjects]
+Add two Projects:
+    my lecture
+    my project
+
+Edit subProjects
+  my lecture -> part1
+         add -> part2
+         add -> part3
+  my thesis  -> for introduction
+         add -> for analyses
+         add -> for discussion
+
+Add a SNote to part1 (part one is about basic topics ...)
+ 
+Import a pdf  by drop on TrrA-part1
+
+Import two pdfs by -import cmd
+    -a book for part1
+    -a paper for introduction
+
+Visit HDD : inspect the folders
+
+Copy some files to Books folder
+Copy some videos to Lectures folder
+
+SCAN by -scan cmd
+
+Search (Covid - Bio) : Select a Ref :  OpenRead
+
+Add a RNote to a Ref
+
+Select a Ref : rClick : link to a SP
+
+Select a SP : Select a Link : Add a LNote
+
+cmd -Share : share Project (my Project) as full-access
+           : entrust Project (My Thesis)  
+
+
+Logout 
+login as Admin
+
+
+Add a new User (user3 3333)
+
+Try delete user1 (populated user wont delete)
+Try delete user3
+
+Backup the lib
+
+Clear the lib
+
+
+Logout then login to eLibA
+Restore
+Logout
+
+
+Login to remote server as msht
+
+Edit Project (0 Daily Notes) : set as inactive
+Show Projects: active, inactive, all
+Use -proj cmd to show Projects
+
+
+Select SP (study : comp.C) : select SNote (last one)
+Search word (color) in the note : then search again
+
+cmd -? : inline help
+
+-rtl  cmd : -ltr cmd 
+-Date cmd
+-Done cmd : Done--Pending
+-save cmd : Save the Note
+
+Select SP (comp.C) : -MindMap cmd
+
+Search (linq) : select first note : set as DownStreams
+Search (program) : select first note : set as DownStreams
+                 : select 3rd   note : set as DownStreams
+
+Search (C#) : select the note : set as UpStream
+Back to AssignForm
+
+
+Search (endnote) : select SNote (labafi) : -fam cmd
+                 : show Parent (F2) + SNotes in B + Links in C
+
+Search (soil) : select Note (soil ok) : -fam cmd
+                 : show Parent (F2) + Link selected in C + LNotes in B 
+
+
+-folder cmd : explore HDD : Papers (Folder = Brachypodium)
+Select 5 Refs : link then to a SP (???)
+
+Select a file : OpenRead
+Select a file : SaveACopy
+Locate the saved file
+
+
+Back to AssignForm
+Add New Project (Temp)
+Select a SNote : replace (to Temp)
+Select the SNote : Move it to Tomorrow
+
+Select SP (Genera: Taxa.Allium) : Select Link (Perruzi) : replace (to Temp)
+
+Select Link (Temp: Taxa.Allium : Perruzi) : show attributes : set as ImR
+
+Select Link again : show attributes : set as Imp1
+
+
+GridB_menu: Show Upcoming
+
+Click on bar on top : edit Upcoming notes
+
+Change Date of a note to day3 from now : Back and check the LEDs
+
+
+Create a new word document (my new file) : link it to SP (Temp)
+
+Show another interface
+Back to the new-interface
+
+
+-shelf cmd (Project = Genera)
+
+
+Select SP (Temp: Taza.Allium) : Select Link (Pirruzi) : show QRCode
+
+
+Explain the shortcut keys:
+F1:TreeA refresh
+F2: change focus between TreeA and SearchBox
+F3: focus on gridA
+F4: show/hide the editor 
+F5: focus on gridB
+F6: Show upcoming notes in gridB
+F7: logout
+
+
+-Report cmd
+
+
+Select Project (Temp) : -Share cmd
+Select User1 : click 'Entrust'
+
+
+logout
+login as user1 (1111)
+Change user's password (to 1234)
+
+Select Project : -Share cmd
+Add users by DblClick
+Remove sharings by DblClick on list at right
+
+
+---
+If older version is installed:
+
+Uninstall old version of eLib
+Download SQLCMD
+Drop local DBs
+
+Download from msht.ir (repeat)
+Compile from Code
+
+
+
+
+
+END
+

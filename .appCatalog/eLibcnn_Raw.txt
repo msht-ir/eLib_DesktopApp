@@ -1,0 +1,23 @@
+eLibcnn
+remote server 1
+31.25.91.22
+msht_eLib
+msht_eLib1AppUser
+eLiB1_dRmShT2733
+C4833301
+
+eLibcnn
+remote server 2
+31.25.91.22
+msht_eLib2
+msht_eLib2AppUser
+eLiB2_dRmShT2733
+C5745366
+
+eLibcnn
+remote server 3
+31.25.91.22
+msht_eLib3
+msht_eLib3AppUser
+eLiB3_dRmShT2733
+C6583018

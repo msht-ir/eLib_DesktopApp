@@ -1,0 +1,148 @@
+ctrl + K + 0 (-9)        : collapse all/levels
+ctrl + K + J             : expand all
+ctrl + shift + [         : Fold current code block
+ctrl + shift + ]         : Unfold current code block
+ctrl + shift + P (F1)    : command palletw
+ctrl + ,                 : settings
+ctrl + G                 : goto line number
+ctrl + shift + F         : search in project
+alt + up/down            : move line up/down
+ctrl + shift + L         : select all occurrences of current word
+ctrl + shift + K         : delete line
+ctrl + I                 : Format document (if formatter is installed)
+
+Debugging
+  F5           : Start/continue debugging
+  Shift + F5   : Stop debugging
+  F9           : Toggle breakpoint
+  F10          : Step over
+  F11          : Step into
+  Shift + F11  : Step out
+  
+ ctrl + `      : integrated terminal
+ 
+ 
+ Multi-Cursor and Selection
+    alt + Click               : Add cursor at click position
+    ctrl + Alt + Up / Down    : Add cursor above/below
+    Ctrl + Shift + Up / Down  : Select lines up/down
+    Shift + Alt + Drag        : Column (box) selection
+    
+    Alt + Left / Right        : Go back/forward in cursor history
+    
+
+
+
+
+
+
+
+SQL Server on Ubuntu:
+---------------------
+Ubuntu Version: SQL Server 2022 officially supports Ubuntu 20.04 and 22.04 LTS. For Ubuntu 24.04, you may need workarounds or Docker (noted below). This guide assumes Ubuntu 22.04 for compatibility.
+
+
+1. Update Your System
+sudo apt update && sudo apt upgrade -y
+
+2. Add Microsoft’s GPG Key
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
+
+3. Add the SQL Server Repository
+curl -fsSL https://packages.microsoft.com/config/ubuntu/22.04/mssql-server-2022.list | sudo tee /etc/apt/sources.list.d/mssql-server-2022.list
+sudo apt update
+
+4. Install SQL Server Express
+sudo apt install -y mssql-server
+
+5. Configure SQL Server
+sudo /opt/mssql/bin/mssql-conf setup
+
+6. Verify the Installation
+sudo systemctl status mssql-server
+
+Output should show active (running).
+If not running, start it with:
+sudo systemctl start mssql-server
+
+Enable it to start on boot:
+sudo systemctl enable mssql-server
+
+7. Install SQL Server Command-Line Tools (sqlcmd)
+curl -fsSL https://packages.microsoft.com/config/ubuntu/22.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+sudo apt update
+sudo apt install -y mssql-tools unixodbc-dev
+
+Add the tools to your PATH for easier access:
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+source ~/.bashrc
+
+est the connection locally, similar to testing connectivity in SSMS:
+sqlcmd -S localhost -U SA -P 'YourStrong@Passw0rd'
+
+At the 1> prompt, create a test database:
+CREATE DATABASE TestDB;
+GO
+SELECT name FROM sys.databases;
+GO
+
+Output should list TestDB among other system databases. Exit with:
+EXIT
+
+8. Connect Using VS Code (Similar to SSMS on Windows)
+To replicate the Windows experience of using a GUI like SSMS, install the SQL Server (mssql) extension in VS Code on Ubuntu:
+
+    Open VS Code.
+    Go to Extensions (Ctrl+Shift+X).
+    Search for SQL Server (mssql) and install it.
+    Add a connection:
+        Press Ctrl+Alt+D to open the SQL Server extension.
+        Click “Add Connection” and enter:
+            Server: localhost
+            Database: (optional, leave blank or enter TestDB)
+            Authentication Type: SQL Login
+            Username: SA
+            Password: YourStrong@Passw0rd
+            Profile Name: e.g., LocalSQLExpress
+        Enable “Trust Server Certificate” if prompted.
+        
+        
+Test by creating a .sql file, setting the language to SQL (Ctrl+K, M), and running:
+SELECT @@VERSION;
+
+Execute with Ctrl+Shift+E. The output should show SQL Server 2022 Express Edition.
+
+
+
+9. (Optional) Enable Remote Connections
+To allow remote access (e.g., from another machine, similar to configuring remote access in Windows), ensure port 1433 is open:
+sudo ufw allow 1433/tcp
+sudo ufw reload
+
+Verify the firewall status:
+sudo ufw status
+
+To allow remote connections in SQL Server:
+sqlcmd -S localhost -U SA -P 'YourStrong@Passw0rd'
+
+EXEC sp_configure 'remote access', 1;
+GO
+RECONFIGURE;
+GO
+EXIT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
