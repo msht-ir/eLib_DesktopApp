@@ -262,7 +262,7 @@ namespace eLib
             }
         private void ShowNotesForm ()
             {
-            if (Db.DS.Tables ["tblNotesCount"].Rows.Count != 0)
+            if (Db.DS.Tables["tblNotesCount"].Rows.Count != 0)
                 {
                 var frmUpcomingNT = new frmUpcomingNotes ();
                 frmUpcomingNT.ShowDialog ();
@@ -643,8 +643,8 @@ namespace eLib
                 case (Keys) 13: //enter
                         {
                         e.SuppressKeyPress = true;
-                        Db.DS.Tables ["tblRefs"].Clear ();
-                        Db.DS.Tables ["tblAssignments"].Clear ();
+                        Db.DS.Tables["tblRefs"].Clear ();
+                        Db.DS.Tables["tblAssignments"].Clear ();
                         if (string.IsNullOrEmpty (Strings.Trim (txtSearch.Text)))
                             {
                             txtSearch.Text = "";
@@ -655,8 +655,8 @@ namespace eLib
                             string searchString = Strings.Trim (txtSearch.Text);
                             FindRefs (searchString);
                             List5.SelectedValue = -1;
-                            Db.DS.Tables ["tblAssignments"].Clear ();
-                            Db.DS.Tables ["tblRNotes"].Clear ();
+                            Db.DS.Tables["tblAssignments"].Clear ();
+                            Db.DS.Tables["tblRNotes"].Clear ();
                             txtSearch.Focus ();
                             //txtSearch.Text = txtSearch.Text.Trim ();
                             txtSearch.SelectionStart = 0;
@@ -789,12 +789,12 @@ namespace eLib
                 return;
                 }
             Assign.DoSearchRefs (searchString);
-            List5.DataSource = Db.DS.Tables ["tblRefs"];
+            List5.DataSource = Db.DS.Tables["tblRefs"];
             List5.DisplayMember = "PaperName";
             List5.ValueMember = "Papers.ID";
             SetList5Status ("Ref");
             //nrows? :if no result => reduce from keys
-            if (Db.DS.Tables ["tblRefs"].Rows.Count == 0)
+            if (Db.DS.Tables["tblRefs"].Rows.Count == 0)
                 {
                 txtSearch.SelectionStart = 0;
                 txtSearch.SelectionLength = txtSearch.Text.Length;
@@ -802,8 +802,8 @@ namespace eLib
                     txtSearch.Text = txtSearch.Text + " .";
                 txtSearch.SelectionStart = Strings.Len (txtSearch.Text);
                 }
-            Db.DS.Tables ["tblAssignments"].Clear ();
-            Db.DS.Tables ["tblRNotes"].Clear ();
+            Db.DS.Tables["tblAssignments"].Clear ();
+            Db.DS.Tables["tblRNotes"].Clear ();
             }
         //List1-List5
         private void List5_DragEnter (object sender, DragEventArgs e)
@@ -839,8 +839,8 @@ namespace eLib
                         return;
                         }
                 }
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
             e.Effect = DragDropEffects.None;
             SubProject.Id = (int) List4.SelectedValue;
             SubProject.Name = List4.Text;
@@ -1006,12 +1006,12 @@ namespace eLib
                         {
                         Ref.Id = Conversions.ToInteger (List5.SelectedValue);
                         Assign.GetRLinks (Ref.Id);
-                        List2.DataSource = Db.DS.Tables ["tblAssignments"];
+                        List2.DataSource = Db.DS.Tables["tblAssignments"];
                         List2.DisplayMember = "SubProjectName";
                         List2.ValueMember = "SubProject_ID";
                         List2.SelectedValue = -1;
                         Assign.GetNotes (Ref.Id, 3);
-                        List15.DataSource = Db.DS.Tables ["tblRNotes"];
+                        List15.DataSource = Db.DS.Tables["tblRNotes"];
                         List15.DisplayMember = "NoteDatum";
                         List15.ValueMember = "ID";//Notes.ID
                         List15.SelectedIndex = -1;
@@ -1020,13 +1020,13 @@ namespace eLib
                         try
                             {
                             Ref.TypeText = "";
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblRefs"].Rows [List5.SelectedIndex] [2], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblRefs"].Rows[List5.SelectedIndex][2], true, false)))
                                 Ref.TypeText = Ref.TypeText + "Paper  ";
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblRefs"].Rows [List5.SelectedIndex] [3], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblRefs"].Rows[List5.SelectedIndex][3], true, false)))
                                 Ref.TypeText = Ref.TypeText + "Book  ";
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblRefs"].Rows [List5.SelectedIndex] [4], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblRefs"].Rows[List5.SelectedIndex][4], true, false)))
                                 Ref.TypeText = Ref.TypeText + "Manual  ";
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblRefs"].Rows [List5.SelectedIndex] [5], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblRefs"].Rows[List5.SelectedIndex][5], true, false)))
                                 Ref.TypeText = Ref.TypeText + "Lecture  "; //lblRefStatus1.Text = Ref.TypeText;
                             }
                         catch (Exception ex)
@@ -1044,14 +1044,14 @@ namespace eLib
                         try
                             {
                             Note.Type = "LinkNote";
-                            Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [7]); // 7:Link.ID
+                            Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][7]); // 7:Link.ID
                             Assign.GetNotes (Link.Id, 2);
-                            List55.DataSource = Db.DS.Tables ["tblLNotes"];
+                            List55.DataSource = Db.DS.Tables["tblLNotes"];
                             List55.DisplayMember = "NoteDatum";
                             List55.ValueMember = "Notes.ID";
                             List55.SelectedIndex = -1;
                             Client.List55Mode = "LinkNote";
-                            Ref.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [0]);
+                            Ref.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][0]);
                             if (Ref.Id < 1)
                                 {
                                 lblStatusBar.Text = List5.Text;
@@ -1060,33 +1060,33 @@ namespace eLib
                             int Refid = List5.SelectedIndex;
                             Ref.TypeText = "";
                             string lblCaption = "";
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [Refid] [2], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[Refid][2], true, false)))
                                 {
                                 lblCaption = lblCaption + "Paper ";
                                 Ref.TypeText = Ref.TypeText + "Paper  ";
                                 }
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [Refid] [3], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[Refid][3], true, false)))
                                 {
                                 lblCaption = lblCaption + "Book ";
                                 Ref.TypeText = Ref.TypeText + "Book  ";
                                 }
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [Refid] [4], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[Refid][4], true, false)))
                                 {
                                 lblCaption = lblCaption + "Manual ";
                                 Ref.TypeText = Ref.TypeText + "Manual  ";
                                 }
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [Refid] [5], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[Refid][5], true, false)))
                                 {
                                 lblCaption = lblCaption + "Lecture ";
                                 Ref.TypeText = Ref.TypeText + "Lecture  ";
                                 }
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [Refid] [8], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[Refid][8], true, false)))
                                 lblCaption = lblCaption + "Imp1 ";
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [Refid] [9], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[Refid][9], true, false)))
                                 lblCaption = lblCaption + "Imp2 ";
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [Refid] [10], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[Refid][10], true, false)))
                                 lblCaption = lblCaption + "Imp3 ";
-                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [Refid] [11], true, false)))
+                            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[Refid][11], true, false)))
                                 lblCaption = lblCaption + "ImR ";
                             lblStatusBar.Text = lblCaption + " / " + List5.Text;
                             List2.DataSource = null;
@@ -1102,14 +1102,14 @@ namespace eLib
                 //Ref, Link, SubProjectNote, SubProjectNoteSearch, LinkNote, LinkNoteSearch, RefNote, RefNoteSearch
                 case "SubProjectNote":
                         {
-                        Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblSNotes"].Rows [List5.SelectedIndex] [2]);
-                        Note.Rtl = Conversions.ToBoolean (Db.DS.Tables ["tblSNotes"].Rows [List5.SelectedIndex] [5]);
+                        Note.NoteText = Conversions.ToString (Db.DS.Tables["tblSNotes"].Rows[List5.SelectedIndex][2]);
+                        Note.Rtl = Conversions.ToBoolean (Db.DS.Tables["tblSNotes"].Rows[List5.SelectedIndex][5]);
                         ShowNoteInTextBox ();
                         break;
                         }
                 case "SubProjectNoteSearch":
                         {
-                        Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblNotesCount"].Rows [List5.SelectedIndex] [3]);
+                        Note.NoteText = Conversions.ToString (Db.DS.Tables["tblNotesCount"].Rows[List5.SelectedIndex][3]);
                         Note.Rtl = false;
                         ShowNoteInTextBox ();
                         break;
@@ -1118,8 +1118,8 @@ namespace eLib
                 case "LinkNoteSearch":
                         {
                         Note.Type = "LinkNote";
-                        Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblLNotes"].Rows [List5.SelectedIndex] [2]);
-                        Note.Rtl = Conversions.ToBoolean (Db.DS.Tables ["tblLNotes"].Rows [List5.SelectedIndex] [5]);
+                        Note.NoteText = Conversions.ToString (Db.DS.Tables["tblLNotes"].Rows[List5.SelectedIndex][2]);
+                        Note.Rtl = Conversions.ToBoolean (Db.DS.Tables["tblLNotes"].Rows[List5.SelectedIndex][5]);
                         ShowNoteInTextBox ();
                         break;
                         }
@@ -1127,8 +1127,8 @@ namespace eLib
                 case "RefNoteSearch":
                         {
                         Note.Type = "LinkNoteSearch";
-                        Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblRNotes"].Rows [List5.SelectedIndex] [2]);
-                        Note.Rtl = Conversions.ToBoolean (Db.DS.Tables ["tblRNotes"].Rows [List5.SelectedIndex] [5]);
+                        Note.NoteText = Conversions.ToString (Db.DS.Tables["tblRNotes"].Rows[List5.SelectedIndex][2]);
+                        Note.Rtl = Conversions.ToBoolean (Db.DS.Tables["tblRNotes"].Rows[List5.SelectedIndex][5]);
                         ShowNoteInTextBox ();
                         break;
                         }
@@ -1237,7 +1237,7 @@ namespace eLib
             {
             try
                 {
-                List5.DataSource = Db.DS.Tables ["tblRefs"];
+                List5.DataSource = Db.DS.Tables["tblRefs"];
                 List5.DisplayMember = "PaperName";
                 List5.ValueMember = "Papers.ID";
                 SetList5Status ("Ref");
@@ -1365,7 +1365,7 @@ namespace eLib
         private void Menu1_GetList_Click (object sender, EventArgs e)
             {
             Assign.GetListOfRefs ();
-            List5.DataSource = Db.DS.Tables ["tblRefs"];
+            List5.DataSource = Db.DS.Tables["tblRefs"];
             List5.DisplayMember = "Papername";
             List5.ValueMember = "Papers.ID";
             }
@@ -1401,7 +1401,7 @@ namespace eLib
         private void Menu1_Imp1_Click (object sender, EventArgs e)
             {
             Assign.GetImportantRefs ("Imp1");
-            List5.DataSource = Db.DS.Tables ["tblRefs"];
+            List5.DataSource = Db.DS.Tables["tblRefs"];
             List5.DisplayMember = "PaperName";
             List5.ValueMember = "Papers.ID";
             txtSearch.Text = "";
@@ -1413,7 +1413,7 @@ namespace eLib
         private void Menu1_Imp2_Click (object sender, EventArgs e)
             {
             Assign.GetImportantRefs ("Imp2");
-            List5.DataSource = Db.DS.Tables ["tblRefs"];
+            List5.DataSource = Db.DS.Tables["tblRefs"];
             List5.DisplayMember = "PaperName";
             List5.ValueMember = "Papers.ID";
             txtSearch.Text = "";
@@ -1425,7 +1425,7 @@ namespace eLib
         private void Menu1_Imp3_Click (object sender, EventArgs e)
             {
             Assign.GetImportantRefs ("Imp3");
-            List5.DataSource = Db.DS.Tables ["tblRefs"];
+            List5.DataSource = Db.DS.Tables["tblRefs"];
             List5.DisplayMember = "PaperName";
             List5.ValueMember = "Papers.ID";
             txtSearch.Text = "";
@@ -1437,7 +1437,7 @@ namespace eLib
         private void Menu1_ImpAll_Click (object sender, EventArgs e)
             {
             Assign.GetImportantRefs ("ImpAll");
-            List5.DataSource = Db.DS.Tables ["tblRefs"];
+            List5.DataSource = Db.DS.Tables["tblRefs"];
             List5.DisplayMember = "PaperName";
             List5.ValueMember = "Papers.ID";
             txtSearch.Text = "";
@@ -1449,7 +1449,7 @@ namespace eLib
         private void Menu1_ImR_Click (object sender, EventArgs e)
             {
             Assign.GetImportantRefs ("ImR");
-            List5.DataSource = Db.DS.Tables ["tblRefs"];
+            List5.DataSource = Db.DS.Tables["tblRefs"];
             List5.DisplayMember = "PaperName";
             List5.ValueMember = "Papers.ID";
             txtSearch.Text = "";
@@ -1574,7 +1574,7 @@ namespace eLib
             My.MyProject.Forms.frmChooseProject.ShowDialog ();
             if (Client.DialogRequestParams == 32)
                 {
-                Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [7]);
+                Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][7]);
                 Assign.ReplaceALink (Link.Id, SubProject.Id);
                 List4_Click (null, null); // refresh List5
                 }
@@ -1589,7 +1589,7 @@ namespace eLib
                 return;
             if (List6.SelectedIndex >= 0)
                 return;
-            Ref.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [0]);
+            Ref.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][0]);
             Client.DialogRequestParams = 2; //1:get Project 2:get SubProject 3:get Project or SubProject
             My.MyProject.Forms.frmChooseProject.ShowDialog ();
             if (Client.DialogRequestParams == 32) //1: A SubProjects is selected from dialog //intProd=id of the selected SubProject
@@ -1617,7 +1617,7 @@ namespace eLib
                 return;
             if (Assign.CheckReadOnlyAccess (Project.Id) == 1)
                 return;
-            Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [7]); // see GetRefs above
+            Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][7]); // see GetRefs above
             Assign.DeleteALink (Link.Id, true);
             try
                 {
@@ -1644,28 +1644,28 @@ namespace eLib
             if (List5.SelectedIndex == -1)
                 return;
             // If List6.SelectedIndex <> -1 Then Exit Sub
-            SubProject.Id = Conversions.ToInteger (Db.DS.Tables ["tblSubProject"].Rows [List4.SelectedIndex] [0]);  // 0:SubProject.Id
-            Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [7]);             // 7:Links.ID
-            Ref.Title = Conversions.ToString (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [1]);            // 1:PaperName
-            SubProject.Note = Conversions.ToString (Db.DS.Tables ["tblSubProject"].Rows [List4.SelectedIndex] [2]); // 2:SubProject.Note
-            Ref.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [0]);              // 0:Papers.ID
-                                                                                                                    // Retval2: 1111-1111 {ImR.Imp3.Imp2.Imp1.Lect.Man.Book.Paper}
+            SubProject.Id = Conversions.ToInteger (Db.DS.Tables["tblSubProject"].Rows[List4.SelectedIndex][0]);  // 0:SubProject.Id
+            Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][7]);             // 7:Links.ID
+            Ref.Title = Conversions.ToString (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][1]);            // 1:PaperName
+            SubProject.Note = Conversions.ToString (Db.DS.Tables["tblSubProject"].Rows[List4.SelectedIndex][2]); // 2:SubProject.Note
+            Ref.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][0]);              // 0:Papers.ID
+                                                                                                                 // Retval2: 1111-1111 {ImR.Imp3.Imp2.Imp1.Lect.Man.Book.Paper}
             Ref.Attributes = 0;
-            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [2], true, false)))
+            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][2], true, false)))
                 Ref.Attributes = Ref.Attributes | 1;
-            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [3], true, false)))
+            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][3], true, false)))
                 Ref.Attributes = Ref.Attributes | 2;
-            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [4], true, false)))
+            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][4], true, false)))
                 Ref.Attributes = Ref.Attributes | 4;
-            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [5], true, false)))
+            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][5], true, false)))
                 Ref.Attributes = Ref.Attributes | 8;
-            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [8], true, false)))
+            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][8], true, false)))
                 Ref.Attributes = Ref.Attributes | 16;
-            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [9], true, false)))
+            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][9], true, false)))
                 Ref.Attributes = Ref.Attributes | 32;
-            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [10], true, false)))
+            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][10], true, false)))
                 Ref.Attributes = Ref.Attributes | 64;
-            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [11], true, false)))
+            if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][11], true, false)))
                 Ref.Attributes = Ref.Attributes | 128;
             My.MyProject.Forms.frmRefAttributes.ShowDialog ();
             if (Ref.Attributes == 1)
@@ -1762,9 +1762,9 @@ namespace eLib
                     SetList5Status (Note.Type); //ie RefNote or RefNoteSearch
                     List55.DataSource = null;
                     //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                    Note.Id = Convert.ToInt32 (Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [0]);
-                    Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [2]);
-                    Note.Rtl = Conversions.ToBoolean (Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [5]);
+                    Note.Id = Convert.ToInt32 (Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][0]);
+                    Note.NoteText = Conversions.ToString (Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][2]);
+                    Note.Rtl = Conversions.ToBoolean (Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][5]);
                     ShowNoteInTextBox ();
                     }
                 catch (Exception ex)
@@ -1813,15 +1813,15 @@ namespace eLib
             {
             if (List15.SelectedIndex == -1)
                 return;
-            Ref.Id = Conversions.ToInteger (Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [3]);
+            Ref.Id = Conversions.ToInteger (Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][3]);
             Ref.Title = List5.Text;
             Note.Id = Conversions.ToInteger (List15.SelectedValue);
             if (Note.Id < 1)
                 return;
-            Note.DateTime = Conversions.ToString (Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [1]);
-            Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [2]);
+            Note.DateTime = Conversions.ToString (Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][1]);
+            Note.NoteText = Conversions.ToString (Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][2]);
             Note.Index = List15.SelectedIndex;
-            Note.Rtl = Conversions.ToBoolean (Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [4]);
+            Note.Rtl = Conversions.ToBoolean (Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][4]);
             CallNoteEditor (Client.List15Mode);
             //refresh lists
             Client.List5Mode = "Ref";
@@ -1841,9 +1841,9 @@ namespace eLib
                 {
                 return;
                 }
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
-            FileInfo MyFile = new FileInfo (strFiles [0]);
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
+            FileInfo MyFile = new FileInfo (strFiles[0]);
             if (MyFile.Extension.ToLower () != ".txt")
                 {
                 return;
@@ -1851,7 +1851,7 @@ namespace eLib
             //create a new RefNote for selected ref in List1
             string text = System.IO.File.ReadAllText (eLibFile.strFilex);
             e.Effect = DragDropEffects.None;
-            Ref.Id = Conversions.ToInteger (Db.DS.Tables ["tblRefs"].Rows [List5.SelectedIndex] [0]); //0:Paper.ID
+            Ref.Id = Conversions.ToInteger (Db.DS.Tables["tblRefs"].Rows[List5.SelectedIndex][0]); //0:Paper.ID
             if (Ref.Id < 1)
                 return;
             string strDateTime = DateTime.Now.ToString ("yyyy-MM-dd . HH-mm");
@@ -1877,7 +1877,7 @@ namespace eLib
             string Keyx3 = "";
             string Keyx4 = "";
             string Fltr = "";
-            var spcz = new int [4];
+            var spcz = new int[4];
             try
                 {
                 //locate spaces in the search string
@@ -1891,11 +1891,11 @@ namespace eLib
                         k = k + 1;
                         if (k == 4)
                             break;
-                        spcz [k] = i;
+                        spcz[k] = i;
                         }
                     }
-                spcz [0] = k; //how many spaces?                    
-                switch (spcz [0])
+                spcz[0] = k; //how many spaces?                    
+                switch (spcz[0])
                     {
                     case 0: // no space; one key
                             {
@@ -1904,17 +1904,17 @@ namespace eLib
                             }
                     case 1: // 1 space; 2 keys
                             {
-                            Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                            Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1);
+                            Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                            Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1);
                             Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                             Fltr = Fltr + "(Note Like '%" + Keyx2 + "%')";
                             break;
                             }
                     case 2: // 2 spaces; 3 keys
                             {
-                            Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                            Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1, spcz [2] - spcz [1] - 1);
-                            Keyx3 = Strings.Mid (KeyxA, spcz [2] + 1);
+                            Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                            Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1, spcz[2] - spcz[1] - 1);
+                            Keyx3 = Strings.Mid (KeyxA, spcz[2] + 1);
                             Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                             Fltr = Fltr + "(Note Like '%" + Keyx2 + "%') AND ";
                             Fltr = Fltr + "(Note Like '%" + Keyx3 + "%')";
@@ -1923,10 +1923,10 @@ namespace eLib
                     case 3:
                     case 4:
                             {
-                            Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                            Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1, spcz [2] - spcz [1] - 1);
-                            Keyx3 = Strings.Mid (KeyxA, spcz [2] + 1, spcz [3] - spcz [2] - 1);
-                            Keyx4 = Strings.Mid (KeyxA, spcz [3] + 1);
+                            Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                            Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1, spcz[2] - spcz[1] - 1);
+                            Keyx3 = Strings.Mid (KeyxA, spcz[2] + 1, spcz[3] - spcz[2] - 1);
+                            Keyx4 = Strings.Mid (KeyxA, spcz[3] + 1);
                             Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                             Fltr = Fltr + "(Note Like '%" + Keyx2 + "%') AND ";
                             Fltr = Fltr + "(Note Like '%" + Keyx3 + "%') AND ";
@@ -1937,7 +1937,7 @@ namespace eLib
                 List2.DataSource = null;
                 List5.SelectedIndex = -1;
                 Client.List15Mode = "RefNoteSearch";
-                Db.DS.Tables ["tblRNotes"].Clear ();
+                Db.DS.Tables["tblRNotes"].Clear ();
                 using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                     {
                     CnnSS.Open ();
@@ -1945,7 +1945,7 @@ namespace eLib
                     Db.DASS.Fill (Db.DS, "tblRNotes");
                     CnnSS.Close ();
                     //list15
-                    List15.DataSource = Db.DS.Tables ["tblRNotes"];
+                    List15.DataSource = Db.DS.Tables["tblRNotes"];
                     List15.DisplayMember = "NoteDatum";
                     List15.ValueMember = "Notes.ID";
                     List15.SelectedIndex = -1;
@@ -1962,7 +1962,7 @@ namespace eLib
             //MessageBox.Show (Client.List5Mode);
             if (Client.List5Mode == "Ref" && List5.SelectedIndex != -1)
                 {
-                Ref.Id = Conversions.ToInteger (Db.DS.Tables ["tblRefs"].Rows [List5.SelectedIndex] [0]); //0:Paper.ID
+                Ref.Id = Conversions.ToInteger (Db.DS.Tables["tblRefs"].Rows[List5.SelectedIndex][0]); //0:Paper.ID
                 if (Ref.Id < 1)
                     return;
                 string text = "new note for:   \n" + List5.Text;
@@ -1977,7 +1977,7 @@ namespace eLib
             {
             if (List15.SelectedIndex == -1)
                 return;
-            Ref.Id = Conversions.ToInteger (Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [3]);
+            Ref.Id = Conversions.ToInteger (Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][3]);
             if (Ref.Id < 1)
                 return;
             Note.Id = Conversions.ToInteger (List15.SelectedValue);
@@ -2007,7 +2007,7 @@ namespace eLib
                         List2.DataSource = null;
                         if (Client.List5Mode == "RefNote")
                             {
-                            List5.DataSource = Db.DS.Tables ["tblRefs"];
+                            List5.DataSource = Db.DS.Tables["tblRefs"];
                             List5.DisplayMember = "PaperName";
                             List5.ValueMember = "Papers.ID";
                             Client.List5Mode = "Ref";
@@ -2040,13 +2040,13 @@ namespace eLib
             try
                 {
                 lblStatusBar.Text = ""; //in case no matching user-id was found
-                int intKarbar = Conversions.ToInteger (Db.DS.Tables ["tblAssignments"].Rows [List2.SelectedIndex] [8]);
-                for (int i = 0, loopTo = Db.DS.Tables ["tblUsrs"].Rows.Count - 1; i <= loopTo; i++)
+                int intKarbar = Conversions.ToInteger (Db.DS.Tables["tblAssignments"].Rows[List2.SelectedIndex][8]);
+                for (int i = 0, loopTo = Db.DS.Tables["tblUsrs"].Rows.Count - 1; i <= loopTo; i++)
                     {
                     //MessageBox.Show ("intKarbar: " & intKarbar.ToString & " /  " & i.ToString & ":i  / id: " & DS.Tables("tblUsrs").Rows(i).Item(0) & " / user: " & DS.Tables("tblUsrs").Rows(i).Item(1))
-                    if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblUsrs"].Rows [i] [0], intKarbar, false)))
+                    if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblUsrs"].Rows[i][0], intKarbar, false)))
                         {
-                        lblStatusBar.Text = Conversions.ToString (Operators.ConcatenateObject ("usr: ", Db.DS.Tables ["tblUsrs"].Rows [i] [1]));
+                        lblStatusBar.Text = Conversions.ToString (Operators.ConcatenateObject ("usr: ", Db.DS.Tables["tblUsrs"].Rows[i][1]));
                         break;
                         }
                     }
@@ -2074,7 +2074,7 @@ namespace eLib
                 SubProject.Id = Conversions.ToInteger (List2.SelectedValue);
                 try
                     {
-                    Db.DS.Tables ["tblRefs"].Clear ();
+                    Db.DS.Tables["tblRefs"].Clear ();
                     using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                         {
                         CnnSS.Open ();
@@ -2086,11 +2086,11 @@ namespace eLib
                 catch (Exception ex)
                     {
                     }
-                List5.DataSource = Db.DS.Tables ["tblRefs"];
+                List5.DataSource = Db.DS.Tables["tblRefs"];
                 List5.DisplayMember = "Papername";
                 List5.ValueMember = "Papers.ID";
                 List5.SelectedIndex = -1;
-                Db.DS.Tables ["tblAssignments"].Clear ();
+                Db.DS.Tables["tblAssignments"].Clear ();
                 }
             }
         private void Menu2_FilterDown_Click (object sender, EventArgs e)
@@ -2109,7 +2109,7 @@ namespace eLib
             // notice: only user's own assignments are listed in list 2, so user cannot removeother's assignments! this function is safe. 
             try
                 {
-                Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblAssignments"].Rows [List2.SelectedIndex] [0]); // see GetAssignments1 above
+                Link.Id = Conversions.ToInteger (Db.DS.Tables["tblAssignments"].Rows[List2.SelectedIndex][0]); // see GetAssignments1 above
                 if (Link.Id < 1)
                     return;
                 DialogResult myansw = (DialogResult) MessageBox.Show ("Delete this Link?", "eLib", MessageBoxButtons.YesNo);
@@ -2142,7 +2142,7 @@ namespace eLib
                 {
                 return;
                 }
-            if (Convert.ToInt32 (Db.DS.Tables ["tblProject"].Rows [(int) List3.SelectedIndex] [4].ToString ()) != User.Id)
+            if (Convert.ToInt32 (Db.DS.Tables["tblProject"].Rows[(int) List3.SelectedIndex][4].ToString ()) != User.Id)
                 {
                 DialogResult i = MessageBox.Show ("Leave Group?", "eLib", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                 if (i == DialogResult.Yes)
@@ -2208,15 +2208,15 @@ namespace eLib
             {
             if ((List3.Items.Count == 0) || (List3.SelectedIndex == -1) || (Project.Id < 1))
                 return;
-            if (Convert.ToInt32 (Db.DS.Tables ["tblProject"].Rows [(int) List3.SelectedIndex] [4].ToString ()) != User.Id)
+            if (Convert.ToInt32 (Db.DS.Tables["tblProject"].Rows[(int) List3.SelectedIndex][4].ToString ()) != User.Id)
                 {
                 MessageBox.Show ("Can't EDIT \n \n You are not the Owner of this project!", "eLib", MessageBoxButtons.OK);
                 return;
                 }
             Client.DialogRequestParams = 9; //edit project
-            Project.IsActive = Conversions.ToBoolean (Db.DS.Tables ["tblProject"].Rows [List3.SelectedIndex] [3]); // active/inactive
-            Project.Name = Conversions.ToString (Db.DS.Tables ["tblProject"].Rows [List3.SelectedIndex] [1]);
-            Project.Note = Conversions.ToString (Db.DS.Tables ["tblProject"].Rows [List3.SelectedIndex] [2]);
+            Project.IsActive = Conversions.ToBoolean (Db.DS.Tables["tblProject"].Rows[List3.SelectedIndex][3]); // active/inactive
+            Project.Name = Conversions.ToString (Db.DS.Tables["tblProject"].Rows[List3.SelectedIndex][1]);
+            Project.Note = Conversions.ToString (Db.DS.Tables["tblProject"].Rows[List3.SelectedIndex][2]);
             Project.Id = Conversions.ToInteger (List3.SelectedValue); //not used here in this method
             My.MyProject.Forms.frmProject.ShowDialog ();
             try
@@ -2255,13 +2255,13 @@ namespace eLib
             Project.Id = Conversions.ToInteger (List3.SelectedValue);
             if (Project.Id < 1)
                 return;
-            if (Convert.ToInt32 (Db.DS.Tables ["tblProject"].Rows [(int) List3.SelectedIndex] [4].ToString ()) != User.Id)
+            if (Convert.ToInt32 (Db.DS.Tables["tblProject"].Rows[(int) List3.SelectedIndex][4].ToString ()) != User.Id)
                 {
                 MessageBox.Show ("NOTICE: \n\n You are not the Owner of this project!", "eLib", MessageBoxButtons.OK);
                 return;
                 }
             //check if this project was populated, if yes, dont delete it 
-            if (Db.DS.Tables ["tblSubProject"].Rows.Count > 0)
+            if (Db.DS.Tables["tblSubProject"].Rows.Count > 0)
                 {
                 MessageBox.Show ("This Project is Populated ! \r\n Replace (or Delete) its Subs, then try again", "eLib", MessageBoxButtons.OK);
                 return;
@@ -2299,7 +2299,7 @@ namespace eLib
         private void Menu3_Active_Click (object sender, EventArgs e)
             {
             Assign.GetProjects (User.Id, 0, ""); //0:active 1:inactive 2:all
-            List3.DataSource = Db.DS.Tables ["tblProject"];
+            List3.DataSource = Db.DS.Tables["tblProject"];
             List3.DisplayMember = "ProjectName";
             List3.ValueMember = "ID";
             List3.SelectedIndex = -1;
@@ -2314,7 +2314,7 @@ namespace eLib
         private void Menu3_InActive_Click (object sender, EventArgs e)
             {
             Assign.GetProjects (User.Id, 1, ""); //0:active 1:inactive 2:all
-            List3.DataSource = Db.DS.Tables ["tblProject"];
+            List3.DataSource = Db.DS.Tables["tblProject"];
             List3.DisplayMember = "ProjectName";
             List3.ValueMember = "ID";
             List3.SelectedIndex = -1;
@@ -2326,7 +2326,7 @@ namespace eLib
         private void Menu3_All_Click (object sender, EventArgs e)
             {
             Assign.GetProjects (User.Id, 2, ""); //0:active 1:inactive 2:all
-            List3.DataSource = Db.DS.Tables ["tblProject"];
+            List3.DataSource = Db.DS.Tables["tblProject"];
             List3.DisplayMember = "ProjectName";
             List3.ValueMember = "ID";
             List3.SelectedIndex = -1;
@@ -2454,7 +2454,7 @@ namespace eLib
             else if ((Strings.Left (Menu3_Search.Text, 6) == "Find: ") & (Menu3_Search.TextLength >= 8))
                 {
                 Assign.GetProjects (User.Id, 3, Strings.Trim (Menu3_Search.Text)); //0:active 1:inactive 2:all
-                List3.DataSource = Db.DS.Tables ["tblProject"];
+                List3.DataSource = Db.DS.Tables["tblProject"];
                 List3.DisplayMember = "ProjectName";
                 List3.ValueMember = "ID";
                 Menu3_Active.Checked = false;
@@ -2465,12 +2465,12 @@ namespace eLib
                 if (string.IsNullOrEmpty (strSearchPrd))
                     return;
                 SrearchSubProjects (strSearchPrd);
-                List4.DataSource = Db.DS.Tables ["tblSubProject"];
+                List4.DataSource = Db.DS.Tables["tblSubProject"];
                 List4.DisplayMember = "SubProjectName";
                 List4.ValueMember = "ID";
                 List4.SelectedValue = -1;
-                Db.DS.Tables ["tblLinks"].Clear ();
-                Db.DS.Tables ["tblSNotes"].Clear ();
+                Db.DS.Tables["tblLinks"].Clear ();
+                Db.DS.Tables["tblSNotes"].Clear ();
                 lblStatusBar.Text = "";
                 }
             }
@@ -2494,7 +2494,7 @@ namespace eLib
             }
         private void SrearchSubProjects (string strSearchKeyword)
             {
-            Db.DS.Tables ["tblSubProject"].Clear ();
+            Db.DS.Tables["tblSubProject"].Clear ();
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
                 CnnSS.Open ();
@@ -2562,16 +2562,16 @@ namespace eLib
                     List35.DataSource = null;
                     }
                 Assign.GetSharedList (Project.Id);
-                List35.DataSource = Db.DS.Tables ["tblUserProject"];
+                List35.DataSource = Db.DS.Tables["tblUserProject"];
                 List35.DisplayMember = "UsrName";
                 List35.ValueMember = "User_Id";
                 List35.SelectedIndex = -1;
-                List4.DataSource = Db.DS.Tables ["tblSubProject"];
+                List4.DataSource = Db.DS.Tables["tblSubProject"];
                 List4.DisplayMember = "SubProjectName";
                 List4.ValueMember = "ID";
                 List4.SelectedValue = -1;
-                Db.DS.Tables ["tblLinks"].Clear ();
-                Db.DS.Tables ["tblSNotes"].Clear ();
+                Db.DS.Tables["tblLinks"].Clear ();
+                Db.DS.Tables["tblSNotes"].Clear ();
                 SetList5Status ("none"); //Ref, Link, LinkNote, LinkNoteSearch, SubProjectNote, SubProjectNoteSearch, RefNote, RefNoteSearch
                 List6.DataSource = null;
                 List55.DataSource = null;
@@ -2619,8 +2619,8 @@ namespace eLib
             SubProject.Id = Conversions.ToInteger (List4.SelectedValue);
             if (SubProject.Id < 1)
                 return;
-            Project.Name = Conversions.ToString (Db.DS.Tables ["tblSubProject"].Rows [List4.SelectedIndex] [1]); // using shared variables
-            Project.Note = Conversions.ToString (Db.DS.Tables ["tblSubProject"].Rows [List4.SelectedIndex] [2]); // using shared variables
+            Project.Name = Conversions.ToString (Db.DS.Tables["tblSubProject"].Rows[List4.SelectedIndex][1]); // using shared variables
+            Project.Note = Conversions.ToString (Db.DS.Tables["tblSubProject"].Rows[List4.SelectedIndex][2]); // using shared variables
             Assign.EditASubProject (SubProject.Id);
             List4_Click (sender, e);
             }
@@ -2693,8 +2693,8 @@ namespace eLib
                 {
                 return;
                 }
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
             Ref.ImportStatus = 6; //flag for NewImport from Main + a subproject
             e.Effect = DragDropEffects.None;
             SubProject.Id = (int) List4.SelectedValue;
@@ -2754,7 +2754,7 @@ namespace eLib
             try
                 {
                 Assign.GetSLinks (SubProject.Id);
-                List5.DataSource = Db.DS.Tables ["tblLinks"];
+                List5.DataSource = Db.DS.Tables["tblLinks"];
                 List5.DisplayMember = "PaperName";
                 List5.ValueMember = "Papers.ID";
                 if (Link.Id > 0)
@@ -2766,12 +2766,12 @@ namespace eLib
                     List5.SelectedIndex = -1;
                     }
                 Assign.GetNotes (SubProject.Id, 1);
-                List6.DataSource = Db.DS.Tables ["tblSNotes"];
+                List6.DataSource = Db.DS.Tables["tblSNotes"];
                 List6.DisplayMember = "NoteDatum";
                 List6.ValueMember = "Notes.ID";
                 List6.SelectedIndex = -1;
                 SetList5Status ("Link");
-                lblStatusBar.Text = Conversions.ToString (Db.DS.Tables ["tblSubProject"].Rows [List4.SelectedIndex] [2]);
+                lblStatusBar.Text = Conversions.ToString (Db.DS.Tables["tblSubProject"].Rows[List4.SelectedIndex][2]);
                 List2.DataSource = null;
                 List15.DataSource = null;
                 List55.DataSource = null;
@@ -2795,10 +2795,10 @@ namespace eLib
                 try
                     {
                     //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                    Note.Id = Convert.ToInt32 (Db.DS.Tables ["tblLNotes"].Rows [List55.SelectedIndex] [0]);
+                    Note.Id = Convert.ToInt32 (Db.DS.Tables["tblLNotes"].Rows[List55.SelectedIndex][0]);
                     Note.Type = Client.List55Mode;
-                    Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblLNotes"].Rows [List55.SelectedIndex] [2]);
-                    Note.Rtl = Conversions.ToBoolean (Db.DS.Tables ["tblLNotes"].Rows [List55.SelectedIndex] [5]);
+                    Note.NoteText = Conversions.ToString (Db.DS.Tables["tblLNotes"].Rows[List55.SelectedIndex][2]);
+                    Note.Rtl = Conversions.ToBoolean (Db.DS.Tables["tblLNotes"].Rows[List55.SelectedIndex][5]);
                     ShowNoteInTextBox ();
                     List2.DataSource = null;
                     List15.DataSource = null;
@@ -2845,17 +2845,17 @@ namespace eLib
             {
             if (List55.SelectedIndex == -1)
                 return;
-            Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLNotes"].Rows [List55.SelectedIndex] [3]);
+            Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLNotes"].Rows[List55.SelectedIndex][3]);
             Note.Id = Conversions.ToInteger (List55.SelectedValue);
             if (Note.Id < 1)
                 return;
             Note.Id = Conversions.ToInteger (List55.SelectedValue);
-            Note.DateTime = Conversions.ToString (Db.DS.Tables ["tblLNotes"].Rows [List55.SelectedIndex] [1]);
-            Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblLNotes"].Rows [List55.SelectedIndex] [2]);
+            Note.DateTime = Conversions.ToString (Db.DS.Tables["tblLNotes"].Rows[List55.SelectedIndex][1]);
+            Note.NoteText = Conversions.ToString (Db.DS.Tables["tblLNotes"].Rows[List55.SelectedIndex][2]);
             Note.Index = List55.SelectedIndex;
             if (Note.Id < 1)
                 return;
-            Note.Rtl = Conversions.ToBoolean (Db.DS.Tables ["tblLNotes"].Rows [List55.SelectedIndex] [4]);
+            Note.Rtl = Conversions.ToBoolean (Db.DS.Tables["tblLNotes"].Rows[List55.SelectedIndex][4]);
             CallNoteEditor (Client.List55Mode);
             }
         private void List55_DragEnter (object sender, DragEventArgs e)
@@ -2873,9 +2873,9 @@ namespace eLib
                 {
                 return;
                 }
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
-            FileInfo MyFile = new FileInfo (strFiles [0]);
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
+            FileInfo MyFile = new FileInfo (strFiles[0]);
             if (MyFile.Extension.ToLower () != ".txt")
                 {
                 return;
@@ -2897,7 +2897,7 @@ namespace eLib
                 string Keyx3 = "";
                 string Keyx4 = "";
                 string Fltr = "";
-                var spcz = new int [4];
+                var spcz = new int[4];
                 try
                     {
                     //locate spaces in the search string
@@ -2911,12 +2911,12 @@ namespace eLib
                             k = k + 1;
                             if (k == 4)
                                 break;
-                            spcz [k] = i;
+                            spcz[k] = i;
                             }
                         }
-                    spcz [0] = k;
+                    spcz[0] = k;
                     //how many spaces?
-                    switch (spcz [0])
+                    switch (spcz[0])
                         {
                         case 0: // no space; one key
                                 {
@@ -2925,17 +2925,17 @@ namespace eLib
                                 }
                         case 1: // 1 space; 2 keys
                                 {
-                                Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                                Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1);
+                                Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                                Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1);
                                 Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx2 + "%')";
                                 break;
                                 }
                         case 2: // 2 spaces; 3 keys
                                 {
-                                Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                                Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1, spcz [2] - spcz [1] - 1);
-                                Keyx3 = Strings.Mid (KeyxA, spcz [2] + 1);
+                                Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                                Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1, spcz[2] - spcz[1] - 1);
+                                Keyx3 = Strings.Mid (KeyxA, spcz[2] + 1);
                                 Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx2 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx3 + "%')";
@@ -2944,10 +2944,10 @@ namespace eLib
                         case 3:
                         case 4:
                                 {
-                                Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                                Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1, spcz [2] - spcz [1] - 1);
-                                Keyx3 = Strings.Mid (KeyxA, spcz [2] + 1, spcz [3] - spcz [2] - 1);
-                                Keyx4 = Strings.Mid (KeyxA, spcz [3] + 1);
+                                Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                                Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1, spcz[2] - spcz[1] - 1);
+                                Keyx3 = Strings.Mid (KeyxA, spcz[2] + 1, spcz[3] - spcz[2] - 1);
+                                Keyx4 = Strings.Mid (KeyxA, spcz[3] + 1);
                                 Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx2 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx3 + "%') AND ";
@@ -2955,7 +2955,7 @@ namespace eLib
                                 break;
                                 }
                         }
-                    Db.DS.Tables ["tblLNotes"].Clear ();
+                    Db.DS.Tables["tblLNotes"].Clear ();
                     using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                         {
                         CnnSS.Open ();
@@ -2963,7 +2963,7 @@ namespace eLib
                         Db.DASS.Fill (Db.DS, "tblLNotes");
                         CnnSS.Close ();
                         }
-                    List55.DataSource = Db.DS.Tables ["tblLNotes"];
+                    List55.DataSource = Db.DS.Tables["tblLNotes"];
                     List55.DisplayMember = "NoteDatum";
                     List55.ValueMember = "Notes.ID";
                     List55.SelectedIndex = -1;
@@ -2987,7 +2987,7 @@ namespace eLib
                 {
                 try
                     {
-                    Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [7]); // 7:Link.ID
+                    Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][7]); // 7:Link.ID
                     if (Link.Id < 1)
                         return;
                     Note.DateTime = DateTime.Now.ToString ("yyyy-MM-dd . HH-mm");
@@ -3005,7 +3005,7 @@ namespace eLib
             {
             if (List55.SelectedIndex == -1)
                 return;
-            Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [List5.SelectedIndex] [7]); // 7:Link.ID
+            Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[List5.SelectedIndex][7]); // 7:Link.ID
             Note.Id = Conversions.ToInteger (List5.SelectedValue);
             if ((Link.Id < 1) || (Note.Id < 1) || (Assign.CheckReadOnlyAccess (Project.Id) == 1))
                 return;
@@ -3055,28 +3055,28 @@ namespace eLib
                 try
                     {
                     Note.Type = Client.List6Mode;
-                    if (List6.DataSource == Db.DS.Tables ["tblSNotes"])
+                    if (List6.DataSource == Db.DS.Tables["tblSNotes"])
                         {
-                        Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblSNotes"].Rows [List6.SelectedIndex] [2]);
+                        Note.NoteText = Conversions.ToString (Db.DS.Tables["tblSNotes"].Rows[List6.SelectedIndex][2]);
                         txtNote.Text = Note.NoteText;
-                        Note.Id = Convert.ToInt32 (Db.DS.Tables ["tblSNotes"].Rows [List6.SelectedIndex] [0]);
-                        Note.Rtl = Conversions.ToBoolean (Db.DS.Tables ["tblSNotes"].Rows [List6.SelectedIndex] [5]);
+                        Note.Id = Convert.ToInt32 (Db.DS.Tables["tblSNotes"].Rows[List6.SelectedIndex][0]);
+                        Note.Rtl = Conversions.ToBoolean (Db.DS.Tables["tblSNotes"].Rows[List6.SelectedIndex][5]);
                         ShowNoteInTextBox ();
                         //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                        Project.Id = Conversions.ToInteger (Db.DS.Tables ["tblSubProject"].Rows [List4.SelectedIndex] [3]);  //3:Project.Id
+                        Project.Id = Conversions.ToInteger (Db.DS.Tables["tblSubProject"].Rows[List4.SelectedIndex][3]);  //3:Project.Id
                         SubProject.Id = (int) (List4.SelectedValue);
                         List5.DataSource = List6.DataSource;
                         List5.DisplayMember = "Note";
                         List5.ValueMember = "ID";
                         SetList5Status (Note.Type); //ie SubProjectNote
                         }
-                    else if (List6.DataSource == Db.DS.Tables ["tblNotesCount"])
+                    else if (List6.DataSource == Db.DS.Tables["tblNotesCount"])
                         {
                         //tblNotesCount: 0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done, 8Rtl : FROM Notes INNER JOIN ...
-                        Project.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [4]);
-                        Note.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [6]);
-                        Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [3]);
-                        Note.Rtl = Convert.ToBoolean (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [8]);
+                        Project.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][4]);
+                        Note.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][6]);
+                        Note.NoteText = Conversions.ToString (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][3]);
+                        Note.Rtl = Convert.ToBoolean (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][8]);
                         ShowNoteInTextBox ();
                         }
                     List2.DataSource = null;
@@ -3116,9 +3116,9 @@ namespace eLib
                 {
                 return;
                 }
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
-            FileInfo MyFile = new FileInfo (strFiles [0]);
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
+            FileInfo MyFile = new FileInfo (strFiles[0]);
             if (MyFile.Extension.ToLower () != ".txt")
                 {
                 return;
@@ -3141,7 +3141,7 @@ namespace eLib
                 string Keyx3 = "";
                 string Keyx4 = "";
                 string Fltr = "";
-                var spcz = new int [4];
+                var spcz = new int[4];
                 try
                     {
                     //locate spaces in the search string
@@ -3155,12 +3155,12 @@ namespace eLib
                             k = k + 1;
                             if (k == 4)
                                 break;
-                            spcz [k] = i;
+                            spcz[k] = i;
                             }
                         }
-                    spcz [0] = k;
+                    spcz[0] = k;
                     //how many spaces?
-                    switch (spcz [0])
+                    switch (spcz[0])
                         {
                         case 0: // no space; one key
                                 {
@@ -3170,17 +3170,17 @@ namespace eLib
                         case 1: // 1 space; 2 keys
                                 {
                                 // Keyx1 = Mid(KeyxA, 1, spcz(1) - 1)
-                                Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                                Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1);
+                                Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                                Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1);
                                 Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx2 + "%')";
                                 break;
                                 }
                         case 2: // 2 spaces; 3 keys
                                 {
-                                Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                                Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1, spcz [2] - spcz [1] - 1);
-                                Keyx3 = Strings.Mid (KeyxA, spcz [2] + 1);
+                                Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                                Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1, spcz[2] - spcz[1] - 1);
+                                Keyx3 = Strings.Mid (KeyxA, spcz[2] + 1);
                                 Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx2 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx3 + "%')";
@@ -3189,10 +3189,10 @@ namespace eLib
                         case 3:
                         case 4:
                                 {
-                                Keyx1 = Strings.Left (KeyxA, spcz [1] - 1);
-                                Keyx2 = Strings.Mid (KeyxA, spcz [1] + 1, spcz [2] - spcz [1] - 1);
-                                Keyx3 = Strings.Mid (KeyxA, spcz [2] + 1, spcz [3] - spcz [2] - 1);
-                                Keyx4 = Strings.Mid (KeyxA, spcz [3] + 1);
+                                Keyx1 = Strings.Left (KeyxA, spcz[1] - 1);
+                                Keyx2 = Strings.Mid (KeyxA, spcz[1] + 1, spcz[2] - spcz[1] - 1);
+                                Keyx3 = Strings.Mid (KeyxA, spcz[2] + 1, spcz[3] - spcz[2] - 1);
+                                Keyx4 = Strings.Mid (KeyxA, spcz[3] + 1);
                                 Fltr = "(Note Like '%" + Keyx1 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx2 + "%') AND ";
                                 Fltr = Fltr + "(Note Like '%" + Keyx3 + "%') AND ";
@@ -3201,7 +3201,7 @@ namespace eLib
                                 }
                         }
                     List4.SelectedIndex = -1;
-                    Db.DS.Tables ["tblNotesCount"].Clear ();
+                    Db.DS.Tables["tblNotesCount"].Clear ();
                     //strSQL ?
                     Db.strSQL = "SELECT ProjectName, SubProjectName, NoteDatum, Note, Projects.ID, SubProjects.ID, Notes.ID, Done, Rtl FROM Notes INNER JOIN SubProjects ON Parent_ID = SubProjects.ID INNER JOIN Projects ON Project_ID = Projects.ID";
                     Db.strSQL += " WHERE (Projects.User_ID = " + User.Id.ToString ();
@@ -3217,7 +3217,7 @@ namespace eLib
                         Db.DASS.Fill (Db.DS, "tblNotesCount");
                         CnnSS.Close ();
                         }
-                    List6.DataSource = Db.DS.Tables ["tblNotesCount"];
+                    List6.DataSource = Db.DS.Tables["tblNotesCount"];
                     List6.DisplayMember = "NoteDatum";
                     List6.ValueMember = "SubPojectsNotes.ID";
                     List6.SelectedIndex = -1;
@@ -3258,11 +3258,11 @@ namespace eLib
                 return;
             if (List4.SelectedIndex == -1 | Client.List5Mode == "SubProjectNoteSearch")
                 {
-                Note.DateTime = Conversions.ToString (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [2]);
-                Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [3]);
-                Project.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [4]);
-                SubProject.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [5]);
-                Note.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [6]);
+                Note.DateTime = Conversions.ToString (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][2]);
+                Note.NoteText = Conversions.ToString (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][3]);
+                Project.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][4]);
+                SubProject.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][5]);
+                Note.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][6]);
                 Menu3_All_Click (null, null);
                 List3.SelectedValue = Project.Id;
                 List3_Click (null, null);
@@ -3276,8 +3276,8 @@ namespace eLib
             SubProject.Name = List4.Text;
             Project.Name = List3.Text;
             Note.Id = Conversions.ToInteger (List6.SelectedValue);
-            Note.DateTime = Conversions.ToString (Db.DS.Tables ["tblSNotes"].Rows [List6.SelectedIndex] [1]);
-            Note.NoteText = Conversions.ToString (Db.DS.Tables ["tblSNotes"].Rows [List6.SelectedIndex] [2]);
+            Note.DateTime = Conversions.ToString (Db.DS.Tables["tblSNotes"].Rows[List6.SelectedIndex][1]);
+            Note.NoteText = Conversions.ToString (Db.DS.Tables["tblSNotes"].Rows[List6.SelectedIndex][2]);
             Note.Index = List6.SelectedIndex;
             if (Note.Id < 1)
                 return;
@@ -3385,8 +3385,8 @@ namespace eLib
                                 }
                             //tblNotesCount: 0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done : FROM Notes INNER JOIN ...
                             Note.Type = "FocusNote";
-                            Note.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [6]);
-                            SubProject.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [5]);
+                            Note.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][6]);
+                            SubProject.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][5]);
                             var frmMindmap = new frmNoteNetEditor ();
                             frmMindmap.ShowDialog ();
                             break;
@@ -3488,25 +3488,25 @@ namespace eLib
                 {
                 case "SubProjectNote":
                         {
-                        Db.DS.Tables ["tblSNotes"].Rows [List6.SelectedIndex] [2] = txtNote.Text;
+                        Db.DS.Tables["tblSNotes"].Rows[List6.SelectedIndex][2] = txtNote.Text;
                         break;
                         }
                 case "SubProjectNoteSearch":
                         {
                         //tblNotesCount: 0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done : FROM Notes INNER JOIN ...
-                        Db.DS.Tables ["tblNotesCount"].Rows [List6.SelectedIndex] [3] = txtNote.Text;
+                        Db.DS.Tables["tblNotesCount"].Rows[List6.SelectedIndex][3] = txtNote.Text;
                         break;
                         }
                 case "LinkNote":
                 case "LinkNoteSearch":
                         {
-                        Db.DS.Tables ["tblLNotes"].Rows [List55.SelectedIndex] [2] = txtNote.Text;
+                        Db.DS.Tables["tblLNotes"].Rows[List55.SelectedIndex][2] = txtNote.Text;
                         break;
                         }
                 case "RefNote":
                 case "RefNoteSearch":
                         {
-                        Db.DS.Tables ["tblRNotes"].Rows [List15.SelectedIndex] [2] = txtNote.Text;
+                        Db.DS.Tables["tblRNotes"].Rows[List15.SelectedIndex][2] = txtNote.Text;
                         break;
                         }
                 }

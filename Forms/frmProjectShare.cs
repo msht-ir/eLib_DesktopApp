@@ -13,7 +13,7 @@ namespace eLib.Forms
         private void frmProjectShare_Load (object sender, EventArgs e)
             {
             Text = "Sharing:  " + Project.Name;
-            lstUsr.DataSource = Db.DS.Tables ["tblUsrs"];
+            lstUsr.DataSource = Db.DS.Tables["tblUsrs"];
             lstUsr.DisplayMember = "UsrName";
             lstUsr.ValueMember = "ID";
             lstUsr.SelectedIndex = -1;
@@ -23,25 +23,25 @@ namespace eLib.Forms
             {
             //get list of users this project is already shared with them
             GridShare.DataSource = null;
-            Db.DS.Tables ["tblUserProject"].Clear ();
+            Db.DS.Tables["tblUserProject"].Clear ();
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
                 CnnSS.Open ();
                 Db.DASS = new Microsoft.Data.SqlClient.SqlDataAdapter ("SELECT User_Id, UsrName, UsrNote, Project_Id, ReadOnly FROM usrs JOIN User_Project ON usrs.ID = User_Project.User_Id WHERE Project_Id = " + Project.Id.ToString (), CnnSS);
-                Db.DASS.Fill (Db.DS.Tables ["tblUserProject"]);
+                Db.DASS.Fill (Db.DS.Tables["tblUserProject"]);
                 //MessageBox.Show ("rows count:  " + Db.DS.Tables ["tblUserProject"].Rows.Count.ToString ());
                 CnnSS.Close ();
                 }
             //Grid
-            GridShare.DataSource = Db.DS.Tables ["tblUserProject"];
-            GridShare.Columns [0].Visible = false; //userId
-            GridShare.Columns [1].Width = 150;     //userName
-            GridShare.Columns [2].Width = 280;     //userNote
-            GridShare.Columns [3].Visible = false; //projectId
-            GridShare.Columns [4].Width = 70;      //readOnly
+            GridShare.DataSource = Db.DS.Tables["tblUserProject"];
+            GridShare.Columns[0].Visible = false; //userId
+            GridShare.Columns[1].Width = 150;     //userName
+            GridShare.Columns[2].Width = 280;     //userNote
+            GridShare.Columns[3].Visible = false; //projectId
+            GridShare.Columns[4].Width = 70;      //readOnly
             for (int k = 0; k <= GridShare.Columns.Count - 1; k++)
                 {
-                GridShare.Columns [k].SortMode = DataGridViewColumnSortMode.Programmatic;
+                GridShare.Columns[k].SortMode = DataGridViewColumnSortMode.Programmatic;
                 }
             lstUsr.SelectedIndex = -1;
             }
@@ -53,8 +53,8 @@ namespace eLib.Forms
             {
             try
                 {
-                int r = (int) GridShare.SelectedCells [0].RowIndex;
-                int c = (int) GridShare.SelectedCells [0].ColumnIndex;
+                int r = (int) GridShare.SelectedCells[0].RowIndex;
+                int c = (int) GridShare.SelectedCells[0].ColumnIndex;
                 switch (c)
                     {
                     case 1: //userName
@@ -128,12 +128,12 @@ namespace eLib.Forms
         private void RemoveSharing ()
             {
             //remove an item from the shareGrid
-            int r = (int) GridShare.SelectedCells [0].RowIndex;
-            int c = (int) GridShare.SelectedCells [0].ColumnIndex;
+            int r = (int) GridShare.SelectedCells[0].RowIndex;
+            int c = (int) GridShare.SelectedCells[0].ColumnIndex;
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
                 CnnSS.Open ();
-                Db.strSQL = "DELETE FROM User_Project WHERE (User_Id = " + Convert.ToInt32 (GridShare.Rows [r].Cells [0].Value).ToString () + " AND Project_Id = " + Convert.ToInt32 (GridShare.Rows [r].Cells [3].Value).ToString () + ")";
+                Db.strSQL = "DELETE FROM User_Project WHERE (User_Id = " + Convert.ToInt32 (GridShare.Rows[r].Cells[0].Value).ToString () + " AND Project_Id = " + Convert.ToInt32 (GridShare.Rows[r].Cells[3].Value).ToString () + ")";
                 var cmd1 = new Microsoft.Data.SqlClient.SqlCommand (Db.strSQL, CnnSS);
                 cmd1.CommandType = CommandType.Text;
                 int k = cmd1.ExecuteNonQuery ();
@@ -142,10 +142,10 @@ namespace eLib.Forms
             }
         private void ChangeAccess ()
             {
-            int r = (int) GridShare.SelectedCells [0].RowIndex;
-            int c = (int) GridShare.SelectedCells [0].ColumnIndex;
+            int r = (int) GridShare.SelectedCells[0].RowIndex;
+            int c = (int) GridShare.SelectedCells[0].ColumnIndex;
             bool boolAccess = true;
-            if (Convert.ToBoolean (GridShare.Rows [r].Cells [4].Value) == true)
+            if (Convert.ToBoolean (GridShare.Rows[r].Cells[4].Value) == true)
                 boolAccess = false;
             else
                 boolAccess = true;
@@ -157,8 +157,8 @@ namespace eLib.Forms
                 var cmd2 = new Microsoft.Data.SqlClient.SqlCommand (Db.strSQL, CnnSS);
                 cmd2.CommandType = CommandType.Text;
                 cmd2.Parameters.AddWithValue ("@readonly", (bool) boolAccess);
-                cmd2.Parameters.AddWithValue ("@userid", Convert.ToInt32 (GridShare.Rows [r].Cells [0].Value).ToString ());
-                cmd2.Parameters.AddWithValue ("@projectid", Convert.ToInt32 (GridShare.Rows [r].Cells [3].Value).ToString ());
+                cmd2.Parameters.AddWithValue ("@userid", Convert.ToInt32 (GridShare.Rows[r].Cells[0].Value).ToString ());
+                cmd2.Parameters.AddWithValue ("@projectid", Convert.ToInt32 (GridShare.Rows[r].Cells[3].Value).ToString ());
                 int m = cmd2.ExecuteNonQuery ();
                 CnnSS.Close ();
                 }
@@ -231,7 +231,7 @@ namespace eLib.Forms
                 r = (int) GridShare.CurrentRow.Index;
                 if (r == -1)
                     return;
-                if (Convert.ToBoolean (GridShare.Rows [r].Cells [4].Value) == true)
+                if (Convert.ToBoolean (GridShare.Rows[r].Cells[4].Value) == true)
                     boolAccess = false;
                 else
                     boolAccess = true;
@@ -243,8 +243,8 @@ namespace eLib.Forms
                     var cmd2 = new Microsoft.Data.SqlClient.SqlCommand (Db.strSQL, CnnSS);
                     cmd2.CommandType = CommandType.Text;
                     cmd2.Parameters.AddWithValue ("@readonly", (bool) boolAccess);
-                    cmd2.Parameters.AddWithValue ("@userid", Convert.ToInt32 (GridShare.Rows [r].Cells [0].Value).ToString ());
-                    cmd2.Parameters.AddWithValue ("@projectid", Convert.ToInt32 (GridShare.Rows [r].Cells [3].Value).ToString ());
+                    cmd2.Parameters.AddWithValue ("@userid", Convert.ToInt32 (GridShare.Rows[r].Cells[0].Value).ToString ());
+                    cmd2.Parameters.AddWithValue ("@projectid", Convert.ToInt32 (GridShare.Rows[r].Cells[3].Value).ToString ());
                     int m = cmd2.ExecuteNonQuery ();
                     CnnSS.Close ();
                     }

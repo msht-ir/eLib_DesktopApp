@@ -14,7 +14,7 @@ namespace eLib.Forms
             Width = 460;
             Height = 460;
             Testbank.GetCourseTopics (Course.Id);
-            lstTopics.DataSource = Db.DS.Tables ["tblCourseTopics"];
+            lstTopics.DataSource = Db.DS.Tables["tblCourseTopics"];
             lstTopics.DisplayMember = "Topic";
             lstTopics.ValueMember = "ID";
             lstTopics.SelectedIndex = -1;

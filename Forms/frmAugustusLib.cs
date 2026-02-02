@@ -176,11 +176,11 @@ namespace eLib
             }
         private void lstCluster_DragDrop (object sender, DragEventArgs e)
             {
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
             for (int i = 0; i < strFiles.Length; i++)
                 {
-                eLibFile.strFilex = strFiles [i];
-                FileInfo MyFile = new FileInfo (strFiles [i]);
+                eLibFile.strFilex = strFiles[i];
+                FileInfo MyFile = new FileInfo (strFiles[i]);
                 if ((MyFile.Extension.ToLower () == ".txt") && (lstSpecies.SelectedIndex != -1))
                     {
                     Species.Id = (int) lstSpecies.SelectedValue;
@@ -254,8 +254,8 @@ namespace eLib
                                             }
                                     default:
                                             {
-                                            string [] itmT = Linex.Split ('\t');
-                                            if (itmT [2] == "transcript")
+                                            string[] itmT = Linex.Split ('\t');
+                                            if (itmT[2] == "transcript")
                                                 {
                                                 ParseTranscriptBlock (Linex);
                                                 }
@@ -292,12 +292,12 @@ namespace eLib
                 transcriptLine = strline;
                 {
                 }
-            string [] items = transcriptLine.Split ('\t');
+            string[] items = transcriptLine.Split ('\t');
             //lstTranscript.Items.Add ("Transcript: " + items [8]);
-            Transcript.TranscriptFrom = Convert.ToInt32 (items [3]);
-            Transcript.TranscriptTo = Convert.ToInt32 (items [4]);
-            Transcript.Direction = (items [6] == "+") ? "P" : "N";
-            Transcript.Name = items [8];
+            Transcript.TranscriptFrom = Convert.ToInt32 (items[3]);
+            Transcript.TranscriptTo = Convert.ToInt32 (items[4]);
+            Transcript.Direction = (items[6] == "+") ? "P" : "N";
+            Transcript.Name = items[8];
             //SQL
             try
                 {
@@ -408,16 +408,16 @@ namespace eLib
                     for (int index = 0; index < lstTranscript.Items.Count; index++)
                         {
                         Transcript.Id = (int) lstTranscript.SelectedValue;
-                        Transcript.Name = Db.DS.Tables ["tblTranscripts"].Rows [index] [1].ToString ();
-                        Transcript.ClusterId = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [2].ToString ());
-                        Transcript.SpacerLength = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [3].ToString ());
-                        Transcript.TranscriptFrom = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [4].ToString ());
-                        Transcript.TranscriptTo = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [5].ToString ());
-                        Transcript.GeneSize = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [6].ToString ());
-                        Transcript.Direction = Db.DS.Tables ["tblTranscripts"].Rows [index] [7].ToString ();
-                        Transcript.Description = Db.DS.Tables ["tblTranscripts"].Rows [index] [8].ToString ();
-                        Transcript.Sel = Convert.ToBoolean (Db.DS.Tables ["tblTranscripts"].Rows [index] [9].ToString ());
-                        Transcript.Info = Db.DS.Tables ["tblTranscripts"].Rows [index] [10].ToString ();
+                        Transcript.Name = Db.DS.Tables["tblTranscripts"].Rows[index][1].ToString ();
+                        Transcript.ClusterId = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][2].ToString ());
+                        Transcript.SpacerLength = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][3].ToString ());
+                        Transcript.TranscriptFrom = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][4].ToString ());
+                        Transcript.TranscriptTo = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][5].ToString ());
+                        Transcript.GeneSize = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][6].ToString ());
+                        Transcript.Direction = Db.DS.Tables["tblTranscripts"].Rows[index][7].ToString ();
+                        Transcript.Description = Db.DS.Tables["tblTranscripts"].Rows[index][8].ToString ();
+                        Transcript.Sel = Convert.ToBoolean (Db.DS.Tables["tblTranscripts"].Rows[index][9].ToString ());
+                        Transcript.Info = Db.DS.Tables["tblTranscripts"].Rows[index][10].ToString ();
 
                         txtSequenceData.Text += "\r\nTranscript: \t" + Transcript.Name;
                         txtSequenceData.Text += "\r\nSize:       \t" + Transcript.GeneSize.ToString () + " (" + Transcript.TranscriptFrom.ToString () + " - " + Transcript.TranscriptTo.ToString () + ")";
@@ -522,16 +522,16 @@ namespace eLib
             Cluster.Name = lstCluster.Text;
             int index = lstTranscript.SelectedIndex;
             Transcript.Id = (int) lstTranscript.SelectedValue;
-            Transcript.Name = Db.DS.Tables ["tblTranscripts"].Rows [index] [1].ToString ();
-            Transcript.ClusterId = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [2].ToString ());
-            Transcript.SpacerLength = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [3].ToString ());
-            Transcript.TranscriptFrom = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [4].ToString ());
-            Transcript.TranscriptTo = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [5].ToString ());
-            Transcript.GeneSize = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [6].ToString ());
-            Transcript.Direction = Db.DS.Tables ["tblTranscripts"].Rows [index] [7].ToString ();
-            Transcript.Description = Db.DS.Tables ["tblTranscripts"].Rows [index] [8].ToString ();
-            Transcript.Sel = Convert.ToBoolean (Db.DS.Tables ["tblTranscripts"].Rows [index] [9].ToString ());
-            Transcript.Info = Db.DS.Tables ["tblTranscripts"].Rows [index] [10].ToString ();
+            Transcript.Name = Db.DS.Tables["tblTranscripts"].Rows[index][1].ToString ();
+            Transcript.ClusterId = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][2].ToString ());
+            Transcript.SpacerLength = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][3].ToString ());
+            Transcript.TranscriptFrom = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][4].ToString ());
+            Transcript.TranscriptTo = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][5].ToString ());
+            Transcript.GeneSize = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][6].ToString ());
+            Transcript.Direction = Db.DS.Tables["tblTranscripts"].Rows[index][7].ToString ();
+            Transcript.Description = Db.DS.Tables["tblTranscripts"].Rows[index][8].ToString ();
+            Transcript.Sel = Convert.ToBoolean (Db.DS.Tables["tblTranscripts"].Rows[index][9].ToString ());
+            Transcript.Info = Db.DS.Tables["tblTranscripts"].Rows[index][10].ToString ();
 
             txtSequenceData.Text = "SPECIES:     \t" + Species.SciName;
             txtSequenceData.Text += "\r\nCLUSTER:    \t" + Cluster.Name;
@@ -561,16 +561,16 @@ namespace eLib
                 {
                 int index = lstTranscript.SelectedIndex;
                 Transcript.Id = (int) lstTranscript.SelectedValue;
-                Transcript.Name = Db.DS.Tables ["tblTranscripts"].Rows [index] [1].ToString ();
-                Transcript.ClusterId = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [2].ToString ());
-                Transcript.SpacerLength = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [3].ToString ());
-                Transcript.TranscriptFrom = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [4].ToString ());
-                Transcript.TranscriptTo = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [5].ToString ());
-                Transcript.GeneSize = Convert.ToInt32 (Db.DS.Tables ["tblTranscripts"].Rows [index] [6].ToString ());
-                Transcript.Direction = Db.DS.Tables ["tblTranscripts"].Rows [index] [7].ToString ();
-                Transcript.Description = Db.DS.Tables ["tblTranscripts"].Rows [index] [8].ToString ();
-                Transcript.Sel = Convert.ToBoolean (Db.DS.Tables ["tblTranscripts"].Rows [index] [9].ToString ());
-                Transcript.Info = Db.DS.Tables ["tblTranscripts"].Rows [index] [10].ToString ();
+                Transcript.Name = Db.DS.Tables["tblTranscripts"].Rows[index][1].ToString ();
+                Transcript.ClusterId = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][2].ToString ());
+                Transcript.SpacerLength = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][3].ToString ());
+                Transcript.TranscriptFrom = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][4].ToString ());
+                Transcript.TranscriptTo = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][5].ToString ());
+                Transcript.GeneSize = Convert.ToInt32 (Db.DS.Tables["tblTranscripts"].Rows[index][6].ToString ());
+                Transcript.Direction = Db.DS.Tables["tblTranscripts"].Rows[index][7].ToString ();
+                Transcript.Description = Db.DS.Tables["tblTranscripts"].Rows[index][8].ToString ();
+                Transcript.Sel = Convert.ToBoolean (Db.DS.Tables["tblTranscripts"].Rows[index][9].ToString ());
+                Transcript.Info = Db.DS.Tables["tblTranscripts"].Rows[index][10].ToString ();
                 //show dialog
                 Form TranscriptEditor = new frmAugustusTranscriptEdit ();
                 TranscriptEditor.ShowDialog ();
@@ -589,9 +589,9 @@ namespace eLib
             }
         private void txtSequenceData_DragDrop (object sender, DragEventArgs e)
             {
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
-            FileInfo MyFile = new FileInfo (strFiles [0]);
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
+            FileInfo MyFile = new FileInfo (strFiles[0]);
             string ext = MyFile.Extension.ToLower ();
             if ((ext == ".txt") || (ext == ".cs") || (ext == ".fasta") || (ext == ".r") || (ext == ".py"))
                 {
@@ -643,7 +643,7 @@ namespace eLib
         private void GetSpecies (int projectid)
             {
             //refresh species
-            Db.DS.Tables ["tblSpecies"].Clear ();
+            Db.DS.Tables["tblSpecies"].Clear ();
             Db.strSQL = "Select ID, SciName, Taxonomy, Project_ID FROM Species WHERE Project_ID = " + projectid.ToString () + " Order By SciName";
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
@@ -652,7 +652,7 @@ namespace eLib
                 Db.DASS.Fill (Db.DS, "tblSpecies");
                 CnnSS.Close ();
                 }
-            lstSpecies.DataSource = Db.DS.Tables ["tblSpecies"];
+            lstSpecies.DataSource = Db.DS.Tables["tblSpecies"];
             lstSpecies.ValueMember = "ID";
             lstSpecies.DisplayMember = "SciName";
             lstCluster.DataSource = null;
@@ -661,7 +661,7 @@ namespace eLib
             }
         private void GetClusters (int speciesid)
             {
-            Db.DS.Tables ["tblClusters"].Clear ();
+            Db.DS.Tables["tblClusters"].Clear ();
             Db.strSQL = "Select ID, ClusterName, Species_ID FROM Clusters WHERE Species_ID = " + speciesid.ToString () + " Order By ID";
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
@@ -670,7 +670,7 @@ namespace eLib
                 Db.DASS.Fill (Db.DS, "tblClusters");
                 CnnSS.Close ();
                 }
-            lstCluster.DataSource = Db.DS.Tables ["tblClusters"];
+            lstCluster.DataSource = Db.DS.Tables["tblClusters"];
             lstCluster.ValueMember = "ID";
             lstCluster.DisplayMember = "ClusterName";
             lstTranscript.DataSource = null;
@@ -678,7 +678,7 @@ namespace eLib
             }
         private void GetTranscripts (int clusterid)
             {
-            Db.DS.Tables ["tblTranscripts"].Clear ();
+            Db.DS.Tables["tblTranscripts"].Clear ();
             Db.strSQL = "Select ID, TranscriptName, Cluster_ID, SpacerLength, TranscriptFrom, TranscriptTo, GeneSize, Direction, Description, Sel, Info FROM Transcripts WHERE Cluster_ID = " + clusterid.ToString () + " Order By TranscriptFrom";
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
@@ -687,7 +687,7 @@ namespace eLib
                 Db.DASS.Fill (Db.DS, "tblTranscripts");
                 CnnSS.Close ();
                 }
-            lstTranscript.DataSource = Db.DS.Tables ["tblTranscripts"];
+            lstTranscript.DataSource = Db.DS.Tables["tblTranscripts"];
             lstTranscript.ValueMember = "ID";
             lstTranscript.DisplayMember = "TranscriptName";
             }

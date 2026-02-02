@@ -19,7 +19,7 @@ namespace eLib.Forms
                 {
                 cboEntries.SelectedValue = Student.EntryId;
                 RefreshGridStudents (Student.EntryId);
-                GridStudents.CurrentCell = GridStudents.Rows [Student.Index].Cells [2];
+                GridStudents.CurrentCell = GridStudents.Rows[Student.Index].Cells[2];
                 }
             RefreshGridStudentExam (Student.Id);
             }
@@ -44,7 +44,7 @@ namespace eLib.Forms
             int r = (int) GridStudents.CurrentCell.RowIndex;
             if (r >= 0)
                 {
-                Student.Id = Convert.ToInt32 (GridStudents.Rows [r].Cells [0].Value);
+                Student.Id = Convert.ToInt32 (GridStudents.Rows[r].Cells[0].Value);
                 RefreshGridStudentExam (Student.Id);
                 }
             }
@@ -103,13 +103,13 @@ namespace eLib.Forms
             }
         private void btn_DeleteStudent_Click (object sender, EventArgs e)
             {
-            int r = GridStudents.SelectedCells [0].RowIndex;
+            int r = GridStudents.SelectedCells[0].RowIndex;
             if (r >= 0)
                 {
                 DialogResult myansw = MessageBox.Show ("Delete Student?\n\nNotice:\nExamSheets of this Student will be deleted too", "eLib.Exams", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (myansw == DialogResult.OK)
                     {
-                    Student.Id = Convert.ToInt32 (GridStudents.Rows [r].Cells [0].Value);
+                    Student.Id = Convert.ToInt32 (GridStudents.Rows[r].Cells[0].Value);
                     Testbank.DeleteOneStudentFromEntry (Student.Id);
                     RefreshGridStudents (Convert.ToInt32 (cboEntries.SelectedValue));
                     RefreshGridStudentExam (Exam.Id);
@@ -132,7 +132,7 @@ namespace eLib.Forms
             }
         private void btnAddExamToStudent_Click (object sender, EventArgs e)
             {
-            if (GridStudents.SelectedCells [0].RowIndex >= 0)
+            if (GridStudents.SelectedCells[0].RowIndex >= 0)
                 {
                 System.Windows.Forms.Form frm_SelectExam = new frmSelectExam ();
                 frm_SelectExam.ShowDialog ();
@@ -155,7 +155,7 @@ namespace eLib.Forms
                 {
                 return;
                 }
-            int r = (int) GridStudentExams.SelectedCells [0].RowIndex;
+            int r = (int) GridStudentExams.SelectedCells[0].RowIndex;
             if (r >= 0)
                 {
                 //confirm!
@@ -166,7 +166,7 @@ namespace eLib.Forms
                     }
                 else
                     {
-                    Exam.Id = Convert.ToInt32 (GridStudentExams.Rows [r].Cells [1].Value);
+                    Exam.Id = Convert.ToInt32 (GridStudentExams.Rows[r].Cells[1].Value);
                     Testbank.RemoveOneStudentFromExam (Exam.Id, Student.Id);
                     RefreshGridStudentExam (Student.Id);
                     }
@@ -184,9 +184,9 @@ namespace eLib.Forms
                 case DialogResult.Yes:
                         {
                         string strUsrPwds = "";
-                        for (int i = 0; i < Db.DS.Tables ["tblEntryStudents"].Rows.Count; i++)
+                        for (int i = 0; i < Db.DS.Tables["tblEntryStudents"].Rows.Count; i++)
                             {
-                            strUsrPwds += Db.DS.Tables ["tblEntryStudents"].Rows [i] [2].ToString () + "   /   " + Db.DS.Tables ["tblEntryStudents"].Rows [i] [3].ToString () + "\n\n";
+                            strUsrPwds += Db.DS.Tables["tblEntryStudents"].Rows[i][2].ToString () + "   /   " + Db.DS.Tables["tblEntryStudents"].Rows[i][3].ToString () + "\n\n";
                             }
                         Client.GenerateQRCode (strUsrPwds);
                         Testbank.PrintoutEntryStudentsUserPass (entryId);
@@ -205,34 +205,34 @@ namespace eLib.Forms
             }
         private void Menu2_PrintoutExamSheet_Click (object sender, EventArgs e)
             {
-            int r1 = (int) GridStudents.SelectedCells [0].RowIndex;
-            int r2 = (int) GridStudentExams.SelectedCells [0].RowIndex;
+            int r1 = (int) GridStudents.SelectedCells[0].RowIndex;
+            int r2 = (int) GridStudentExams.SelectedCells[0].RowIndex;
             if ((r1 >= 0) && (r2 >= 0))
                 {
-                if (!Convert.ToBoolean (GridStudentExams.Rows [r2].Cells [6].Value))
+                if (!Convert.ToBoolean (GridStudentExams.Rows[r2].Cells[6].Value))
                     {
-                    Student.Id = Convert.ToInt32 (GridStudents.Rows [r1].Cells [0].Value);
-                    Exam.Id = Convert.ToInt32 (GridStudentExams.Rows [r2].Cells [1].Value);
-                    Exam.Title = GridStudentExams.Rows [r2].Cells [2].Value.ToString ();
+                    Student.Id = Convert.ToInt32 (GridStudents.Rows[r1].Cells[0].Value);
+                    Exam.Id = Convert.ToInt32 (GridStudentExams.Rows[r2].Cells[1].Value);
+                    Exam.Title = GridStudentExams.Rows[r2].Cells[2].Value.ToString ();
                     Testbank.PrintoutRawExamSheets (Exam.Id, Student.Id);
                     }
                 else
                     {
-                    MessageBox.Show (GridStudents.Rows [r1].Cells [2].Value.ToString () + " has written this exam!");
+                    MessageBox.Show (GridStudents.Rows[r1].Cells[2].Value.ToString () + " has written this exam!");
                     }
                 }
             }
         private void Menu2_PrintoutExamRecord_Click (object sender, EventArgs e)
             {
-            int r1 = (int) GridStudents.SelectedCells [0].RowIndex;
-            int r2 = (int) GridStudentExams.SelectedCells [0].RowIndex;
+            int r1 = (int) GridStudents.SelectedCells[0].RowIndex;
+            int r2 = (int) GridStudentExams.SelectedCells[0].RowIndex;
             if ((r1 >= 0) & (r2 >= 0))
                 {
-                if (Convert.ToBoolean (GridStudentExams.Rows [r2].Cells [8].Value))
+                if (Convert.ToBoolean (GridStudentExams.Rows[r2].Cells[8].Value))
                     {
-                    Student.Id = Convert.ToInt32 (GridStudents.Rows [r1].Cells [0].Value);
-                    Exam.Id = Convert.ToInt32 (GridStudentExams.Rows [r2].Cells [1].Value);
-                    Exam.Title = GridStudentExams.Rows [r2].Cells [2].Value.ToString ();
+                    Student.Id = Convert.ToInt32 (GridStudents.Rows[r1].Cells[0].Value);
+                    Exam.Id = Convert.ToInt32 (GridStudentExams.Rows[r2].Cells[1].Value);
+                    Exam.Title = GridStudentExams.Rows[r2].Cells[2].Value.ToString ();
                     Testbank.PrintoutExamRecords (Exam.Id, Student.Id);
                     }
                 else
@@ -248,7 +248,7 @@ namespace eLib.Forms
                 {
                 cboEntries.DataSource = null;
                 Testbank.GetEntries (User.Id);
-                cboEntries.DataSource = Db.DS.Tables ["tblEntries"];
+                cboEntries.DataSource = Db.DS.Tables["tblEntries"];
                 cboEntries.DisplayMember = "EntryName";
                 cboEntries.ValueMember = "ID";
                 cboEntries.SelectedValue = Student.Id;
@@ -263,16 +263,16 @@ namespace eLib.Forms
             {
             GridStudents.DataSource = null;
             Testbank.GetEntryStudents (entryId);
-            GridStudents.DataSource = Db.DS.Tables ["tblEntryStudents"];
+            GridStudents.DataSource = Db.DS.Tables["tblEntryStudents"];
             for (int i = 0, loopTo = GridStudents.Columns.Count - 1; i <= loopTo; i++) //disable sort for column_haeders
                 {
-                GridStudents.Columns [i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                GridStudents.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                 }
             //0ID, 1Entry_ID, 2StudentName, 3StudentPass
-            GridStudents.Columns [0].Visible = false;   //ID
-            GridStudents.Columns [1].Visible = false;   //Entry_ID
-            GridStudents.Columns [2].Width = 180;       //StudentName
-            GridStudents.Columns [3].Width = 80;        //StudentPass
+            GridStudents.Columns[0].Visible = false;   //ID
+            GridStudents.Columns[1].Visible = false;   //Entry_ID
+            GridStudents.Columns[2].Width = 180;       //StudentName
+            GridStudents.Columns[3].Width = 80;        //StudentPass
             //reset right
             GridStudentExams.DataSource = null;
             }
@@ -286,21 +286,21 @@ namespace eLib.Forms
                 {
                 GridStudentExams.DataSource = null;
                 Testbank.GetAllStudentExams (Student.Id);
-                GridStudentExams.DataSource = Db.DS.Tables ["tblStudentExams"];
+                GridStudentExams.DataSource = Db.DS.Tables["tblStudentExams"];
                 for (int i = 0, loopTo = GridStudents.Columns.Count - 1; i <= loopTo; i++) //disable sort for column_haeders
                     {
-                    GridStudentExams.Columns [i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                    GridStudentExams.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                     }
                 //0CourseName, 1Exams.ID, 2ExamTitle, 3ExamDuration, 4IsActive, 5Training, 6Started, 7ExamStudents.DateTime, 8Finished
-                GridStudentExams.Columns [0].Width = 180;       //CourseName
-                GridStudentExams.Columns [1].Visible = false;   //Exams.ID
-                GridStudentExams.Columns [2].Width = 210;       //ExamTitle
-                GridStudentExams.Columns [3].Width = 60;        //ExamDuration
-                GridStudentExams.Columns [4].Width = 40;        //IsActive
-                GridStudentExams.Columns [5].Width = 40;        //Training
-                GridStudentExams.Columns [6].Width = 40;        //Started
-                GridStudentExams.Columns [7].Width = 140;       //ExamStudents.DateTime
-                GridStudentExams.Columns [8].Width = 40;        //Finished
+                GridStudentExams.Columns[0].Width = 180;       //CourseName
+                GridStudentExams.Columns[1].Visible = false;   //Exams.ID
+                GridStudentExams.Columns[2].Width = 210;       //ExamTitle
+                GridStudentExams.Columns[3].Width = 60;        //ExamDuration
+                GridStudentExams.Columns[4].Width = 40;        //IsActive
+                GridStudentExams.Columns[5].Width = 40;        //Training
+                GridStudentExams.Columns[6].Width = 40;        //Started
+                GridStudentExams.Columns[7].Width = 140;       //ExamStudents.DateTime
+                GridStudentExams.Columns[8].Width = 40;        //Finished
                 }
             }
         private void AddNewStudent ()
@@ -339,16 +339,16 @@ namespace eLib.Forms
             }
         private void EditStudent ()
             {
-            if ((GridStudents.Rows.Count == 0) || (GridStudents.SelectedCells [0].RowIndex == -1))
+            if ((GridStudents.Rows.Count == 0) || (GridStudents.SelectedCells[0].RowIndex == -1))
                 {
                 return;
                 }
             else
                 {
                 //Grid1-cols: 0ID, 1Entry_ID, 2StudentName, 3StudentPass
-                int intStudentId = Convert.ToInt32 (GridStudents.Rows [GridStudents.SelectedCells [0].RowIndex].Cells [0].Value.ToString ());
-                string strStudentName = GridStudents.Rows [GridStudents.SelectedCells [0].RowIndex].Cells [2].Value.ToString ();
-                string strStudentPass = GridStudents.Rows [GridStudents.SelectedCells [0].RowIndex].Cells [3].Value.ToString ();
+                int intStudentId = Convert.ToInt32 (GridStudents.Rows[GridStudents.SelectedCells[0].RowIndex].Cells[0].Value.ToString ());
+                string strStudentName = GridStudents.Rows[GridStudents.SelectedCells[0].RowIndex].Cells[2].Value.ToString ();
+                string strStudentPass = GridStudents.Rows[GridStudents.SelectedCells[0].RowIndex].Cells[3].Value.ToString ();
                 //dialog
                 Project.Name = strStudentName;
                 Project.Note = strStudentPass;

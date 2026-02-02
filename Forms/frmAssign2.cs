@@ -61,7 +61,7 @@ namespace eLib.Forms
             lblDatum.Text = "";
             //ImR
             Assign.GetImportantRefs ("ImR");
-            GridC.DataSource = Db.DS.Tables ["tblRefs"];
+            GridC.DataSource = Db.DS.Tables["tblRefs"];
             SetMode (29);
             txtSearch.Focus ();
             if (GridC.Rows.Count > 0)
@@ -210,7 +210,7 @@ namespace eLib.Forms
             TreeA.Nodes.Clear ();
             GridC.DataSource = null;
             GridB.DataSource = null;
-            GridB.DataSource = Db.DS.Tables ["tblNotesCount"];
+            GridB.DataSource = Db.DS.Tables["tblNotesCount"];
             SetMode (4); //A:- B:FNotes
             }
         //Grid-B
@@ -340,14 +340,14 @@ namespace eLib.Forms
             {
             try
                 {
-                if ((GridB.Rows.Count == 0) || (GridB.SelectedRows [0].Index == -1))
+                if ((GridB.Rows.Count == 0) || (GridB.SelectedRows[0].Index == -1))
                     {
                     lblStatusBar.Text = "Select an item!";
                     return;
                     }
                 else
                     {
-                    int r = (int) GridB.SelectedRows [0].Index;
+                    int r = (int) GridB.SelectedRows[0].Index;
                     switch (Assign.Mode)
                         {
                         case 50: //A:SP B:SNotes
@@ -356,12 +356,12 @@ namespace eLib.Forms
                         case 29: //A:-  B:SLRNotes
                         case 5:  //A:-  B:RNotes
                                 {
-                                string tmpDate = GridB [1, GridB.SelectedRows [0].Index].Value.ToString ();
+                                string tmpDate = GridB[1, GridB.SelectedRows[0].Index].Value.ToString ();
                                 mntCal.SetDate (DateTime.Parse (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
                                 //Edit SLR-Note {0:ID, 1:NoteDatum, 2:Note, 3:Parent_ID, 4:ParentType, 5:Rtl, 6:Done, 7:User_ID, 8:Shared}
-                                Note.Id = Convert.ToInt32 (GridB.Rows [r].Cells [0].Value);
-                                Note.Done = Convert.ToBoolean (GridB.Rows [r].Cells [6].Value);
-                                Note.ParentType = Convert.ToInt32 (GridB.Rows [r].Cells [4].Value);
+                                Note.Id = Convert.ToInt32 (GridB.Rows[r].Cells[0].Value);
+                                Note.Done = Convert.ToBoolean (GridB.Rows[r].Cells[6].Value);
+                                Note.ParentType = Convert.ToInt32 (GridB.Rows[r].Cells[4].Value);
                                 switch (GridB.CurrentCell.ColumnIndex)
                                     {
                                     case 6:
@@ -374,17 +374,17 @@ namespace eLib.Forms
                                                 {
                                                 Note.SetNoteStatusDone (Note.Id, true);
                                                 }
-                                            GridB.Rows [r].Cells [6].Value = Note.Done;
+                                            GridB.Rows[r].Cells[6].Value = Note.Done;
                                             return;
                                             }
                                     default:
                                             {
                                             Note.Index = r;
-                                            Note.DateTime = GridB.Rows [r].Cells [1].Value.ToString ();
+                                            Note.DateTime = GridB.Rows[r].Cells[1].Value.ToString ();
                                             lblDatum.Text = Note.DateTime;
-                                            Note.Rtl = Convert.ToBoolean (GridB.Rows [r].Cells [5].Value);
-                                            Note.Done = Convert.ToBoolean (GridB.Rows [r].Cells [6].Value);
-                                            string snote = GridB.Rows [r].Cells [2].Value.ToString ();
+                                            Note.Rtl = Convert.ToBoolean (GridB.Rows[r].Cells[5].Value);
+                                            Note.Done = Convert.ToBoolean (GridB.Rows[r].Cells[6].Value);
+                                            string snote = GridB.Rows[r].Cells[2].Value.ToString ();
                                             //lblStatusBar.Text = snote;
                                             ShowTextInInlineEditor (snote, Note.Rtl, Note.Done, false); //false:dont focus on txtNote
                                             break;
@@ -394,11 +394,11 @@ namespace eLib.Forms
                                 }
                         case 4:  //A:-  B:F-Notes -abandoned
                                 {
-                                string tmpDate = GridB [2, GridB.SelectedRows [0].Index].Value.ToString ();
+                                string tmpDate = GridB[2, GridB.SelectedRows[0].Index].Value.ToString ();
                                 mntCal.SetDate (DateTime.Parse (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
                                 //Edit SNote {0:ProjectName, 1:SubProjectName, 2:NoteDatum, 3:Note, 4:Projects.ID, 5:SubProjects.ID, 6:Notes.ID, 7:Done, 8:Rtl}
-                                Note.Id = Convert.ToInt32 (GridB.Rows [r].Cells [6].Value);
-                                Note.Done = Convert.ToBoolean (GridB.Rows [r].Cells [7].Value);
+                                Note.Id = Convert.ToInt32 (GridB.Rows[r].Cells[6].Value);
+                                Note.Done = Convert.ToBoolean (GridB.Rows[r].Cells[7].Value);
                                 switch (GridB.CurrentCell.ColumnIndex)
                                     {
                                     case 7:
@@ -411,17 +411,17 @@ namespace eLib.Forms
                                                 {
                                                 Note.SetNoteStatusDone (Note.Id, true);
                                                 }
-                                            GridB.Rows [r].Cells [7].Value = Note.Done;
+                                            GridB.Rows[r].Cells[7].Value = Note.Done;
                                             return;
                                             }
                                     default:
                                             {
                                             Note.Index = r;
-                                            Note.DateTime = GridB.Rows [r].Cells [2].Value.ToString ();
+                                            Note.DateTime = GridB.Rows[r].Cells[2].Value.ToString ();
                                             lblDatum.Text = Note.DateTime;
-                                            Note.Done = Convert.ToBoolean (GridB.Rows [r].Cells [7].Value);
-                                            Note.Rtl = Convert.ToBoolean (GridB.Rows [r].Cells [8].Value);
-                                            string snote = GridB.Rows [r].Cells [3].Value.ToString ();
+                                            Note.Done = Convert.ToBoolean (GridB.Rows[r].Cells[7].Value);
+                                            Note.Rtl = Convert.ToBoolean (GridB.Rows[r].Cells[8].Value);
+                                            string snote = GridB.Rows[r].Cells[3].Value.ToString ();
                                             //lblStatusBar.Text = snote;
                                             ShowTextInInlineEditor (snote, Note.Rtl, Note.Done, false); //false:dont focus on txtNote
                                             break;
@@ -439,7 +439,7 @@ namespace eLib.Forms
             }
         private void GridB_CellDoubleClick (object sender, DataGridViewCellEventArgs e)
             {
-            if ((GridB.Rows.Count == 0) || (GridB.SelectedRows [0].Index == -1))
+            if ((GridB.Rows.Count == 0) || (GridB.SelectedRows[0].Index == -1))
                 {
                 lblStatusBar.Text = "Select an item!";
                 return;
@@ -501,9 +501,9 @@ namespace eLib.Forms
                 }
             else
                 {
-                string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-                eLibFile.strFilex = strFiles [0];
-                FileInfo MyFile = new FileInfo (strFiles [0]);
+                string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+                eLibFile.strFilex = strFiles[0];
+                FileInfo MyFile = new FileInfo (strFiles[0]);
                 if (MyFile.Extension.ToLower () != ".txt")
                     {
                     return;
@@ -512,24 +512,24 @@ namespace eLib.Forms
                 string text = System.IO.File.ReadAllText (eLibFile.strFilex);
                 e.Effect = DragDropEffects.None;
                 string strDateTime = DateTime.Now.ToString ("yyyy-MM-dd . HH-mm");
-                int r = (int) GridB.SelectedRows [0].Index;
+                int r = (int) GridB.SelectedRows[0].Index;
                 switch (Assign.Mode)
                     {
                     case 50:// s-note
                             {
-                            SubProject.Id = Convert.ToInt32 (GridB.Rows [r].Cells [3].Value);
+                            SubProject.Id = Convert.ToInt32 (GridB.Rows[r].Cells[3].Value);
                             Assign.AddNewNote (strDateTime, Strings.Left (text, 3998), SubProject.Id, 1, User.Id);
                             break;
                             }
                     case 42: //l-note
                             {
-                            Link.Id = Convert.ToInt32 (GridB.Rows [r].Cells [3].Value);
+                            Link.Id = Convert.ToInt32 (GridB.Rows[r].Cells[3].Value);
                             Assign.AddNewNote (strDateTime, Strings.Left (text, 3998), Link.Id, 2, User.Id);
                             break;
                             }
                     case 5: //r-note
                             {
-                            Ref.Id = Convert.ToInt32 (GridB.Rows [r].Cells [3].Value);
+                            Ref.Id = Convert.ToInt32 (GridB.Rows[r].Cells[3].Value);
                             Assign.AddNewNote (strDateTime, Strings.Left (text, 3998), Ref.Id, 3, User.Id);
                             break;
                             }
@@ -593,16 +593,16 @@ namespace eLib.Forms
             }
         private void GridC_CellClick (object sender, DataGridViewCellEventArgs e)
             {
-            if (GridC.SelectedRows [0].Index != -1)
+            if (GridC.SelectedRows[0].Index != -1)
                 {
-                if ((GridC.Rows.Count == 0) || (GridC.SelectedRows [0].Index == -1))
+                if ((GridC.Rows.Count == 0) || (GridC.SelectedRows[0].Index == -1))
                     {
                     lblStatusBar.Text = "Select an item!";
                     return;
                     }
                 else
                     {
-                    int r = (int) GridC.SelectedRows [0].Index;
+                    int r = (int) GridC.SelectedRows[0].Index;
                     GridB.DataSource = null;
                     switch (Assign.Mode)
                         {
@@ -610,9 +610,9 @@ namespace eLib.Forms
                         case 42: //C:Link A:SP B:LNotes
                                 {
                                 //Show Notes for A Link {Papers.ID, PaperName, IsPaper, IsBook, IsManual, IsLecture, SubProject_ID, Links.ID AS LinkID, Imp1, Imp2, Imp3, ImR}
-                                Link.Id = Convert.ToInt32 (GridC.Rows [r].Cells [7].Value);
+                                Link.Id = Convert.ToInt32 (GridC.Rows[r].Cells[7].Value);
                                 Assign.GetNotes (Link.Id, 2); //ParentTypes (get notes): 1:SNotes, 2:LNotes, 3:RNotes
-                                GridB.DataSource = Db.DS.Tables ["tblLNotes"];
+                                GridB.DataSource = Db.DS.Tables["tblLNotes"];
                                 CloseInlineNoteEditor ();
                                 SetMode (42);
                                 lblGridB.Text = "Link Note";
@@ -623,10 +623,10 @@ namespace eLib.Forms
                         case 5:  //C:Ref A:-  B:RNotes
                                 {
                                 //Show Notes for A Ref {Papers.ID, PaperName, IsPaper, IsBook, IsManual, IsLecture}
-                                Ref.Id = Convert.ToInt32 (GridC.Rows [r].Cells [0].Value);
+                                Ref.Id = Convert.ToInt32 (GridC.Rows[r].Cells[0].Value);
                                 Assign.GetNotes (Ref.Id, 3); //ParentTypes (get notes): 1:SNotes, 2:LNotes, 3:RNotes
                                 CloseInlineNoteEditor ();
-                                GridB.DataSource = Db.DS.Tables ["tblRNotes"];
+                                GridB.DataSource = Db.DS.Tables["tblRNotes"];
                                 SetMode (5);
                                 lblGridB.Text = "Ref Note";
                                 lblStatusBar.Text = "";
@@ -634,15 +634,15 @@ namespace eLib.Forms
                                 }
                         }
                     //GET R-LINKS
-                    Ref.Id = Convert.ToInt32 (GridC.SelectedRows [0].Cells [0].Value);
+                    Ref.Id = Convert.ToInt32 (GridC.SelectedRows[0].Cells[0].Value);
                     Assign.GetRLinks (Ref.Id);
-                    int intRowcount = Db.DS.Tables ["tblAssignments"].Rows.Count;
+                    int intRowcount = Db.DS.Tables["tblAssignments"].Rows.Count;
                     if (intRowcount > 0)
                         {
                         string strLinkedSPs = "";
-                        for (int i = 0; i < Db.DS.Tables ["tblAssignments"].Rows.Count; i++)
+                        for (int i = 0; i < Db.DS.Tables["tblAssignments"].Rows.Count; i++)
                             {
-                            strLinkedSPs += Db.DS.Tables ["tblAssignments"].Rows [i] [3].ToString () + " | ";
+                            strLinkedSPs += Db.DS.Tables["tblAssignments"].Rows[i][3].ToString () + " | ";
                             }
                         lblStatusBar.Text = "Linked to: " + strLinkedSPs;
                         //notice: this string is used in line 1615 to show a messagebox of linked SPs
@@ -656,21 +656,21 @@ namespace eLib.Forms
             }
         private void GridC_CellDoubleClick (object sender, DataGridViewCellEventArgs e)
             {
-            if ((GridC.Rows.Count == 0) || (GridC.SelectedRows [0].Index == -1))
+            if ((GridC.Rows.Count == 0) || (GridC.SelectedRows[0].Index == -1))
                 {
                 lblStatusBar.Text = "Select an item!";
                 return;
                 }
             else
                 {
-                int r = (int) GridC.SelectedRows [0].Index;
+                int r = (int) GridC.SelectedRows[0].Index;
                 switch (Assign.Mode)
                     {
                     case 29: //C:Refs    B:xNotes      
                     case 5:  //C:Refs ?  B:RNotes 
                             {
-                            lblStatusBar.Text = GridC.Rows [r].Cells [1].Value.ToString ();
-                            Ref.Title = Strings.Trim (GridC.Rows [r].Cells [1].Value.ToString ());
+                            lblStatusBar.Text = GridC.Rows[r].Cells[1].Value.ToString ();
+                            Ref.Title = Strings.Trim (GridC.Rows[r].Cells[1].Value.ToString ());
                             if (!string.IsNullOrEmpty (Ref.Title))
                                 {
                                 My.MyProject.Forms.frmReadRef.ShowDialog ();
@@ -680,8 +680,8 @@ namespace eLib.Forms
                     case 50:  //C:Links B:SNotes
                     case 42:  //C:Links B:LNotes
                             {
-                            lblStatusBar.Text = GridC.Rows [r].Cells [1].Value.ToString ();
-                            Ref.Title = Strings.Trim (GridC.Rows [r].Cells [1].Value.ToString ());
+                            lblStatusBar.Text = GridC.Rows[r].Cells[1].Value.ToString ();
+                            Ref.Title = Strings.Trim (GridC.Rows[r].Cells[1].Value.ToString ());
                             if (!string.IsNullOrEmpty (Ref.Title))
                                 {
                                 My.MyProject.Forms.frmReadRef.ShowDialog ();
@@ -717,18 +717,18 @@ namespace eLib.Forms
                         else
                             {
                             lblStatusBar.Text = "wait...";
-                            Db.DS.Tables ["tblRefs"].Clear ();
-                            Db.DS.Tables ["tblRNotes"].Clear ();
+                            Db.DS.Tables["tblRefs"].Clear ();
+                            Db.DS.Tables["tblRNotes"].Clear ();
                             //do the search
                             string strSearchString = Strings.Trim (txtSearch.Text);
                             //1.search refs
                             GridC.DataSource = null;
                             Assign.DoSearchRefs (strSearchString);
-                            GridC.DataSource = Db.DS.Tables ["tblRefs"];
+                            GridC.DataSource = Db.DS.Tables["tblRefs"];
                             //2.search notes
                             Assign.DoSearchNotes (strSearchString, 4); //ParentType (search): {0:SubProjectForFNotes 1:SubProjectForSNotes 2:LinkForLNotes 3:RefForRNotes 4:AllNoteTypes(SLR)}
                             GridB.DataSource = null;
-                            GridB.DataSource = Db.DS.Tables ["tblRNotes"];
+                            GridB.DataSource = Db.DS.Tables["tblRNotes"];
                             //setmode
                             CloseInlineNoteEditor ();
                             TreeA.CollapseAll ();
@@ -895,7 +895,7 @@ namespace eLib.Forms
                 case "-imp1":
                         {
                         Assign.GetImportantRefs ("Imp1");
-                        GridC.DataSource = Db.DS.Tables ["tblRefs"];
+                        GridC.DataSource = Db.DS.Tables["tblRefs"];
                         SetMode (29);
                         txtSearch.SelectionStart = 0;
                         txtSearch.SelectionLength = txtSearch.Text.Length;
@@ -904,7 +904,7 @@ namespace eLib.Forms
                 case "-imp2":
                         {
                         Assign.GetImportantRefs ("Imp2");
-                        GridC.DataSource = Db.DS.Tables ["tblRefs"];
+                        GridC.DataSource = Db.DS.Tables["tblRefs"];
                         SetMode (29);
                         txtSearch.SelectionStart = 0;
                         txtSearch.SelectionLength = txtSearch.Text.Length;
@@ -913,7 +913,7 @@ namespace eLib.Forms
                 case "-imp3":
                         {
                         Assign.GetImportantRefs ("Imp3");
-                        GridC.DataSource = Db.DS.Tables ["tblRefs"];
+                        GridC.DataSource = Db.DS.Tables["tblRefs"];
                         SetMode (29);
                         txtSearch.SelectionStart = 0;
                         txtSearch.SelectionLength = txtSearch.Text.Length;
@@ -924,7 +924,7 @@ namespace eLib.Forms
                         GridB.DataSource = null;
                         GridC.DataSource = null;
                         Assign.GetImportantRefs ("ImR");
-                        GridC.DataSource = Db.DS.Tables ["tblRefs"];
+                        GridC.DataSource = Db.DS.Tables["tblRefs"];
                         SetMode (29);
                         txtSearch.SelectionStart = 0;
                         txtSearch.SelectionLength = txtSearch.Text.Length;
@@ -1126,7 +1126,7 @@ namespace eLib.Forms
                 case "-shelf":
                         {
                         Assign.GetListOfRefs ();
-                        GridC.DataSource = Db.DS.Tables ["tblRefs"];
+                        GridC.DataSource = Db.DS.Tables["tblRefs"];
                         //lblListA.Text = "Click: Projects";
                         lblGridC.Text = "Refs from Shelf";
                         txtSearch.SelectionStart = 0;
@@ -1174,20 +1174,20 @@ namespace eLib.Forms
                             case 16:
                                     {
                                     //snotes  eLib_Guide.html"
-                                    Db.DS.Tables ["tblSNotes"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\notes-s.xml");
+                                    Db.DS.Tables["tblSNotes"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\notes-s.xml");
                                     break;
                                     }
                             case 42:
                                     {
                                     //lnotes
-                                    Db.DS.Tables ["tblLNotes"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\notes-l.xml");
+                                    Db.DS.Tables["tblLNotes"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\notes-l.xml");
                                     break;
                                     }
                             case 29:
                             case 5:
                                     {
                                     //rnotes
-                                    Db.DS.Tables ["tblRNotes"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\notes-r.xml");
+                                    Db.DS.Tables["tblRNotes"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\notes-r.xml");
                                     break;
                                     }
                             }
@@ -1198,7 +1198,7 @@ namespace eLib.Forms
                         }
                 case "save list data as xml: l":
                         {
-                        Db.DS.Tables ["tblLinks"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\links.xml");
+                        Db.DS.Tables["tblLinks"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\links.xml");
                         txtSearch.Text = "refs list saved as xml, ok.";
                         txtSearch.SelectionStart = 0;
                         txtSearch.SelectionLength = txtSearch.Text.Length;
@@ -1206,7 +1206,7 @@ namespace eLib.Forms
                         }
                 case "save list data as xml: r":
                         {
-                        Db.DS.Tables ["tblRefs"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\refs.xml");
+                        Db.DS.Tables["tblRefs"].WriteXml (System.Windows.Forms.Application.StartupPath + @"\refs.xml");
                         lblStatusBar.Text = "refs list saved as xml, ok.";
                         txtSearch.SelectionStart = 0;
                         txtSearch.SelectionLength = txtSearch.Text.Length;
@@ -1474,14 +1474,14 @@ namespace eLib.Forms
                 {
                 case 50:
                         {
-                        GridB.DataSource = Db.DS.Tables ["tblLNotes"];
+                        GridB.DataSource = Db.DS.Tables["tblLNotes"];
                         SetMode (42);
                         lblDatum.Text = "";
                         break;
                         }
                 case 42:
                         {
-                        GridB.DataSource = Db.DS.Tables ["tblSNotes"];
+                        GridB.DataSource = Db.DS.Tables["tblSNotes"];
                         SetMode (50);
                         lblDatum.Text = "";
                         break;
@@ -1500,9 +1500,9 @@ namespace eLib.Forms
             if (Strings.Left (lblStatusBar.Text, 10) == "Linked to:")
                 {
                 string strLinkedSPs = "";
-                for (int i = 0; i < Db.DS.Tables ["tblAssignments"].Rows.Count; i++)
+                for (int i = 0; i < Db.DS.Tables["tblAssignments"].Rows.Count; i++)
                     {
-                    strLinkedSPs += "\r\n\r\n" + Db.DS.Tables ["tblAssignments"].Rows [i] [3].ToString ();
+                    strLinkedSPs += "\r\n\r\n" + Db.DS.Tables["tblAssignments"].Rows[i][3].ToString ();
                     }
                 MessageBox.Show (strLinkedSPs, "eLib: Ref is Linked to:", MessageBoxButtons.OK);
                 return;
@@ -1738,7 +1738,7 @@ namespace eLib.Forms
                     Assign.EditASubProject (SubProject.Id);
                     ShowProjectsInTreeA (User.Id, currentActiveMode, ""); //0:active 1:inactive 2:all 3:search                    
                     SetMode (64); //?32 ?64 //SetMode (32)
-                    TreeA.Nodes [intPrjIndex].ExpandAll ();
+                    TreeA.Nodes[intPrjIndex].ExpandAll ();
                     }
                 }
             catch (Exception ex)
@@ -1760,8 +1760,8 @@ namespace eLib.Forms
                             {
                             Project.Id = Convert.ToInt32 (TreeA.SelectedNode.Tag);
                             Project.Name = TreeA.SelectedNode.Text;
-                            Project.Note = Db.DS.Tables ["tblProject"].Rows [TreeA.SelectedNode.Index] [2].ToString ();
-                            Project.IsActive = Convert.ToBoolean (Db.DS.Tables ["tblProject"].Rows [TreeA.SelectedNode.Index] [3]);
+                            Project.Note = Db.DS.Tables["tblProject"].Rows[TreeA.SelectedNode.Index][2].ToString ();
+                            Project.IsActive = Convert.ToBoolean (Db.DS.Tables["tblProject"].Rows[TreeA.SelectedNode.Index][3]);
                             Assign.EditAProject (Convert.ToInt32 (TreeA.SelectedNode.Tag));
                             ShowProjectsInTreeA (User.Id, currentActiveMode, "");
                             SetMode (64);
@@ -1774,7 +1774,7 @@ namespace eLib.Forms
                             Assign.GetSubProjects (Project.Id);
                             Project.Name = TreeA.SelectedNode.Text;
                             //tblSbProject: ID, SubProjectName, Notes, Project_ID
-                            Project.Note = Db.DS.Tables ["tblSubProject"].Rows [Convert.ToInt32 (TreeA.SelectedNode.Index)] [2].ToString ();
+                            Project.Note = Db.DS.Tables["tblSubProject"].Rows[Convert.ToInt32 (TreeA.SelectedNode.Index)][2].ToString ();
                             SubProject.Id = Convert.ToInt32 (TreeA.SelectedNode.Tag);
                             Assign.EditASubProject (SubProject.Id);
                             ShowProjectsInTreeA (User.Id, currentActiveMode, "");
@@ -1814,7 +1814,7 @@ namespace eLib.Forms
                             {
                             Project.Id = Convert.ToInt32 (TreeA.SelectedNode.Tag);
                             Project.Name = TreeA.SelectedNode.Text;
-                            if (Convert.ToInt32 (Db.DS.Tables ["tblProject"].Rows [Convert.ToInt32 (TreeA.SelectedNode.Index)] [4].ToString ()) != User.Id)
+                            if (Convert.ToInt32 (Db.DS.Tables["tblProject"].Rows[Convert.ToInt32 (TreeA.SelectedNode.Index)][4].ToString ()) != User.Id)
                                 {
                                 MessageBox.Show ("NOTICE: \n\n You are not the Owner of this project!", "eLib", MessageBoxButtons.OK);
                                 return;
@@ -1856,7 +1856,7 @@ namespace eLib.Forms
                                 {
                                 Assign.DeleteASubProject (SubProject.Id);
                                 ShowProjectsInTreeA (User.Id, currentActiveMode, ""); //2:all
-                                TreeA.Nodes [projectIndex].ExpandAll ();
+                                TreeA.Nodes[projectIndex].ExpandAll ();
                                 SetMode (32);
                                 lblStatusBar.Text = "Deleted";
                                 }
@@ -1949,22 +1949,22 @@ namespace eLib.Forms
                 case 42: //new l-note
                         {
                         //Link: Papers.ID, PaperName, IsPaper, IsBook, IsManual, IsLecture, SubProject_ID, Links.ID AS LinkID, Imp1, Imp2, Imp3, ImR
-                        int r = (int) GridC.SelectedRows [0].Index;
-                        Link.Id = Convert.ToInt32 (GridC.Rows [r].Cells [7].Value); //7:LinkId
+                        int r = (int) GridC.SelectedRows[0].Index;
+                        Link.Id = Convert.ToInt32 (GridC.Rows[r].Cells[7].Value); //7:LinkId
                         Assign.AddNewNote (strDateTime1, User.Name + " @ " + strDateTime2 + "  \r\n{\r\n \r\n}", Link.Id, 2, User.Id); //2:l
                         ShowSNotesInGridB_LinksInGridC (SubProject.Id);
                         //refresh l-notes
-                        GridC.CurrentCell = GridC.Rows [r].Cells [1];
+                        GridC.CurrentCell = GridC.Rows[r].Cells[1];
                         GridC_CellClick (null, null);
                         break;
                         }
                 case 5: //new r-note
                         {
-                        int r = (int) GridC.SelectedRows [0].Index;
-                        Ref.Id = Convert.ToInt32 (GridC.Rows [r].Cells [0].Value); //0:PaperId
+                        int r = (int) GridC.SelectedRows[0].Index;
+                        Ref.Id = Convert.ToInt32 (GridC.Rows[r].Cells[0].Value); //0:PaperId
                         Assign.AddNewNote (strDateTime1, User.Name + " @ " + strDateTime2 + "  \r\n{\r\n \r\n}", Ref.Id, 3, User.Id);
                         //refresh r-notes
-                        GridC.CurrentCell = GridC.Rows [r].Cells [1];
+                        GridC.CurrentCell = GridC.Rows[r].Cells[1];
                         GridC_CellClick (null, null);
                         break;
                         }
@@ -1972,10 +1972,10 @@ namespace eLib.Forms
             //locate new note and edit
             for (int i = 0; i < GridC.Rows.Count; i++)
                 {
-                if (Convert.ToInt32 (GridB.Rows [i].Cells [0].Value) == Note.Id)
+                if (Convert.ToInt32 (GridB.Rows[i].Cells[0].Value) == Note.Id)
                     {
-                    GridB.CurrentCell = GridB.Rows [i].Cells [1];
-                    Note.NoteText = GridB.Rows [i].Cells [2].Value.ToString ();
+                    GridB.CurrentCell = GridB.Rows[i].Cells[1];
+                    Note.NoteText = GridB.Rows[i].Cells[2].Value.ToString ();
                     lblDatum.Text = strDateTime1;
                     ShowTextInInlineEditor (Note.NoteText, false, false, true);
                     break;
@@ -1989,7 +1989,7 @@ namespace eLib.Forms
             //RNote 5
             try
                 {
-                if ((GridB.Rows.Count > 0) && (GridB.SelectedRows [0].Index >= 0))
+                if ((GridB.Rows.Count > 0) && (GridB.SelectedRows[0].Index >= 0))
                     {
                     switch (Assign.Mode)
                         {
@@ -2000,14 +2000,14 @@ namespace eLib.Forms
                                 {
                                 //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
                                 Project.Name = TreeA.SelectedNode.Parent.Text;
-                                Note.ParentID = Convert.ToInt32 (Convert.ToInt32 (GridB.SelectedRows [0].Cells [3].Value));
-                                Note.Id = Convert.ToInt32 (GridB.Rows [GridB.SelectedRows [0].Index].Cells [0].Value);
+                                Note.ParentID = Convert.ToInt32 (Convert.ToInt32 (GridB.SelectedRows[0].Cells[3].Value));
+                                Note.Id = Convert.ToInt32 (GridB.Rows[GridB.SelectedRows[0].Index].Cells[0].Value);
                                 if (Note.Id < 1)
                                     return;
-                                Note.DateTime = (GridB.Rows [GridB.SelectedRows [0].Index].Cells [1]).ToString ();
-                                Note.NoteText = (GridB.Rows [GridB.SelectedRows [0].Index].Cells [2]).ToString ();
-                                Note.Rtl = Convert.ToBoolean (GridB.Rows [GridB.SelectedRows [0].Index].Cells [5].Value);
-                                Note.Index = GridB.SelectedRows [0].Index;
+                                Note.DateTime = (GridB.Rows[GridB.SelectedRows[0].Index].Cells[1]).ToString ();
+                                Note.NoteText = (GridB.Rows[GridB.SelectedRows[0].Index].Cells[2]).ToString ();
+                                Note.Rtl = Convert.ToBoolean (GridB.Rows[GridB.SelectedRows[0].Index].Cells[5].Value);
+                                Note.Index = GridB.SelectedRows[0].Index;
                                 CallNoteEditor (Assign.Mode);
                                 break;
                                 }
@@ -2027,19 +2027,19 @@ namespace eLib.Forms
             }
         private void MenuB_DateTime_Click (object sender, EventArgs e)
             {
-            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows [0].Index >= 0))
+            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows[0].Index >= 0))
                 {
                 lblStatusBar.Text = "Date/Time changed from:  " + Note.DateTime + "   to: ";
                 if (Assign.Mode == 4)
                     {
                     //f-Notes: 0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done, 8Rtl
-                    Note.DateTime = GridB [2, GridB.SelectedRows [0].Index].Value.ToString ();
-                    Note.Id = (int) GridB [6, GridB.SelectedRows [0].Index].Value;
+                    Note.DateTime = GridB[2, GridB.SelectedRows[0].Index].Value.ToString ();
+                    Note.Id = (int) GridB[6, GridB.SelectedRows[0].Index].Value;
                     }
                 else
                     {
-                    Note.DateTime = GridB [1, GridB.SelectedRows [0].Index].Value.ToString ();
-                    Note.Id = (int) GridB [0, GridB.SelectedRows [0].Index].Value;
+                    Note.DateTime = GridB[1, GridB.SelectedRows[0].Index].Value.ToString ();
+                    Note.Id = (int) GridB[0, GridB.SelectedRows[0].Index].Value;
                     }
                 var frmTMDT = new frmTimeAndDate ();
                 frmTMDT.ShowDialog ();
@@ -2083,24 +2083,24 @@ namespace eLib.Forms
             }
         private void MenuB_Replace_Click (object sender, EventArgs e)
             {
-            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows [0].Index >= 0) && (Assign.Mode == 50))
+            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows[0].Index >= 0) && (Assign.Mode == 50))
                 {
-                Note.Id = Convert.ToInt32 (GridB.Rows [GridB.SelectedRows [0].Index].Cells [0].Value);
+                Note.Id = Convert.ToInt32 (GridB.Rows[GridB.SelectedRows[0].Index].Cells[0].Value);
                 Assign.ReplaceASubProjectNote (Note.Id);
                 TreeA_AfterSelect (null, null);
                 }
             }
         private void MenuB_MovetoToday_Click (object sender, EventArgs e)
             {
-            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows [0].Index >= 0))
+            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows[0].Index >= 0))
                 {
                 if ((Assign.Mode == 50) || (Assign.Mode == 16) || (Assign.Mode == 42) || (Assign.Mode == 5))
                     {
                     //SLR-Notes: 0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                    Note.Id = (int) GridB [0, GridB.SelectedRows [0].Index].Value;
-                    Note.DateTime = GridB [1, GridB.SelectedRows [0].Index].Value.ToString ();
+                    Note.Id = (int) GridB[0, GridB.SelectedRows[0].Index].Value;
+                    Note.DateTime = GridB[1, GridB.SelectedRows[0].Index].Value.ToString ();
                     Note.PostpondNote (Note.Id, 0);
-                    GridB.SelectedRows [0].Cells [1].Value = Note.DateTime;
+                    GridB.SelectedRows[0].Cells[1].Value = Note.DateTime;
                     lblDatum.Text = Note.DateTime;
                     GridB.Focus ();
                     }
@@ -2109,15 +2109,15 @@ namespace eLib.Forms
             }
         private void MenuB_MovetoTomorrow_Click (object sender, EventArgs e)
             {
-            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows [0].Index >= 0))
+            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows[0].Index >= 0))
                 {
                 if ((Assign.Mode == 50) || (Assign.Mode == 16) || (Assign.Mode == 42) || (Assign.Mode == 5))
                 //SLR-Notes: 0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
                     {
-                    Note.Id = (int) GridB [0, GridB.SelectedRows [0].Index].Value;
-                    Note.DateTime = GridB [1, GridB.SelectedRows [0].Index].Value.ToString ();
+                    Note.Id = (int) GridB[0, GridB.SelectedRows[0].Index].Value;
+                    Note.DateTime = GridB[1, GridB.SelectedRows[0].Index].Value.ToString ();
                     Note.PostpondNote (Note.Id, 1);
-                    GridB.SelectedRows [0].Cells [1].Value = Note.DateTime;
+                    GridB.SelectedRows[0].Cells[1].Value = Note.DateTime;
                     lblDatum.Text = Note.DateTime;
                     GridB.Focus ();
                     }
@@ -2126,15 +2126,15 @@ namespace eLib.Forms
             }
         private void MenuB_MovetoNextWeek_Click (object sender, EventArgs e)
             {
-            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows [0].Index >= 0))
+            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows[0].Index >= 0))
                 {
                 if ((Assign.Mode == 50) || (Assign.Mode == 16) || (Assign.Mode == 42) || (Assign.Mode == 5))
                     {
                     //SLR-Notes: 0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                    Note.Id = (int) GridB [0, GridB.SelectedRows [0].Index].Value;
-                    Note.DateTime = GridB [1, GridB.SelectedRows [0].Index].Value.ToString ();
+                    Note.Id = (int) GridB[0, GridB.SelectedRows[0].Index].Value;
+                    Note.DateTime = GridB[1, GridB.SelectedRows[0].Index].Value.ToString ();
                     Note.PostpondNote (Note.Id, 7);
-                    GridB.SelectedRows [0].Cells [1].Value = Note.DateTime;
+                    GridB.SelectedRows[0].Cells[1].Value = Note.DateTime;
                     lblDatum.Text = Note.DateTime;
                     GridB.Focus ();
                     }
@@ -2155,10 +2155,10 @@ namespace eLib.Forms
                     {
                     SubProject.Id = Convert.ToInt32 (TreeA.SelectedNode.Tag);
                     SubProject.Name = TreeA.SelectedNode.Text;
-                    Note.Id = Convert.ToInt32 (Db.DS.Tables ["tblSNotes"].Rows [GridB.SelectedRows [0].Index] [0]);
-                    Note.DateTime = (Db.DS.Tables ["tblSNotes"].Rows [GridB.SelectedRows [0].Index] [1]).ToString ();
-                    Note.NoteText = (Db.DS.Tables ["tblSNotes"].Rows [GridB.SelectedRows [0].Index] [2]).ToString ();
-                    Note.Index = (int) GridB.SelectedRows [0].Index;
+                    Note.Id = Convert.ToInt32 (Db.DS.Tables["tblSNotes"].Rows[GridB.SelectedRows[0].Index][0]);
+                    Note.DateTime = (Db.DS.Tables["tblSNotes"].Rows[GridB.SelectedRows[0].Index][1]).ToString ();
+                    Note.NoteText = (Db.DS.Tables["tblSNotes"].Rows[GridB.SelectedRows[0].Index][2]).ToString ();
+                    Note.Index = (int) GridB.SelectedRows[0].Index;
                     Note.Type = "SubProjectNote"; //FocusNote SubProjectNote SubProjectNoteSearch LinkNote LinkNoteSearch RefNote RefNoteSearch
                     if (Note.Id < 1)
                         return;
@@ -2170,7 +2170,7 @@ namespace eLib.Forms
                     ShowProjectsInTreeA (User.Id, currentActiveMode, "");
                     TreeA.SelectedNode = null; //??
                     ShowSNotesInGridB_LinksInGridC (Note.ParentID);
-                    GridB.CurrentCell = GridB.Rows [Note.Index].Cells [1];
+                    GridB.CurrentCell = GridB.Rows[Note.Index].Cells[1];
                     GridB.Focus ();
                     }
                 else
@@ -2200,9 +2200,9 @@ namespace eLib.Forms
                 {
                 e.SuppressKeyPress = true;
                 MenuB.Visible = false;
-                Db.DS.Tables ["tblRefs"].Clear ();
-                Db.DS.Tables ["tblAssignments"].Clear ();
-                Db.DS.Tables ["tblSNotes"].Clear ();
+                Db.DS.Tables["tblRefs"].Clear ();
+                Db.DS.Tables["tblAssignments"].Clear ();
+                Db.DS.Tables["tblSNotes"].Clear ();
                 if (string.IsNullOrEmpty (Strings.Trim (MenuB_Search.Text)))
                     {
                     MenuB_Search.Text = "";
@@ -2214,7 +2214,7 @@ namespace eLib.Forms
                     GridB.DataSource = null;
                     string strSearchString = Strings.Trim (MenuB_Search.Text);
                     Assign.DoSearchNotes (strSearchString, 1); //ParentType (search): {0:SubProjectForFNotes 1:SubProjectForSNotes 2:LinkForLNotes 3:RefForRNotes 4:AllNoteTypes(SLR)}
-                    GridB.DataSource = Db.DS.Tables ["tblSNotes"];
+                    GridB.DataSource = Db.DS.Tables["tblSNotes"];
                     FormatGridB ("SNotes"); //{SubProjects. SNotes, LNotes. RNotes, FNotes}
                     MenuB_Search.Focus ();
                     MenuB_Search.SelectionStart = 0;
@@ -2227,17 +2227,17 @@ namespace eLib.Forms
             }
         private void MenuB_Delete_Click (object sender, EventArgs e)
             {
-            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows [0].Index >= 0))
+            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows[0].Index >= 0))
                 {
                 if (Assign.Mode == 4)
                     {
                     //f-Notes: 0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done, 8Rtl
-                    Note.Id = Convert.ToInt32 (GridB [6, GridB.SelectedRows [0].Index].Value);
+                    Note.Id = Convert.ToInt32 (GridB[6, GridB.SelectedRows[0].Index].Value);
                     }
                 else
                     {
                     //SLR-Notes: 0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                    Note.Id = Convert.ToInt32 (GridB [0, GridB.SelectedRows [0].Index].Value);
+                    Note.Id = Convert.ToInt32 (GridB[0, GridB.SelectedRows[0].Index].Value);
                     }
                 string result = Assign.DeleteNote (Note.Id, true); //true: get user confirmation
                 switch (result)
@@ -2245,7 +2245,7 @@ namespace eLib.Forms
                     case "deleted":
                             {
                             lblStatusBar.Text = "Deleted";
-                            GridB.Rows.RemoveAt ((int) GridB.SelectedRows [0].Index);
+                            GridB.Rows.RemoveAt ((int) GridB.SelectedRows[0].Index);
                             GridB.Focus ();
                             CloseInlineNoteEditor ();
                             if (Assign.Mode == 4)
@@ -2283,7 +2283,7 @@ namespace eLib.Forms
             {
             Note.GetSNotesFromDB ("upcomingpending"); //all, upcomingpending, postponeded, ndays
             TreeA.Nodes.Clear ();
-            GridB.DataSource = Db.DS.Tables ["tblNotesCount"];
+            GridB.DataSource = Db.DS.Tables["tblNotesCount"];
             GridC.DataSource = null;
             SetMode (4); //A:- B:FNotes (~SNotes ?)
             }
@@ -2291,7 +2291,7 @@ namespace eLib.Forms
             {
             Note.GetSNotesFromDB ("postponeded"); //all, upcomingpending, postponeded, ndays
             TreeA.Nodes.Clear ();
-            GridB.DataSource = Db.DS.Tables ["tblNotesCount"];
+            GridB.DataSource = Db.DS.Tables["tblNotesCount"];
             GridC.DataSource = null;
             SetMode (4); //A:- B:FNotes
             }
@@ -2321,7 +2321,7 @@ namespace eLib.Forms
                         {
                         Note.GetSNotesFromDB ("ndays");
                         TreeA.Nodes.Clear ();
-                        GridB.DataSource = Db.DS.Tables ["tblNotesCount"];
+                        GridB.DataSource = Db.DS.Tables["tblNotesCount"];
                         GridC.DataSource = null;
                         lblStatusBar.Text = "notes during <" + Note.days.ToString () + "> days";
                         SetMode (4); //A:- B:FNotes
@@ -2354,7 +2354,7 @@ namespace eLib.Forms
                 case 29: //A:-  B:-        C:refs ?
                 case 5:  //A:-  B:r-notes  C:refs ?
                         {
-                        Ref.Id = Convert.ToInt32 (GridC.SelectedRows [0].Cells [0].Value);
+                        Ref.Id = Convert.ToInt32 (GridC.SelectedRows[0].Cells[0].Value);
                         if (Ref.Id < 1)
                             return;
                         Client.DialogRequestParams = 2; //1:get Project 2:get SubProject 3:get Project or SubProject
@@ -2379,27 +2379,27 @@ namespace eLib.Forms
             }
         private void MenuC_CopyTitle_Click (object sender, EventArgs e)
             {
-            int r = Convert.ToInt32 (GridC.SelectedRows [0].Index);
+            int r = Convert.ToInt32 (GridC.SelectedRows[0].Index);
             if (r >= 0)
                 {
-                My.MyProject.Computer.Clipboard.SetText (GridC.Rows [r].Cells [1].Value.ToString ());
-                lblStatusBar.Text = "copied: " + GridC.Rows [r].Cells [1].Value.ToString ();
+                My.MyProject.Computer.Clipboard.SetText (GridC.Rows[r].Cells[1].Value.ToString ());
+                lblStatusBar.Text = "copied: " + GridC.Rows[r].Cells[1].Value.ToString ();
                 }
             }
         private void MenuC_QRCode_Click (object sender, EventArgs e)
             {
-            int r = (int) GridC.SelectedRows [0].Index;
+            int r = (int) GridC.SelectedRows[0].Index;
             if (r >= 0)
                 {
-                Client.GenerateQRCode (GridC.Rows [r].Cells [1].Value.ToString ());
+                Client.GenerateQRCode (GridC.Rows[r].Cells[1].Value.ToString ());
                 }
             }
         private void MenuC_Replace_Click (object sender, EventArgs e)
             {
-            if ((GridC.SelectedRows [0].Index >= 0) && ((Assign.Mode == 50) || (Assign.Mode == 42)))
+            if ((GridC.SelectedRows[0].Index >= 0) && ((Assign.Mode == 50) || (Assign.Mode == 42)))
                 {
                 //50,42: C:link
-                Link.Id = Convert.ToInt32 (GridC.SelectedRows [0].Cells [7].Value);
+                Link.Id = Convert.ToInt32 (GridC.SelectedRows[0].Cells[7].Value);
                 Client.DialogRequestParams = 2; //1:get Project 2:get SubProject 3:get Project or SubProject
                 My.MyProject.Forms.frmChooseProject.ShowDialog ();
                 if (Client.DialogRequestParams == 32)
@@ -2414,32 +2414,32 @@ namespace eLib.Forms
             try
                 {
                 Project.Id = (TreeA.SelectedNode.Level == 0) ? Convert.ToInt32 (TreeA.SelectedNode.Tag) : Convert.ToInt32 (TreeA.SelectedNode.Parent.Tag);
-                if (((Assign.Mode != 50) || (Assign.Mode != 42)) && (GridC.SelectedRows [0].Index != -1) && (Assign.CheckReadOnlyAccess (Project.Id) != 1))
+                if (((Assign.Mode != 50) || (Assign.Mode != 42)) && (GridC.SelectedRows[0].Index != -1) && (Assign.CheckReadOnlyAccess (Project.Id) != 1))
                     {
                     //50,42: C:link
-                    Link.Id = Convert.ToInt32 (GridC.SelectedRows [0].Cells [7].Value);       //7:LinkId
-                    Ref.Title = (GridC.SelectedRows [0].Cells [1].Value).ToString ();         //1:paperName(refTitle)
-                    Ref.Id = Convert.ToInt32 (GridC.SelectedRows [0].Cells [0].Value);        //0:PapersId(RefId)
-                    SubProject.Id = Convert.ToInt32 (GridC.SelectedRows [0].Cells [6].Value); //6:SubProjectId
-                    SubProject.Note = (GridC.SelectedRows [0].Cells [2].Value).ToString (); // 2:SubProject.Note
+                    Link.Id = Convert.ToInt32 (GridC.SelectedRows[0].Cells[7].Value);       //7:LinkId
+                    Ref.Title = (GridC.SelectedRows[0].Cells[1].Value).ToString ();         //1:paperName(refTitle)
+                    Ref.Id = Convert.ToInt32 (GridC.SelectedRows[0].Cells[0].Value);        //0:PapersId(RefId)
+                    SubProject.Id = Convert.ToInt32 (GridC.SelectedRows[0].Cells[6].Value); //6:SubProjectId
+                    SubProject.Note = (GridC.SelectedRows[0].Cells[2].Value).ToString (); // 2:SubProject.Note
                     }
                 Ref.Attributes = 0;
                 //1111-1111 {ImR.Imp3.Imp2.Imp1.Lect.Man.Book.Paper}
-                if (Convert.ToBoolean (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [2]) == true)
+                if (Convert.ToBoolean (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][2]) == true)
                     Ref.Attributes = Ref.Attributes | 1;
-                if (Convert.ToBoolean (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [3]) == true)
+                if (Convert.ToBoolean (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][3]) == true)
                     Ref.Attributes = Ref.Attributes | 2;
-                if (Convert.ToBoolean (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [4]) == true)
+                if (Convert.ToBoolean (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][4]) == true)
                     Ref.Attributes = Ref.Attributes | 4;
-                if (Convert.ToBoolean (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [5]) == true)
+                if (Convert.ToBoolean (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][5]) == true)
                     Ref.Attributes = Ref.Attributes | 8;
-                if (Convert.ToBoolean (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [8]) == true)
+                if (Convert.ToBoolean (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][8]) == true)
                     Ref.Attributes = Ref.Attributes | 16;
-                if (Convert.ToBoolean (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [9]) == true)
+                if (Convert.ToBoolean (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][9]) == true)
                     Ref.Attributes = Ref.Attributes | 32;
-                if (Convert.ToBoolean (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [10]) == true)
+                if (Convert.ToBoolean (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][10]) == true)
                     Ref.Attributes = Ref.Attributes | 64;
-                if (Convert.ToBoolean (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [11]) == true)
+                if (Convert.ToBoolean (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][11]) == true)
                     Ref.Attributes = Ref.Attributes | 128;
                 My.MyProject.Forms.frmRefAttributes.ShowDialog ();
                 if (Client.DialogRequestParams == 16)
@@ -2447,14 +2447,14 @@ namespace eLib.Forms
                     //16: ok! save
                     Assign.SetRefAttributes (Ref.Attributes);
                     //update grid row
-                    (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [2]) = ((Ref.Attributes & 1) == 1) ? 1 : 0;
-                    (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [3]) = ((Ref.Attributes & 2) == 2) ? 1 : 0;
-                    (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [4]) = ((Ref.Attributes & 4) == 4) ? 1 : 0;
-                    (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [5]) = ((Ref.Attributes & 8) == 8) ? 1 : 0;
-                    (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [8]) = ((Ref.Attributes & 16) == 16) ? 1 : 0;
-                    (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [9]) = ((Ref.Attributes & 32) == 32) ? 1 : 0;
-                    (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [10]) = ((Ref.Attributes & 64) == 64) ? 1 : 0;
-                    (Db.DS.Tables ["tblLinks"].Rows [GridC.SelectedRows [0].Index] [11]) = ((Ref.Attributes & 128) == 128) ? 1 : 0;
+                    (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][2]) = ((Ref.Attributes & 1) == 1) ? 1 : 0;
+                    (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][3]) = ((Ref.Attributes & 2) == 2) ? 1 : 0;
+                    (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][4]) = ((Ref.Attributes & 4) == 4) ? 1 : 0;
+                    (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][5]) = ((Ref.Attributes & 8) == 8) ? 1 : 0;
+                    (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][8]) = ((Ref.Attributes & 16) == 16) ? 1 : 0;
+                    (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][9]) = ((Ref.Attributes & 32) == 32) ? 1 : 0;
+                    (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][10]) = ((Ref.Attributes & 64) == 64) ? 1 : 0;
+                    (Db.DS.Tables["tblLinks"].Rows[GridC.SelectedRows[0].Index][11]) = ((Ref.Attributes & 128) == 128) ? 1 : 0;
                     }
                 }
             catch (Exception ex)
@@ -2465,7 +2465,7 @@ namespace eLib.Forms
             }
         private void MenuC_Delete_Click (object sender, EventArgs e)
             {
-            if ((GridC.Rows.Count == 0) || (GridC.SelectedRows [0].Index == -1))
+            if ((GridC.Rows.Count == 0) || (GridC.SelectedRows[0].Index == -1))
                 {
                 return;
                 }
@@ -2478,10 +2478,10 @@ namespace eLib.Forms
                             {
                             if (Assign.CheckReadOnlyAccess (Project.Id) != 1)
                                 {
-                                Link.Id = Convert.ToInt32 (GridC.SelectedRows [0].Cells [7].Value); //7:LinkId
+                                Link.Id = Convert.ToInt32 (GridC.SelectedRows[0].Cells[7].Value); //7:LinkId
                                 if (Assign.DeleteALink (Link.Id, true))
                                     {
-                                    GridC.Rows.RemoveAt (GridC.SelectedRows [0].Index);
+                                    GridC.Rows.RemoveAt (GridC.SelectedRows[0].Index);
                                     }
                                 }
                             break;
@@ -2489,10 +2489,10 @@ namespace eLib.Forms
                     case 29: //C: Ref
                     case 5:  //C: Ref
                             {
-                            Ref.Id = Convert.ToInt32 (GridC.SelectedRows [0].Cells [0].Value); //0:RefId
+                            Ref.Id = Convert.ToInt32 (GridC.SelectedRows[0].Cells[0].Value); //0:RefId
                             if (Assign.DeleteARef (Ref.Id, true))
                                 {
-                                GridC.Rows.RemoveAt (GridC.SelectedRows [0].Index);
+                                GridC.Rows.RemoveAt (GridC.SelectedRows[0].Index);
                                 }
                             break;
                             }
@@ -2527,7 +2527,7 @@ namespace eLib.Forms
             frmTMDT.ShowDialog ();
             if (Client.DialogRequestParams == 16)
                 {
-                GridB.Rows [GridB.SelectedRows [0].Index].Cells [1].Value = Note.DateTime;
+                GridB.Rows[GridB.SelectedRows[0].Index].Cells[1].Value = Note.DateTime;
                 lblDatum.Text = Note.DateTime;
                 lblStatusBar.Text += Note.DateTime;
                 LED_Save.Visible = true;
@@ -2574,10 +2574,10 @@ namespace eLib.Forms
                             {
                             SubProject.Id = Convert.ToInt32 (TreeA.SelectedNode.Tag);
                             SubProject.Name = TreeA.SelectedNode.Text;
-                            Note.Id = Convert.ToInt32 (Db.DS.Tables ["tblSNotes"].Rows [GridB.SelectedRows [0].Index] [0]);
-                            Note.DateTime = (Db.DS.Tables ["tblSNotes"].Rows [GridB.SelectedRows [0].Index] [1]).ToString ();
-                            Note.NoteText = (Db.DS.Tables ["tblSNotes"].Rows [GridB.SelectedRows [0].Index] [2]).ToString ();
-                            Note.Index = (int) GridB.SelectedRows [0].Index;
+                            Note.Id = Convert.ToInt32 (Db.DS.Tables["tblSNotes"].Rows[GridB.SelectedRows[0].Index][0]);
+                            Note.DateTime = (Db.DS.Tables["tblSNotes"].Rows[GridB.SelectedRows[0].Index][1]).ToString ();
+                            Note.NoteText = (Db.DS.Tables["tblSNotes"].Rows[GridB.SelectedRows[0].Index][2]).ToString ();
+                            Note.Index = (int) GridB.SelectedRows[0].Index;
                             if (Note.Id < 1)
                                 return;
                             CallNoteEditor (50);
@@ -2587,20 +2587,20 @@ namespace eLib.Forms
                             ShowProjectsInTreeA (User.Id, currentActiveMode, "");
                             TreeA.SelectedNode = null; //SubProject.Id; ------------------------------------------
                             ShowSNotesInGridB_LinksInGridC (Note.ParentID);
-                            GridB.CurrentCell = GridB.Rows [Note.Index].Cells [1];
+                            GridB.CurrentCell = GridB.Rows[Note.Index].Cells[1];
                             GridB.Focus ();
                             break;
                             }
                     case 16: //A:-  B:SNote ?
                             {
                             //tblNotesCount: 0:ProjectName, 1:SubProjectName, 2:NoteDatum, 3:Note, 4:Projects.ID, 5:SubProjects.ID, 6:Notes.ID, 7:Done, 8:Rtl
-                            Project.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [GridB.SelectedRows [0].Index] [4]);
-                            SubProject.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [GridB.SelectedRows [0].Index] [5]);
-                            SubProject.Name = (Db.DS.Tables ["tblNotesCount"].Rows [GridB.SelectedRows [0].Index] [1]).ToString ();
-                            Note.Index = (int) GridB.SelectedRows [0].Index;
-                            Note.Id = (int) (Db.DS.Tables ["tblNotesCount"].Rows [GridB.SelectedRows [0].Index] [6]);
-                            Note.DateTime = (Db.DS.Tables ["tblNotesCount"].Rows [GridB.SelectedRows [0].Index] [2]).ToString ();
-                            Note.NoteText = (Db.DS.Tables ["tblNotesCount"].Rows [GridB.SelectedRows [0].Index] [3]).ToString ();
+                            Project.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[GridB.SelectedRows[0].Index][4]);
+                            SubProject.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[GridB.SelectedRows[0].Index][5]);
+                            SubProject.Name = (Db.DS.Tables["tblNotesCount"].Rows[GridB.SelectedRows[0].Index][1]).ToString ();
+                            Note.Index = (int) GridB.SelectedRows[0].Index;
+                            Note.Id = (int) (Db.DS.Tables["tblNotesCount"].Rows[GridB.SelectedRows[0].Index][6]);
+                            Note.DateTime = (Db.DS.Tables["tblNotesCount"].Rows[GridB.SelectedRows[0].Index][2]).ToString ();
+                            Note.NoteText = (Db.DS.Tables["tblNotesCount"].Rows[GridB.SelectedRows[0].Index][3]).ToString ();
                             if (Note.Id < 1)
                                 return;
                             CallNoteEditor (16);
@@ -2610,7 +2610,7 @@ namespace eLib.Forms
                             ShowProjectsInTreeA (User.Id, currentActiveMode, "");
                             TreeA.SelectedNode = null; //SubProject.Id; ----------------------------------
                             ShowSNotesInGridB_LinksInGridC (Note.ParentID);
-                            GridB.CurrentCell = GridB.Rows [Note.Index].Cells [1];
+                            GridB.CurrentCell = GridB.Rows[Note.Index].Cells[1];
                             GridB.Focus ();
                             break;
                             }
@@ -2677,10 +2677,10 @@ namespace eLib.Forms
             string tmpDate = "";
             mntCal.RemoveAllBoldedDates ();
             mntCal.UpdateBoldedDates ();
-            foreach (DataRow r in Db.DS.Tables [tblType].Rows)
+            foreach (DataRow r in Db.DS.Tables[tblType].Rows)
                 {
                 rx++;
-                tmpDate = Strings.Left (r ["NoteDatum"].ToString (), 10);
+                tmpDate = Strings.Left (r["NoteDatum"].ToString (), 10);
                 mntCal.AddBoldedDate (DateTime.Parse (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
                 }
             mntCal.UpdateBoldedDates ();
@@ -2694,7 +2694,7 @@ namespace eLib.Forms
             TreeA.Focus ();
             if (TreeA.Nodes.Count > 0)
                 {
-                TreeA.SelectedNode = TreeA.Nodes [0];
+                TreeA.SelectedNode = TreeA.Nodes[0];
                 }
             }
         private void ShowUpcomingNotes (int actiontype)
@@ -2708,7 +2708,7 @@ namespace eLib.Forms
             if (actiontype == 1)
                 {
                 TreeA.Nodes.Clear ();
-                GridB.DataSource = Db.DS.Tables ["tblNotesCount"];
+                GridB.DataSource = Db.DS.Tables["tblNotesCount"];
                 BoldDatesOnCalendar ("tblNotesCount");
                 GridC.DataSource = null;
                 SetMode (4); //A:- B:FNotes
@@ -2746,7 +2746,7 @@ namespace eLib.Forms
             }
         private void ShowFNotesForm ()
             {
-            if (Db.DS.Tables ["tblNotesCount"].Rows.Count != 0)
+            if (Db.DS.Tables["tblNotesCount"].Rows.Count != 0)
                 {
                 var frmUpcomingNT = new frmUpcomingNotes ();
                 frmUpcomingNT.ShowDialog ();
@@ -2882,7 +2882,7 @@ namespace eLib.Forms
                 {
                 for (int i = 0, loopTo = GridB.Columns.Count - 1; i <= loopTo; i++) //disable sort for column_haeders
                     {
-                    GridB.Columns [i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                    GridB.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                     }
                 }
             catch (Exception ex) { }
@@ -2894,29 +2894,29 @@ namespace eLib.Forms
                 case "RNotes":
                         {
                         //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                        GridB.Columns [0].Visible = false;   //ID
-                        GridB.Columns [1].Width = 160;       //NoteDatum
-                        GridB.Columns [2].Width = 730;       //Note
-                        GridB.Columns [3].Visible = false;   //Parent_ID 
-                        GridB.Columns [4].Visible = false;   //ParentType
-                        GridB.Columns [5].Visible = false;   //Rtl
-                        GridB.Columns [6].Width = 40;        //Done
-                        GridB.Columns [7].Visible = false;   //User_ID
-                        GridB.Columns [8].Visible = false;   //Shared
+                        GridB.Columns[0].Visible = false;   //ID
+                        GridB.Columns[1].Width = 160;       //NoteDatum
+                        GridB.Columns[2].Width = 730;       //Note
+                        GridB.Columns[3].Visible = false;   //Parent_ID 
+                        GridB.Columns[4].Visible = false;   //ParentType
+                        GridB.Columns[5].Visible = false;   //Rtl
+                        GridB.Columns[6].Width = 40;        //Done
+                        GridB.Columns[7].Visible = false;   //User_ID
+                        GridB.Columns[8].Visible = false;   //Shared
                         break;
                         }
                 case "FNotes":
                         {
                         //0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done, 8Rtl
-                        GridB.Columns [0].Width = 180;          //ProjectName
-                        GridB.Columns [1].Width = 200;          //SubProjectName
-                        GridB.Columns [2].Width = 120;          //NoteDatum
-                        GridB.Columns [3].Width = 400;          //Note
-                        GridB.Columns [4].Visible = false;      //Projects.ID
-                        GridB.Columns [5].Visible = false;      //SubProjects.ID
-                        GridB.Columns [6].Visible = false;      //Notes.ID
-                        GridB.Columns [7].Width = 30;           //Done
-                        GridB.Columns [8].Visible = false;      //Rtl
+                        GridB.Columns[0].Width = 180;          //ProjectName
+                        GridB.Columns[1].Width = 200;          //SubProjectName
+                        GridB.Columns[2].Width = 120;          //NoteDatum
+                        GridB.Columns[3].Width = 400;          //Note
+                        GridB.Columns[4].Visible = false;      //Projects.ID
+                        GridB.Columns[5].Visible = false;      //SubProjects.ID
+                        GridB.Columns[6].Visible = false;      //Notes.ID
+                        GridB.Columns[7].Width = 30;           //Done
+                        GridB.Columns[8].Visible = false;      //Rtl
                         break;
                         }
                 }
@@ -2927,7 +2927,7 @@ namespace eLib.Forms
                 {
                 for (int i = 0, loopTo = GridC.Columns.Count - 1; i <= loopTo; i++) //disable sort for column_haeders
                     {
-                    GridC.Columns [i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                    GridC.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                     }
                 }
             catch (Exception ex) { }
@@ -2936,29 +2936,29 @@ namespace eLib.Forms
                 case "Links":
                         {
                         //Papers.ID, PaperName, IsPaper, IsBook, IsManual, IsLecture, SubProject_ID, Links.ID AS LinkID, Imp1, Imp2, Imp3, ImR
-                        GridC.Columns [0].Visible = false;      //Papers.ID
-                        GridC.Columns [1].Width = 950;          //PaperName
-                        GridC.Columns [2].Visible = false;      //IsPaper
-                        GridC.Columns [3].Visible = false;      //IsBook
-                        GridC.Columns [4].Visible = false;      //IsManual
-                        GridC.Columns [5].Visible = false;      //IsLecture
-                        GridC.Columns [6].Visible = false;      //SubProject_ID
-                        GridC.Columns [7].Visible = false;      //Links.ID AS LinkID
-                        GridC.Columns [8].Visible = false;      //Imp1
-                        GridC.Columns [9].Visible = false;      //Imp2
-                        GridC.Columns [10].Visible = false;     //Imp3
-                        GridC.Columns [11].Visible = false;     //ImR
+                        GridC.Columns[0].Visible = false;      //Papers.ID
+                        GridC.Columns[1].Width = 950;          //PaperName
+                        GridC.Columns[2].Visible = false;      //IsPaper
+                        GridC.Columns[3].Visible = false;      //IsBook
+                        GridC.Columns[4].Visible = false;      //IsManual
+                        GridC.Columns[5].Visible = false;      //IsLecture
+                        GridC.Columns[6].Visible = false;      //SubProject_ID
+                        GridC.Columns[7].Visible = false;      //Links.ID AS LinkID
+                        GridC.Columns[8].Visible = false;      //Imp1
+                        GridC.Columns[9].Visible = false;      //Imp2
+                        GridC.Columns[10].Visible = false;     //Imp3
+                        GridC.Columns[11].Visible = false;     //ImR
                         break;
                         }
                 case "Refs":
                         {
                         //Papers.ID, PaperName, IsPaper, IsBook, IsManual, IsLecture
-                        GridC.Columns [0].Visible = false;      //ID
-                        GridC.Columns [1].Width = 920;          //PaperName
-                        GridC.Columns [2].Visible = false;      //IsPaper
-                        GridC.Columns [3].Visible = false;      //IsBook
-                        GridC.Columns [4].Visible = false;      //IsManual
-                        GridC.Columns [5].Visible = false;      //IsLecture
+                        GridC.Columns[0].Visible = false;      //ID
+                        GridC.Columns[1].Width = 920;          //PaperName
+                        GridC.Columns[2].Visible = false;      //IsPaper
+                        GridC.Columns[3].Visible = false;      //IsBook
+                        GridC.Columns[4].Visible = false;      //IsManual
+                        GridC.Columns[5].Visible = false;      //IsLecture
                         break;
                         }
                 }
@@ -3134,21 +3134,21 @@ namespace eLib.Forms
                 TreeA.Nodes.Clear ();
                 //Level-1 : projects
                 Assign.GetProjects (intUserId, intActiveMode, strSearch); //0:active 1:inactive 2:all 3:search
-                for (int i = 0; i < Db.DS.Tables ["tblProject"].Rows.Count; i++)
+                for (int i = 0; i < Db.DS.Tables["tblProject"].Rows.Count; i++)
                     {
                     TreeNode nd1 = new TreeNode { Text = "", Tag = "" };
-                    nd1.Text = Db.DS.Tables ["tblProject"].Rows [i] [1].ToString ();
-                    nd1.Tag = Db.DS.Tables ["tblProject"].Rows [i] [0].ToString ();
+                    nd1.Text = Db.DS.Tables["tblProject"].Rows[i][1].ToString ();
+                    nd1.Tag = Db.DS.Tables["tblProject"].Rows[i][0].ToString ();
                     TreeA.Nodes.Add (nd1);
                     //Level-2 : subprojects
-                    Project.Id = Convert.ToInt32 (Db.DS.Tables ["tblProject"].Rows [i] [0]);
+                    Project.Id = Convert.ToInt32 (Db.DS.Tables["tblProject"].Rows[i][0]);
                     Assign.GetSubProjects (Project.Id);
-                    for (int j = 0; j < Db.DS.Tables ["tblSubProject"].Rows.Count; j++)
+                    for (int j = 0; j < Db.DS.Tables["tblSubProject"].Rows.Count; j++)
                         {
                         TreeNode nd2 = new TreeNode { Text = "", Tag = "" };
-                        nd2.Text = Db.DS.Tables ["tblSubProject"].Rows [j] [1].ToString (); //ID, SubProjectName, Notes, Project_ID
-                        nd2.Tag = Db.DS.Tables ["tblSubProject"].Rows [j] [0].ToString ();
-                        TreeA.Nodes [i].Nodes.Add (nd2);
+                        nd2.Text = Db.DS.Tables["tblSubProject"].Rows[j][1].ToString (); //ID, SubProjectName, Notes, Project_ID
+                        nd2.Tag = Db.DS.Tables["tblSubProject"].Rows[j][0].ToString ();
+                        TreeA.Nodes[i].Nodes.Add (nd2);
                         }
                     }
                 lblListA.Text = "Projects";
@@ -3195,15 +3195,15 @@ namespace eLib.Forms
         private void ShowSNotesInGridB_LinksInGridC (int intSubProjectId)
             {
             Assign.GetNotes (SubProject.Id, 1); //ParentTypes (get notes): 1:SNotes, 2:LNotes, 3:RNotes
-            GridB.DataSource = Db.DS.Tables ["tblSNotes"];
+            GridB.DataSource = Db.DS.Tables["tblSNotes"];
             Assign.GetSLinks (SubProject.Id);
-            GridC.DataSource = Db.DS.Tables ["tblLinks"];
+            GridC.DataSource = Db.DS.Tables["tblLinks"];
             SetMode (50);
             }
         private void ShareAProject (int projectId)
             {
             //check if project is mine or a shared project
-            if (Convert.ToInt32 (Db.DS.Tables ["tblProject"].Rows [Convert.ToInt32 (TreeA.SelectedNode.Index)] [4].ToString ()) != User.Id)
+            if (Convert.ToInt32 (Db.DS.Tables["tblProject"].Rows[Convert.ToInt32 (TreeA.SelectedNode.Index)][4].ToString ()) != User.Id)
                 {
                 DialogResult i = MessageBox.Show ("Leave Group?", "eLib", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                 if (i == DialogResult.Yes)
@@ -3295,11 +3295,11 @@ namespace eLib.Forms
             //Save
             if (Assign.Mode == 4)
                 {
-                Note.DateTime = GridB.Rows [GridB.SelectedRows [0].Index].Cells [2].Value.ToString (); //focus-notes
+                Note.DateTime = GridB.Rows[GridB.SelectedRows[0].Index].Cells[2].Value.ToString (); //focus-notes
                 }
             else
                 {
-                Note.DateTime = GridB.Rows [GridB.SelectedRows [0].Index].Cells [1].Value.ToString ();
+                Note.DateTime = GridB.Rows[GridB.SelectedRows[0].Index].Cells[1].Value.ToString ();
                 }
             Note.NoteText = txtNote.Text;
             Note.Index = GridB.CurrentRow.Index;
@@ -3345,17 +3345,17 @@ namespace eLib.Forms
             if (Assign.Mode == 4)
                 {
                 //0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done, 8Rtl
-                GridB.Rows [Note.Index].Cells [2].Value = Note.DateTime; //datetime
-                GridB.Rows [Note.Index].Cells [3].Value = Note.NoteText; //note
-                GridB.Rows [Note.Index].Cells [7].Value = Note.Done; //done
-                GridB.Rows [Note.Index].Cells [8].Value = Note.Rtl; //rtl
+                GridB.Rows[Note.Index].Cells[2].Value = Note.DateTime; //datetime
+                GridB.Rows[Note.Index].Cells[3].Value = Note.NoteText; //note
+                GridB.Rows[Note.Index].Cells[7].Value = Note.Done; //done
+                GridB.Rows[Note.Index].Cells[8].Value = Note.Rtl; //rtl
                 }
             else
                 {
-                GridB.Rows [Note.Index].Cells [1].Value = Note.DateTime; //datetime
-                GridB.Rows [Note.Index].Cells [2].Value = Note.NoteText; //note
-                GridB.Rows [Note.Index].Cells [6].Value = Note.Done; //done
-                GridB.Rows [Note.Index].Cells [5].Value = Note.Rtl; //rtl
+                GridB.Rows[Note.Index].Cells[1].Value = Note.DateTime; //datetime
+                GridB.Rows[Note.Index].Cells[2].Value = Note.NoteText; //note
+                GridB.Rows[Note.Index].Cells[6].Value = Note.Done; //done
+                GridB.Rows[Note.Index].Cells[5].Value = Note.Rtl; //rtl
                 }
             CloseInlineNoteEditor ();
             lblStatusBar.Text = "Note Saved";
@@ -3371,7 +3371,7 @@ namespace eLib.Forms
                 GridB.Enabled = true;
                 GridC.Enabled = true;
                 GridB.Focus ();
-                GridB.Rows [Note.Index].Cells [1].Selected = true;
+                GridB.Rows[Note.Index].Cells[1].Selected = true;
                 }
             catch (Exception ex) { }
             }
@@ -3509,21 +3509,21 @@ namespace eLib.Forms
             }
         private void ShowFamForSelectedNote ()
             {
-            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows [0].Index != -1))
+            if ((GridB.Rows.Count > 0) && (GridB.SelectedRows[0].Index != -1))
                 {
                 if (Assign.Mode == 4)
                     {
                     //f-Notes: 0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done, 8Rtl
-                    Note.Id = Convert.ToInt32 (GridB.SelectedRows [0].Cells [6].Value);
-                    Note.ParentID = Convert.ToInt32 (GridB.SelectedRows [0].Cells [5].Value); //Note.ParentID for a SNote equals SubProject.Id
+                    Note.Id = Convert.ToInt32 (GridB.SelectedRows[0].Cells[6].Value);
+                    Note.ParentID = Convert.ToInt32 (GridB.SelectedRows[0].Cells[5].Value); //Note.ParentID for a SNote equals SubProject.Id
                     Note.ParentType = 1; //(is 1 always?) ParentTypes: 1:SubProject 2:Link 3:Ref                            
                     }
                 else
                     {
                     //SLR-Notes : [0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared -> FROM Notes]
-                    Note.Id = Convert.ToInt32 (GridB.SelectedRows [0].Cells [0].Value);
-                    Note.ParentID = Convert.ToInt32 (GridB.SelectedRows [0].Cells [3].Value); //Note.ParentID for a SNote equals SubProject.Id
-                    Note.ParentType = Convert.ToInt32 (GridB.SelectedRows [0].Cells [4].Value); //ParentTypes: 1:SubProject 2:Link 3:Ref                            
+                    Note.Id = Convert.ToInt32 (GridB.SelectedRows[0].Cells[0].Value);
+                    Note.ParentID = Convert.ToInt32 (GridB.SelectedRows[0].Cells[3].Value); //Note.ParentID for a SNote equals SubProject.Id
+                    Note.ParentType = Convert.ToInt32 (GridB.SelectedRows[0].Cells[4].Value); //ParentTypes: 1:SubProject 2:Link 3:Ref                            
                     }
                 //MessageBox.Show ("line 1053 : ParentType = " + Note.ParentType.ToString());
                 switch (Note.ParentType)
@@ -3534,14 +3534,14 @@ namespace eLib.Forms
                             ShowProjectsInTreeA (User.Id, 2, ""); //0:active 1:inactive 2:all 3:search
                             for (int i = 0; i < TreeA.Nodes.Count; i++)
                                 {
-                                for (int j = 0; j < TreeA.Nodes [i].Nodes.Count; j++)
+                                for (int j = 0; j < TreeA.Nodes[i].Nodes.Count; j++)
                                     {
                                     //lblStatusBar.Text = "count: " + TreeA.Nodes.Count.ToString () + "    i: " + i.ToString () + "    j: " + j.ToString ();
-                                    if (Convert.ToInt32 (TreeA.Nodes [i].Nodes [j].Tag) == Note.ParentID)
+                                    if (Convert.ToInt32 (TreeA.Nodes[i].Nodes[j].Tag) == Note.ParentID)
                                         {
-                                        TreeA.SelectedNode = TreeA.Nodes [i].Nodes [j];
+                                        TreeA.SelectedNode = TreeA.Nodes[i].Nodes[j];
                                         lblStatusBar.Text = "found!";
-                                        GridB.CurrentCell = GridB.Rows [0].Cells [1];
+                                        GridB.CurrentCell = GridB.Rows[0].Cells[1];
                                         SetMode (50);
                                         i = TreeA.Nodes.Count + 1; //exit loop
                                         break;
@@ -3552,9 +3552,9 @@ namespace eLib.Forms
                             ShowSNotesInGridB_LinksInGridC (Note.ParentID); //Note.ParentID for a SNote equals SubProject.Id
                             for (int n = 0; n < GridB.Rows.Count; n++)
                                 {
-                                if (Convert.ToInt32 (GridB.Rows [n].Cells [0].Value) == Note.Id)
+                                if (Convert.ToInt32 (GridB.Rows[n].Cells[0].Value) == Note.Id)
                                     {
-                                    GridB.CurrentCell = GridB.Rows [n].Cells [1];
+                                    GridB.CurrentCell = GridB.Rows[n].Cells[1];
                                     SetMode (50);
                                     n = GridB.Rows.Count + 1; //exit loop
                                     break;
@@ -3575,11 +3575,11 @@ namespace eLib.Forms
                                 }
                             for (int i = 0; i < TreeA.Nodes.Count; i++)
                                 {
-                                for (int j = 0; j < TreeA.Nodes [i].Nodes.Count; j++)
+                                for (int j = 0; j < TreeA.Nodes[i].Nodes.Count; j++)
                                     {
-                                    if (Convert.ToInt32 (TreeA.Nodes [i].Nodes [j].Tag) == SubProject.Id)
+                                    if (Convert.ToInt32 (TreeA.Nodes[i].Nodes[j].Tag) == SubProject.Id)
                                         {
-                                        TreeA.SelectedNode = TreeA.Nodes [i].Nodes [j];
+                                        TreeA.SelectedNode = TreeA.Nodes[i].Nodes[j];
                                         lblStatusBar.Text = "found!";
                                         i = TreeA.Nodes.Count + 1; //exit loop
                                         break;
@@ -3588,7 +3588,7 @@ namespace eLib.Forms
                                 }
                             //step2: show links of this subproject in grid-C
                             Assign.GetSLinks (SubProject.Id);
-                            GridC.DataSource = Db.DS.Tables ["tblLinks"];
+                            GridC.DataSource = Db.DS.Tables["tblLinks"];
                             FormatGridC ("Links");
                             SetMenuGridC ("Links");
                             //step3: show sisters (LNotes of this link in grid-B)
@@ -3596,9 +3596,9 @@ namespace eLib.Forms
                             SetMode (42);
                             for (int n = 0; n < GridB.Rows.Count; n++)
                                 {
-                                if (Convert.ToInt32 (GridB.Rows [n].Cells [0].Value) == Note.Id)
+                                if (Convert.ToInt32 (GridB.Rows[n].Cells[0].Value) == Note.Id)
                                     {
-                                    GridB.CurrentCell = GridB.Rows [n].Cells [1];
+                                    GridB.CurrentCell = GridB.Rows[n].Cells[1];
                                     n = GridB.Rows.Count + 1; //exit loop
                                     break;
                                     }
@@ -3606,9 +3606,9 @@ namespace eLib.Forms
                             //step4: locate link in grid-c
                             for (int l = 0; l < GridC.Rows.Count; l++)
                                 {
-                                if (Convert.ToInt32 (GridC.Rows [l].Cells [7].Value) == Note.ParentID) //7:link_id
+                                if (Convert.ToInt32 (GridC.Rows[l].Cells[7].Value) == Note.ParentID) //7:link_id
                                     {
-                                    GridC.CurrentCell = GridC.Rows [l].Cells [1];
+                                    GridC.CurrentCell = GridC.Rows[l].Cells[1];
                                     GridC_CellClick (null, null); //show l-note in grid-b
                                     l = GridC.Rows.Count + 1; //exit loop
                                     break;
@@ -3627,16 +3627,16 @@ namespace eLib.Forms
                                 {
                                 return;
                                 }
-                            GridC.DataSource = Db.DS.Tables ["tblRefs"];
+                            GridC.DataSource = Db.DS.Tables["tblRefs"];
                             FormatGridC ("Refs");
                             SetMenuGridC ("Refs");
                             //step2: show sisters (RNotes of this ref in grid-b)
                             Assign.GetNotes (Note.ParentID, 3); //ParentTypes (get notes): 1:SNotes, 2:LNotes, 3:RNotes
                             for (int n = 0; n < GridB.Rows.Count; n++)
                                 {
-                                if (Convert.ToInt32 (GridB.Rows [n].Cells [0].Value) == Note.Id)
+                                if (Convert.ToInt32 (GridB.Rows[n].Cells[0].Value) == Note.Id)
                                     {
-                                    GridB.CurrentCell = GridB.Rows [n].Cells [1];
+                                    GridB.CurrentCell = GridB.Rows[n].Cells[1];
                                     SetMode (5);
                                     n = GridB.Rows.Count + 1; //exit loop
                                     break;
@@ -3658,43 +3658,43 @@ namespace eLib.Forms
             //Note.Type = ? {FocusNote SubProjectNote SubProjectNoteSearch LinkNote LinkNoteSearch RefNote RefNoteSearch}
             try
                 {
-                if (GridB.SelectedRows [0].Index != -1)
+                if (GridB.SelectedRows[0].Index != -1)
                     {
                     switch (Assign.Mode)
                         {
                         case 50:
                                 {
                                 //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                                Note.Id = (int) GridB [0, GridB.SelectedRows [0].Index].Value;
+                                Note.Id = (int) GridB[0, GridB.SelectedRows[0].Index].Value;
                                 Note.Type = "SubProjectNote";
                                 break;
                                 }
                         case 16:
                                 {
                                 //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                                Note.Id = (int) GridB [0, GridB.SelectedRows [0].Index].Value;
+                                Note.Id = (int) GridB[0, GridB.SelectedRows[0].Index].Value;
                                 Note.Type = "SubProjectNote";
                                 break;
                                 }
                         case 42:
                                 {
                                 //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                                Note.Id = (int) GridB [0, GridB.SelectedRows [0].Index].Value;
+                                Note.Id = (int) GridB[0, GridB.SelectedRows[0].Index].Value;
                                 Note.Type = "LinkNote";
                                 break;
                                 }
                         case 5:
                                 {
                                 //0ID, 1NoteDatum, 2Note, 3Parent_ID, 4ParentType, 5Rtl, 6Done, 7User_ID, 8Shared
-                                Note.Id = (int) GridB [0, GridB.SelectedRows [0].Index].Value;
+                                Note.Id = (int) GridB[0, GridB.SelectedRows[0].Index].Value;
                                 Note.Type = "RefNote";
                                 break;
                                 }
                         case 4:
                                 {
                                 //0ProjectName, 1SubProjectName, 2NoteDatum, 3Note, 4Projects.ID, 5SubProjects.ID, 6Notes.ID, 7Done, 8Rtl
-                                SubProject.Id = (int) GridB [5, GridB.SelectedRows [0].Index].Value;
-                                Note.Id = (int) GridB [6, GridB.SelectedRows [0].Index].Value;
+                                SubProject.Id = (int) GridB[5, GridB.SelectedRows[0].Index].Value;
+                                Note.Id = (int) GridB[6, GridB.SelectedRows[0].Index].Value;
                                 Note.Type = "FocusNote"; //this signal tells NoteNet that must use ["tblNotesCount"]
                                 break;
                                 }

@@ -16,15 +16,15 @@ namespace eLib
             Width = 480;
             Height = 620;
             //format columns
-            GridPalette.Columns [0].Width = 60;   //0ID
-            GridPalette.Columns [1].Width = 60;   //1Red
-            GridPalette.Columns [2].Width = 60;   //2Green
-            GridPalette.Columns [3].Width = 60;   //3Blue
-            GridPalette.Columns [4].Width = 200;  //4COLOR
+            GridPalette.Columns[0].Width = 60;   //0ID
+            GridPalette.Columns[1].Width = 60;   //1Red
+            GridPalette.Columns[2].Width = 60;   //2Green
+            GridPalette.Columns[3].Width = 60;   //3Blue
+            GridPalette.Columns[4].Width = 200;  //4COLOR
             //format columns...
             for (int i = 0; i < GridPalette.Columns.Count; i++)
                 {
-                GridPalette.Columns [i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                GridPalette.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
             //default palette
             CreateRandomPalette ();
@@ -87,10 +87,10 @@ namespace eLib
                     var WS0 = WB.AddWorksheet ("Palette");
                     for (int i = 0; i < 20; i++)
                         {
-                        WS0.Cell (i + 1, 1).Value = GridPalette.Rows [i].Cells [0].Value.ToString ();
-                        WS0.Cell (i + 1, 2).Value = GridPalette.Rows [i].Cells [1].Value.ToString ();
-                        WS0.Cell (i + 1, 3).Value = GridPalette.Rows [i].Cells [2].Value.ToString ();
-                        WS0.Cell (i + 1, 4).Value = GridPalette.Rows [i].Cells [3].Value.ToString ();
+                        WS0.Cell (i + 1, 1).Value = GridPalette.Rows[i].Cells[0].Value.ToString ();
+                        WS0.Cell (i + 1, 2).Value = GridPalette.Rows[i].Cells[1].Value.ToString ();
+                        WS0.Cell (i + 1, 3).Value = GridPalette.Rows[i].Cells[2].Value.ToString ();
+                        WS0.Cell (i + 1, 4).Value = GridPalette.Rows[i].Cells[3].Value.ToString ();
                         }
                     }
                 string Filename = "";
@@ -115,14 +115,14 @@ namespace eLib
             }
         private void Menu_OkUsePalette_Click (object sender, EventArgs e)
             {
-            Db.DS.Tables ["tblPalette"].Clear ();
+            Db.DS.Tables["tblPalette"].Clear ();
             for (int i = 0; i < 20; i++)
                 {
-                Palette.ID = Convert.ToInt32 (GridPalette.Rows [i].Cells [0].Value);
-                Palette.Rcolor = Convert.ToInt32 (GridPalette.Rows [i].Cells [1].Value);
-                Palette.Gcolor = Convert.ToInt32 (GridPalette.Rows [i].Cells [2].Value);
-                Palette.Bcolor = Convert.ToInt32 (GridPalette.Rows [i].Cells [3].Value);
-                Db.DS.Tables ["tblPalette"].Rows.Add (Palette.ID, Palette.Rcolor, Palette.Gcolor, Palette.Bcolor);
+                Palette.ID = Convert.ToInt32 (GridPalette.Rows[i].Cells[0].Value);
+                Palette.Rcolor = Convert.ToInt32 (GridPalette.Rows[i].Cells[1].Value);
+                Palette.Gcolor = Convert.ToInt32 (GridPalette.Rows[i].Cells[2].Value);
+                Palette.Bcolor = Convert.ToInt32 (GridPalette.Rows[i].Cells[3].Value);
+                Db.DS.Tables["tblPalette"].Rows.Add (Palette.ID, Palette.Rcolor, Palette.Gcolor, Palette.Bcolor);
                 }
             Dispose ();
             }
@@ -131,11 +131,11 @@ namespace eLib
             {
             if (e.ColumnIndex == 4)
                 {
-                GridPalette.CurrentCell = GridPalette.Rows [GridPalette.CurrentCell.RowIndex].Cells [0];
+                GridPalette.CurrentCell = GridPalette.Rows[GridPalette.CurrentCell.RowIndex].Cells[0];
                 }
-            GaugeR.Value = Convert.ToInt32 (GridPalette.Rows [GridPalette.SelectedCells [0].RowIndex].Cells [1].Value);
-            GaugeG.Value = Convert.ToInt32 (GridPalette.Rows [GridPalette.SelectedCells [0].RowIndex].Cells [2].Value);
-            GaugeB.Value = Convert.ToInt32 (GridPalette.Rows [GridPalette.SelectedCells [0].RowIndex].Cells [3].Value);
+            GaugeR.Value = Convert.ToInt32 (GridPalette.Rows[GridPalette.SelectedCells[0].RowIndex].Cells[1].Value);
+            GaugeG.Value = Convert.ToInt32 (GridPalette.Rows[GridPalette.SelectedCells[0].RowIndex].Cells[2].Value);
+            GaugeB.Value = Convert.ToInt32 (GridPalette.Rows[GridPalette.SelectedCells[0].RowIndex].Cells[3].Value);
             GaugeR.Focus ();
             }
         //gauges
@@ -164,9 +164,9 @@ namespace eLib
             {
             try
                 {
-                int r = GridPalette.SelectedCells [0].RowIndex;
+                int r = GridPalette.SelectedCells[0].RowIndex;
                 if (r != -1)
-                    GridPalette.Rows [GridPalette.SelectedCells [0].RowIndex].Cells [1].Value = GaugeR.Value.ToString ();
+                    GridPalette.Rows[GridPalette.SelectedCells[0].RowIndex].Cells[1].Value = GaugeR.Value.ToString ();
                 PaintCell (r, GaugeR.Value, GaugeG.Value, GaugeB.Value);
                 }
             catch (Exception ex)
@@ -178,9 +178,9 @@ namespace eLib
             {
             try
                 {
-                int r = GridPalette.SelectedCells [0].RowIndex;
+                int r = GridPalette.SelectedCells[0].RowIndex;
                 if (r != -1)
-                    GridPalette.Rows [GridPalette.SelectedCells [0].RowIndex].Cells [2].Value = GaugeG.Value.ToString ();
+                    GridPalette.Rows[GridPalette.SelectedCells[0].RowIndex].Cells[2].Value = GaugeG.Value.ToString ();
                 PaintCell (r, GaugeR.Value, GaugeG.Value, GaugeB.Value);
                 }
             catch (Exception ex)
@@ -192,9 +192,9 @@ namespace eLib
             {
             try
                 {
-                int r = GridPalette.SelectedCells [0].RowIndex;
+                int r = GridPalette.SelectedCells[0].RowIndex;
                 if (r != -1)
-                    GridPalette.Rows [GridPalette.SelectedCells [0].RowIndex].Cells [3].Value = GaugeB.Value.ToString ();
+                    GridPalette.Rows[GridPalette.SelectedCells[0].RowIndex].Cells[3].Value = GaugeB.Value.ToString ();
                 PaintCell (r, GaugeR.Value, GaugeG.Value, GaugeB.Value);
                 }
             catch (Exception ex)
@@ -242,16 +242,16 @@ namespace eLib
             {
             for (int i = 0; i < GridPalette.Rows.Count; i++)
                 {
-                Palette.Rcolor = Convert.ToInt32 (GridPalette.Rows [i].Cells [1].Value);
-                Palette.Gcolor = Convert.ToInt32 (GridPalette.Rows [i].Cells [2].Value);
-                Palette.Bcolor = Convert.ToInt32 (GridPalette.Rows [i].Cells [3].Value);
+                Palette.Rcolor = Convert.ToInt32 (GridPalette.Rows[i].Cells[1].Value);
+                Palette.Gcolor = Convert.ToInt32 (GridPalette.Rows[i].Cells[2].Value);
+                Palette.Bcolor = Convert.ToInt32 (GridPalette.Rows[i].Cells[3].Value);
                 if (Palette.Rcolor > 255)
                     Palette.Rcolor = 255;
                 if (Palette.Gcolor > 255)
                     Palette.Gcolor = 255;
                 if (Palette.Bcolor > 255)
                     Palette.Bcolor = 255;
-                GridPalette.Rows [i].Cells [4].Style.BackColor = System.Drawing.Color.FromArgb (Palette.Rcolor, Palette.Gcolor, Palette.Bcolor);
+                GridPalette.Rows[i].Cells[4].Style.BackColor = System.Drawing.Color.FromArgb (Palette.Rcolor, Palette.Gcolor, Palette.Bcolor);
                 }
             }
         private void PaintCell (int thisRow, int R, int G, int B)
@@ -262,7 +262,7 @@ namespace eLib
                 G = 255;
             if (B > 255)
                 B = 255;
-            GridPalette.Rows [thisRow].Cells [4].Style.BackColor = System.Drawing.Color.FromArgb (R, G, B);
+            GridPalette.Rows[thisRow].Cells[4].Style.BackColor = System.Drawing.Color.FromArgb (R, G, B);
             }
         private void label2_Click (object sender, EventArgs e)
             {

@@ -34,13 +34,13 @@ namespace eLib
                 lblProject.Visible = true;
                 lblSubProject.Visible = true;
                 }
-            Db.DS.Tables ["tblProj_tmp"].Clear ();
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProj_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             GetListProj (User.Id, 0); // activex {0:active 1:inactive 2:all}
-            ListProj.DataSource = Db.DS.Tables ["tblProj_tmp"];
+            ListProj.DataSource = Db.DS.Tables["tblProj_tmp"];
             ListProj.DisplayMember = "ProjectName";
             ListProj.ValueMember = "ID";
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             }
         private void frmChooseProject_KeyDown (object sender, KeyEventArgs e)
             {
@@ -56,7 +56,7 @@ namespace eLib
              * 1:inactive 
              * 2:all
              */
-            Db.DS.Tables ["tblProject"].Clear ();
+            Db.DS.Tables["tblProject"].Clear ();
             switch (activex)
                 {
                 case 0:
@@ -98,8 +98,8 @@ namespace eLib
                         }
                     else
                         {
-                        Db.DS.Tables ["tblProj_tmp"].Clear ();
-                        Db.DS.Tables ["tblProd_tmp"].Clear ();
+                        Db.DS.Tables["tblProj_tmp"].Clear ();
+                        Db.DS.Tables["tblProd_tmp"].Clear ();
                         // /
                         FindProject (searchString);
                         ListProj.SelectedValue = -1;
@@ -138,7 +138,7 @@ namespace eLib
                     Db.DASS.Fill (Db.DS, "tblProj_tmp");
                     CnnSS.Close ();
                     }
-                ListProj.DataSource = Db.DS.Tables ["tblProj_tmp"];
+                ListProj.DataSource = Db.DS.Tables["tblProj_tmp"];
                 ListProj.DisplayMember = "ProjectName";
                 ListProj.ValueMember = "ID";
                 }
@@ -158,7 +158,7 @@ namespace eLib
                     Db.DASS.Fill (Db.DS, "tblProd_tmp");
                     CnnSS.Close ();
                     }
-                ListProd.DataSource = Db.DS.Tables ["tblProd_tmp"];
+                ListProd.DataSource = Db.DS.Tables["tblProd_tmp"];
                 ListProd.DisplayMember = "SubProjectName";
                 ListProd.ValueMember = "ID";
                 }
@@ -170,7 +170,7 @@ namespace eLib
         private void GetListProj (int usrid, int activex)
             {
             // activex {0:active 1:inactive 2:all}
-            Db.DS.Tables ["tblProj_tmp"].Clear ();
+            Db.DS.Tables["tblProj_tmp"].Clear ();
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
                 CnnSS.Open ();
@@ -260,13 +260,13 @@ namespace eLib
             }
         private void Menu1_Active_Click (object sender, EventArgs e)
             {
-            Db.DS.Tables ["tblProj_tmp"].Clear ();
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProj_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             GetListProj (User.Id, 0); // activex {0:active 1:inactive 2:all}
-            ListProj.DataSource = Db.DS.Tables ["tblProj_tmp"];
+            ListProj.DataSource = Db.DS.Tables["tblProj_tmp"];
             ListProj.DisplayMember = "ProjectName";
             ListProj.ValueMember = "ID";
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             Menu1_Active.Checked = true;
             Menu1_Inactive.Checked = false;
             Menu1_All.Checked = false;
@@ -274,13 +274,13 @@ namespace eLib
             }
         private void Menu1_Inactive_Click (object sender, EventArgs e)
             {
-            Db.DS.Tables ["tblProj_tmp"].Clear ();
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProj_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             GetListProj (User.Id, 1); // activex {0:active 1:inactive 2:all}
-            ListProj.DataSource = Db.DS.Tables ["tblProj_tmp"];
+            ListProj.DataSource = Db.DS.Tables["tblProj_tmp"];
             ListProj.DisplayMember = "ProjectName";
             ListProj.ValueMember = "ID";
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             Menu1_Active.Checked = false;
             Menu1_Inactive.Checked = true;
             Menu1_All.Checked = false;
@@ -288,13 +288,13 @@ namespace eLib
             }
         private void Menu1_All_Click (object sender, EventArgs e)
             {
-            Db.DS.Tables ["tblProj_tmp"].Clear ();
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProj_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             GetListProj (User.Id, 2); // activex {0:active 1:inactive 2:all}
-            ListProj.DataSource = Db.DS.Tables ["tblProj_tmp"];
+            ListProj.DataSource = Db.DS.Tables["tblProj_tmp"];
             ListProj.DisplayMember = "ProjectName";
             ListProj.ValueMember = "ID";
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             Menu1_Active.Checked = false;
             Menu1_Inactive.Checked = false;
             Menu1_All.Checked = true;
@@ -332,7 +332,7 @@ namespace eLib
         private void GetListProd (int Projid)
             {
             // activex {0:active 1:inactive 2:all}
-            Db.DS.Tables ["tblProd_tmp"].Clear ();
+            Db.DS.Tables["tblProd_tmp"].Clear ();
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
                 CnnSS.Open ();
@@ -341,7 +341,7 @@ namespace eLib
                 Db.DASS.Fill (Db.DS, "tblProd_tmp");
                 CnnSS.Close ();
                 }
-            ListProd.DataSource = Db.DS.Tables ["tblProd_tmp"];
+            ListProd.DataSource = Db.DS.Tables["tblProd_tmp"];
             ListProd.DisplayMember = "SubProjectName";
             ListProd.ValueMember = "ID";
             }
@@ -349,7 +349,7 @@ namespace eLib
             {
             if (ListProd.SelectedIndex == -1)
                 return;
-            TextBoxProdNote.Text = Conversions.ToString (Db.DS.Tables ["tblProd_tmp"].Rows [ListProd.SelectedIndex] [2]);
+            TextBoxProdNote.Text = Conversions.ToString (Db.DS.Tables["tblProd_tmp"].Rows[ListProd.SelectedIndex][2]);
             }
         private void ListProd_DoubleClick (object sender, EventArgs e)
             {

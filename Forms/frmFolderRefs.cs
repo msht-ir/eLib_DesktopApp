@@ -30,7 +30,7 @@ namespace eLib
                 {
                 //show files in the list
                 ListPathx.Items.Clear ();
-                string [] Files = Directory.GetFiles (treeView1.SelectedNode.FullPath, "*.*");
+                string[] Files = Directory.GetFiles (treeView1.SelectedNode.FullPath, "*.*");
                 lblPath.Text = treeView1.SelectedNode.FullPath;
                 // Loop through them to see files
                 foreach (string file in Files)
@@ -96,7 +96,7 @@ namespace eLib
             {
             if (ListPathx.SelectedItems.Count > 0)
                 {
-                Instance.Path = Strings.Trim (ListPathx.SelectedItems [0].Text);
+                Instance.Path = Strings.Trim (ListPathx.SelectedItems[0].Text);
                 //MessageBox.Show (treeView1.SelectedNode.FullPath + @"\" + Instance.Path);
                 long G = Interaction.Shell ("RUNDLL32.EXE URL.DLL,FileProtocolHandler " + treeView1.SelectedNode.FullPath + @"\" + Instance.Path, Microsoft.VisualBasic.Constants.vbNormalFocus);
                 }
@@ -138,9 +138,9 @@ namespace eLib
                     return;
                 for (int i = 0, loopTo = ListPathx.Items.Count - 1; i <= loopTo; i++)
                     {
-                    if (ListPathx.Items [i].Checked == true)
+                    if (ListPathx.Items[i].Checked == true)
                         {
-                        strItem = ListPathx.Items [i].ToString ();
+                        strItem = ListPathx.Items[i].ToString ();
                         int intRefId = FindRefId (strItem);
                         if (intRefId > 0)
                             {
@@ -180,20 +180,20 @@ namespace eLib
             {
             for (int i = 0, loopTo = ListPathx.Items.Count - 1; i <= loopTo; i++)
                 {
-                if (ListPathx.Items [i].Checked == true)
+                if (ListPathx.Items[i].Checked == true)
                     {
-                    ListPathx.Items [i].Checked = false;
+                    ListPathx.Items[i].Checked = false;
                     }
                 else
                     {
-                    ListPathx.Items [i].Checked = true;
+                    ListPathx.Items[i].Checked = true;
                     }
                 }
             }
         private void Menu_None_Click (object sender, EventArgs e)
             {
             for (int i = 0, loopTo = ListPathx.Items.Count - 1; i <= loopTo; i++)
-                ListPathx.Items [i].Checked = false;
+                ListPathx.Items[i].Checked = false;
             }
         private void Menu_ViewList_Click (object sender, EventArgs e)
             {
@@ -214,7 +214,7 @@ namespace eLib
             tds.StateImageIndex = 0;
             LoadSubDirectories (eLibFile.DestinationFolder, tds);
             treeView1.ExpandAll ();
-            treeView1.SelectedNode = treeView1.Nodes [0];
+            treeView1.SelectedNode = treeView1.Nodes[0];
             treeView1_AfterSelect (null, null);
             }
         private void Menu2_Books_Click (object sender, EventArgs e)
@@ -227,7 +227,7 @@ namespace eLib
             tds.StateImageIndex = 0;
             LoadSubDirectories (eLibFile.DestinationFolder, tds);
             treeView1.ExpandAll ();
-            treeView1.SelectedNode = treeView1.Nodes [0];
+            treeView1.SelectedNode = treeView1.Nodes[0];
             treeView1_AfterSelect (null, null);
             }
         private void Menu2_Manuals_Click (object sender, EventArgs e)
@@ -240,7 +240,7 @@ namespace eLib
             tds.StateImageIndex = 0;
             LoadSubDirectories (eLibFile.DestinationFolder, tds);
             treeView1.ExpandAll ();
-            treeView1.SelectedNode = treeView1.Nodes [0];
+            treeView1.SelectedNode = treeView1.Nodes[0];
             treeView1_AfterSelect (null, null);
             }
         private void Menu2_Lectures_Click (object sender, EventArgs e)
@@ -253,7 +253,7 @@ namespace eLib
             tds.StateImageIndex = 0;
             LoadSubDirectories (eLibFile.DestinationFolder, tds);
             treeView1.ExpandAll ();
-            treeView1.SelectedNode = treeView1.Nodes [0];
+            treeView1.SelectedNode = treeView1.Nodes[0];
             treeView1_AfterSelect (null, null);
             }
         private void Menu2_SelectFolderromDialog_Click (object sender, EventArgs e)
@@ -264,7 +264,7 @@ namespace eLib
         private void LoadSubDirectories (string dir, TreeNode td)
             {
             //get all subdirectories
-            string [] subdirectoryEntries = Directory.GetDirectories (dir);
+            string[] subdirectoryEntries = Directory.GetDirectories (dir);
             foreach (string subdirectory in subdirectoryEntries)
                 {
                 //loop through them to see if they have any other subdirectories
@@ -279,7 +279,7 @@ namespace eLib
             {
             int FindRefIdRet = default;
             //Find ID of a Ref in tblPapers
-            Db.DS.Tables ["tblRefs"].Clear ();
+            Db.DS.Tables["tblRefs"].Clear ();
             string Fltr = "PaperName='" + strTitle + "'";
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
@@ -288,7 +288,7 @@ namespace eLib
                 Db.DASS.Fill (Db.DS, "tblRefs");
                 CnnSS.Close ();
                 }
-            FindRefIdRet = Conversions.ToInteger (Db.DS.Tables ["tblRefs"].Rows [0] [0]);
+            FindRefIdRet = Conversions.ToInteger (Db.DS.Tables["tblRefs"].Rows[0][0]);
             return FindRefIdRet;
             }
         private int DoAssignRefToSubProjects (int iRef, int iProd)
@@ -331,7 +331,7 @@ namespace eLib
                 tds.StateImageIndex = 0;
                 LoadSubDirectories (eLibFile.DestinationFolder, tds);
                 treeView1.ExpandAll ();
-                treeView1.SelectedNode = treeView1.Nodes [0];
+                treeView1.SelectedNode = treeView1.Nodes[0];
                 treeView1_AfterSelect (null, null);
                 }
             else

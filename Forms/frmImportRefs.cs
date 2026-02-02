@@ -27,8 +27,8 @@ namespace eLib
             this.Activate ();
             AllowDrop = true;
             Db.ReadSettingsAndUsers ();
-            Db.DS.Tables ["tblProd_tmp2"].Clear ();
-            ListSubProject.DataSource = Db.DS.Tables ["tblProd_tmp2"];
+            Db.DS.Tables["tblProd_tmp2"].Clear ();
+            ListSubProject.DataSource = Db.DS.Tables["tblProd_tmp2"];
             ListSubProject.ValueMember = "ProdId";
             ListSubProject.DisplayMember = "ProdName";
             lblDestinationFolder.Text = "-"; //this label will be checked in line 490
@@ -50,7 +50,7 @@ namespace eLib
                 case 6: //(2+4) import via frmAssign, con link to a subproject
                         {
                         //add a subproject t list
-                        Db.DS.Tables ["tblProd_tmp2"].Rows.Add (SubProject.Id, SubProject.Name);
+                        Db.DS.Tables["tblProd_tmp2"].Rows.Add (SubProject.Id, SubProject.Name);
                         //(no drops!)ShowFileInfo (eLibFile.strFilex);
                         break;
                         }
@@ -87,12 +87,12 @@ namespace eLib
                         Menu2_Add.Enabled = false;
                         Menu2_Remove.Enabled = false;
                         Menu2_Clear.Enabled = false;
-                        for (int i = 0, loopTo = Db.DS.Tables ["tblAssignments"].Rows.Count - 1; i <= loopTo; i++)
+                        for (int i = 0, loopTo = Db.DS.Tables["tblAssignments"].Rows.Count - 1; i <= loopTo; i++)
                             {
                             //tblProd_tmp2 Cols: {ProdId, ProdName}
-                            SubProject.Id = Conversions.ToInteger (Db.DS.Tables ["tblAssignments"].Rows [i] [2]);
-                            SubProject.Name = Conversions.ToString (Db.DS.Tables ["tblAssignments"].Rows [i] [3]);
-                            Db.DS.Tables ["tblProd_tmp2"].Rows.Add (SubProject.Id, SubProject.Name);
+                            SubProject.Id = Conversions.ToInteger (Db.DS.Tables["tblAssignments"].Rows[i][2]);
+                            SubProject.Name = Conversions.ToString (Db.DS.Tables["tblAssignments"].Rows[i][3]);
+                            Db.DS.Tables["tblProd_tmp2"].Rows.Add (SubProject.Id, SubProject.Name);
                             }
                         Ref.ImportStatus |= 8; //bit4: on (ref is ready2move)
                         break;
@@ -186,7 +186,7 @@ namespace eLib
             if (Client.DialogRequestParams != 32)
                 return;
             //tblProd_tmp2 Cols: {ProdId, ProdName}
-            Db.DS.Tables ["tblProd_tmp2"].Rows.Add (SubProject.Id, SubProject.Name);
+            Db.DS.Tables["tblProd_tmp2"].Rows.Add (SubProject.Id, SubProject.Name);
             }
         private void Menu2_Remove_Click (object sender, EventArgs e)
             {
@@ -196,7 +196,7 @@ namespace eLib
             if (ListSubProject.SelectedItems.Count == 0)
                 return; // No cells is selected
             int i = ListSubProject.SelectedIndex;
-            Db.DS.Tables ["tblProd_tmp2"].Rows.RemoveAt (i);
+            Db.DS.Tables["tblProd_tmp2"].Rows.RemoveAt (i);
             }
         private void ListSubProject_DoubleClick (object sender, EventArgs e)
             {
@@ -205,7 +205,7 @@ namespace eLib
         private void Menu2_Clear_Click (object sender, EventArgs e)
             {
             //Clear
-            Db.DS.Tables ["tblProd_tmp2"].Clear ();
+            Db.DS.Tables["tblProd_tmp2"].Clear ();
             }
         //MENU_1 SELECT/Drag-Drop
         private void Menu1_SelectRef_Click (object sender, EventArgs e)
@@ -249,8 +249,8 @@ namespace eLib
             {
             //get one file from dropped item(s)
             //if ((Ref.ImportStatus & 8) == 0)
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
             ShowFileInfo (eLibFile.strFilex);
             }
         private void ShowFileInfo (string strF)
@@ -659,7 +659,7 @@ namespace eLib
                     case 0: //Import Ref Mode
                             {
                             //Find ID of the new Ref in tblPapers (Import Mode Only)
-                            Db.DS.Tables ["tblRefs"].Clear ();
+                            Db.DS.Tables["tblRefs"].Clear ();
                             string Fltr = "PaperName='" + strTitle + "'";
                             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                                 {
@@ -668,12 +668,12 @@ namespace eLib
                                 Db.DASS.Fill (Db.DS, "tblRefs");
                                 CnnSS.Close ();
                                 }
-                            int idx = Conversions.ToInteger (Db.DS.Tables ["tblRefs"].Rows [0] [0]);
+                            int idx = Conversions.ToInteger (Db.DS.Tables["tblRefs"].Rows[0][0]);
                             int idy = 0;
 
-                            for (int k = 0, loopTo = Db.DS.Tables ["tblProd_tmp2"].Rows.Count - 1; k <= loopTo; k++)
+                            for (int k = 0, loopTo = Db.DS.Tables["tblProd_tmp2"].Rows.Count - 1; k <= loopTo; k++)
                                 {
-                                idy = Conversions.ToInteger (Db.DS.Tables ["tblProd_tmp2"].Rows [k] [0]);
+                                idy = Conversions.ToInteger (Db.DS.Tables["tblProd_tmp2"].Rows[k][0]);
                                 using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                                     {
                                     CnnSS.Open ();
@@ -714,7 +714,7 @@ namespace eLib
                     {
                     case 0: //ImportRefMode
                             {
-                            txtTitle.Text = "Imported: " + strTitle + " \r\n //assigned to: " + Db.DS.Tables ["tblProd_tmp2"].Rows.Count.ToString () + " item(s)\r\n --";
+                            txtTitle.Text = "Imported: " + strTitle + " \r\n //assigned to: " + Db.DS.Tables["tblProd_tmp2"].Rows.Count.ToString () + " item(s)\r\n --";
                             lblPath.Visible = true;
                             lblPath.Text = "Drop a Ref  ^";
                             lblExt.Visible = false;

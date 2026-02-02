@@ -35,21 +35,21 @@ namespace eLib.Forms
             Grid6.Width = intGridExpandWidth;
             try
                 {
-                Grid6.DataSource = Db.DS.Tables ["tblNotesCount"];
+                Grid6.DataSource = Db.DS.Tables["tblNotesCount"];
                 for (int i = 0, loopTo = Grid6.Columns.Count - 1; i <= loopTo; i++) //disable sort for column_haeders
                     {
-                    Grid6.Columns [i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                    Grid6.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                     }
                 //grid columns total:992px
-                Grid6.Columns [0].Width = 155;       //Project
-                Grid6.Columns [1].Width = 190;       //SubProject
-                Grid6.Columns [2].Width = 120;       //Datum
-                Grid6.Columns [3].Width = 380;       //Note 
-                Grid6.Columns [4].Visible = false;   //Projects.ID
-                Grid6.Columns [5].Visible = false;   //SubProjects.ID
-                Grid6.Columns [6].Visible = false;   //Notes.ID
-                Grid6.Columns [7].Width = 30;        //Done
-                Grid6.Columns [8].Visible = false;   //RTL
+                Grid6.Columns[0].Width = 155;       //Project
+                Grid6.Columns[1].Width = 190;       //SubProject
+                Grid6.Columns[2].Width = 120;       //Datum
+                Grid6.Columns[3].Width = 380;       //Note 
+                Grid6.Columns[4].Visible = false;   //Projects.ID
+                Grid6.Columns[5].Visible = false;   //SubProjects.ID
+                Grid6.Columns[6].Visible = false;   //Notes.ID
+                Grid6.Columns[7].Width = 30;        //Done
+                Grid6.Columns[8].Visible = false;   //RTL
                 //wrap lines (if row-height be adjusted): Grid6.Columns [3].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 HighlightGridRows ();
                 Grid6.Focus ();
@@ -67,29 +67,29 @@ namespace eLib.Forms
             string tmpDate = "";
             mntCal.RemoveAllBoldedDates ();
             mntCal.UpdateBoldedDates ();
-            foreach (DataRow r in Db.DS.Tables ["tblNotesCount"].Rows)
+            foreach (DataRow r in Db.DS.Tables["tblNotesCount"].Rows)
                 {
                 rx++;
-                tmpDate = Strings.Left (r ["NoteDatum"].ToString (), 10);
+                tmpDate = Strings.Left (r["NoteDatum"].ToString (), 10);
                 mntCal.AddBoldedDate (Conversions.ToDate (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
                 //Day0 (today)
-                if (Strings.Left (r ["NoteDatum"].ToString (), 10) == DateTime.Now.ToString ("yyyy-MM-dd"))
-                    Grid6.Rows [rx - 1].DefaultCellStyle.Font = new System.Drawing.Font (Grid6.Font, FontStyle.Bold);
+                if (Strings.Left (r["NoteDatum"].ToString (), 10) == DateTime.Now.ToString ("yyyy-MM-dd"))
+                    Grid6.Rows[rx - 1].DefaultCellStyle.Font = new System.Drawing.Font (Grid6.Font, FontStyle.Bold);
                 //Day+1
-                if (Strings.Left (r ["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+1).ToString ("yyyy-MM-dd"))
-                    Grid6.Rows [rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.IndianRed;
+                if (Strings.Left (r["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+1).ToString ("yyyy-MM-dd"))
+                    Grid6.Rows[rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.IndianRed;
                 //Day+2
-                if (Strings.Left (r ["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+2).ToString ("yyyy-MM-dd"))
-                    Grid6.Rows [rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Blue;
+                if (Strings.Left (r["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+2).ToString ("yyyy-MM-dd"))
+                    Grid6.Rows[rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Blue;
                 //Day+3
-                if (Strings.Left (r ["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+3).ToString ("yyyy-MM-dd"))
-                    Grid6.Rows [rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Green;
+                if (Strings.Left (r["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+3).ToString ("yyyy-MM-dd"))
+                    Grid6.Rows[rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Green;
                 //Day+4
-                if (Strings.Left (r ["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+4).ToString ("yyyy-MM-dd"))
-                    Grid6.Rows [rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.SteelBlue;
+                if (Strings.Left (r["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+4).ToString ("yyyy-MM-dd"))
+                    Grid6.Rows[rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.SteelBlue;
                 //Day+5
-                if (Strings.Left (r ["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+5).ToString ("yyyy-MM-dd"))
-                    Grid6.Rows [rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Peru;
+                if (Strings.Left (r["NoteDatum"].ToString (), 10) == DateTime.Now.AddDays (+5).ToString ("yyyy-MM-dd"))
+                    Grid6.Rows[rx - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Peru;
                 }
             mntCal.UpdateBoldedDates ();
             }
@@ -107,7 +107,7 @@ namespace eLib.Forms
                 e.SuppressKeyPress = true;
                 SelectTheNoteAndExit ();
                 }
-            else if ((e.KeyCode == Keys.Right) && (Grid6.SelectedRows [0].Index != -1))
+            else if ((e.KeyCode == Keys.Right) && (Grid6.SelectedRows[0].Index != -1))
                 {
                 e.SuppressKeyPress = true;
                 if (Grid6.Width == intGridExpandWidth)
@@ -119,7 +119,7 @@ namespace eLib.Forms
                     SetEditNoteMode (2);
                     }
                 }
-            else if ((e.KeyCode == Keys.Left) && (Grid6.SelectedRows [0].Index != -1))
+            else if ((e.KeyCode == Keys.Left) && (Grid6.SelectedRows[0].Index != -1))
                 {
                 e.SuppressKeyPress = true;
                 SetEditNoteMode (0);
@@ -128,7 +128,7 @@ namespace eLib.Forms
         private void Grid6_CellClick (object sender, DataGridViewCellEventArgs e)
             {
             //0Project  1SubProject  2Datum 3Note  4Projects.ID(hide)  5SubProjects.ID(hide)  6Notes.ID(hide)  7Done
-            string tmpDate = Grid6 [2, Grid6.SelectedRows [0].Index].Value.ToString ();
+            string tmpDate = Grid6[2, Grid6.SelectedRows[0].Index].Value.ToString ();
             mntCal.SetDate (Conversions.ToDate (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
             switch (e.ColumnIndex)
                 {
@@ -171,20 +171,20 @@ namespace eLib.Forms
                         }
                 case 1: //subproject
                         {
-                        if (Grid6.SelectedRows [0].Index == -1)
+                        if (Grid6.SelectedRows[0].Index == -1)
                             {
                             return;
                             }
                         DialogResult myansw = MessageBox.Show ("Replace this note?", "eLib", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                         if (myansw == DialogResult.No)
                             return;
-                        SubProject.Id = (int) Grid6 [5, Grid6.SelectedRows [0].Index].Value;
+                        SubProject.Id = (int) Grid6[5, Grid6.SelectedRows[0].Index].Value;
                         Client.DialogRequestParams = 2; //1:get Project 2:get SubProject 3:get Project or SubProject
                         My.MyProject.Forms.frmChooseProject.ShowDialog ();
                         //replace current SubProjectNote to selected SubProject
                         if (Client.DialogRequestParams == 32) //2: A SubProjects is selected from dialog
                             {
-                            Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
+                            Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
                             Db.strSQL = "UPDATE Notes SET Parent_ID=@parentid WHERE ID=@id";
                             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                                 {
@@ -209,12 +209,12 @@ namespace eLib.Forms
                         }
                 case 2: //datum
                         {
-                        Note.DateTime = Grid6 [2, Grid6.SelectedRows [0].Index].Value.ToString ();
+                        Note.DateTime = Grid6[2, Grid6.SelectedRows[0].Index].Value.ToString ();
                         var frmTMDT = new frmTimeAndDate ();
                         frmTMDT.ShowDialog ();
                         if (Client.DialogRequestParams == 16)
                             {
-                            Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
+                            Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
                             //do UPDATE...
                             Assign.UpdateDateTime (Note.Id, Note.DateTime);
                             Note.GetSNotesFromDB ("all");
@@ -232,12 +232,12 @@ namespace eLib.Forms
                         }
                 case 7: //done
                         {
-                        if (Grid6.SelectedRows [0].Index == -1)
+                        if (Grid6.SelectedRows[0].Index == -1)
                             {
                             return;
                             }
                         bool intDone = false;
-                        if ((bool) Grid6 [7, Grid6.SelectedRows [0].Index].Value == false)
+                        if ((bool) Grid6[7, Grid6.SelectedRows[0].Index].Value == false)
                             {
                             intDone = true;
                             }
@@ -245,7 +245,7 @@ namespace eLib.Forms
                             {
                             intDone = false;
                             }
-                        Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
+                        Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
                         Db.strSQL = "UPDATE Notes SET Done=@done WHERE ID=@id";
                         using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                             {
@@ -256,7 +256,7 @@ namespace eLib.Forms
                             try
                                 {
                                 int i = cmd.ExecuteNonQuery ();
-                                Grid6 [7, Grid6.SelectedRows [0].Index].Value = intDone;
+                                Grid6[7, Grid6.SelectedRows[0].Index].Value = intDone;
                                 }
                             catch (Exception ex)
                                 {
@@ -273,11 +273,11 @@ namespace eLib.Forms
             {
             try
                 {
-                if ((Grid6.Rows.Count > 0) && (Grid6.SelectedRows [0].Index != -1))
+                if ((Grid6.Rows.Count > 0) && (Grid6.SelectedRows[0].Index != -1))
                     {
-                    string tmpDate = Grid6 [2, Grid6.SelectedRows [0].Index].Value.ToString ();
+                    string tmpDate = Grid6[2, Grid6.SelectedRows[0].Index].Value.ToString ();
                     mntCal.SetDate (Conversions.ToDate (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
-                    int c = Grid6.SelectedColumns [0].Index;
+                    int c = Grid6.SelectedColumns[0].Index;
                     if (c != 7)
                         {
                         //col7:Done (if col7 is clicked, keep grid6 expanded so a dblClick on Done checkBox be still possible)
@@ -333,9 +333,9 @@ namespace eLib.Forms
             {
             try
                 {
-                int r = Grid6.SelectedRows [0].Index;
-                txtNote.Text = Grid6 [3, r].Value.ToString ();
-                if (Convert.ToBoolean (Grid6.Rows [r].Cells [8].Value) == true)
+                int r = Grid6.SelectedRows[0].Index;
+                txtNote.Text = Grid6[3, r].Value.ToString ();
+                if (Convert.ToBoolean (Grid6.Rows[r].Cells[8].Value) == true)
                     {
                     //rtl
                     txtNote.RightToLeft = RightToLeft.Yes;
@@ -427,18 +427,18 @@ namespace eLib.Forms
                 txtNote.Enabled = false;
                 txtNote.ScrollBars = ScrollBars.None;
                 //vars
-                int r = Grid6.SelectedRows [0].Index;
-                Note.Id = (int) Grid6 [6, r].Value;
-                Note.DateTime = Grid6 [2, r].Value.ToString ();
+                int r = Grid6.SelectedRows[0].Index;
+                Note.Id = (int) Grid6[6, r].Value;
+                Note.DateTime = Grid6[2, r].Value.ToString ();
                 Note.NoteText = txtNote.Text;
                 Note.Rtl = Convert.ToBoolean (txtNote.RightToLeft);
                 //save
                 Note.SaveNote (Note.Id, Note.NoteText, Note.DateTime, Note.Rtl, Note.Done);
                 //refresh
-                Db.DS.Tables ["tblNotesCount"].Rows [r] [3] = txtNote.Text.ToString ();
-                Db.DS.Tables ["tblNotesCount"].Rows [r] [8] = Note.Rtl.ToString ();
-                Grid6 [3, r].Value = txtNote.Text;
-                Grid6 [8, r].Value = Note.Rtl.ToString ();
+                Db.DS.Tables["tblNotesCount"].Rows[r][3] = txtNote.Text.ToString ();
+                Db.DS.Tables["tblNotesCount"].Rows[r][8] = Note.Rtl.ToString ();
+                Grid6[3, r].Value = txtNote.Text;
+                Grid6[8, r].Value = Note.Rtl.ToString ();
                 SetEditNoteMode (1);
                 Grid6.Focus ();
                 }
@@ -470,14 +470,14 @@ namespace eLib.Forms
                 SetFormTitle ("new note added to: " + Note.DateTime);
                 Grid6.Focus ();
                 Note.GetThisNote (Note.Id);
-                Grid6.Rows [0].Cells [1].Selected = true;
+                Grid6.Rows[0].Cells[1].Selected = true;
                 ShowNote ();
                 SetEditNoteMode (2);
                 }
             }
         private void Menu_AddToNewSpubProject_Click (object sender, EventArgs e)
             {
-            if (Grid6.SelectedRows [0].Index == -1)
+            if (Grid6.SelectedRows[0].Index == -1)
                 {
                 return;
                 }
@@ -498,8 +498,8 @@ namespace eLib.Forms
                             Db.strSQL = "INSERT INTO Notes (NoteDatum, Note, Parent_ID, ParentType, Rtl, Done, User_ID, Shared) VALUES (@notedatum, @note, @parentid, 1, @rtl, 0, @userid, 0); SELECT CAST(scope_identity() AS int)";
                             var cmdx = new Microsoft.Data.SqlClient.SqlCommand (Db.strSQL, CnnSS);
                             cmdx.CommandType = CommandType.Text;
-                            cmdx.Parameters.AddWithValue ("@notedatum", Convert.ToString (Grid6 [2, Grid6.SelectedRows [0].Index].Value));
-                            cmdx.Parameters.AddWithValue ("@note", "(noted again) \n" + Convert.ToString (Grid6 [3, Grid6.SelectedRows [0].Index].Value));
+                            cmdx.Parameters.AddWithValue ("@notedatum", Convert.ToString (Grid6[2, Grid6.SelectedRows[0].Index].Value));
+                            cmdx.Parameters.AddWithValue ("@note", "(noted again) \n" + Convert.ToString (Grid6[3, Grid6.SelectedRows[0].Index].Value));
                             cmdx.Parameters.AddWithValue ("@parentid", SubProject.Id.ToString ());
                             cmdx.Parameters.AddWithValue ("@rtl", Note.Rtl);
                             cmdx.Parameters.AddWithValue ("@userid", User.Id.ToString ());
@@ -509,7 +509,7 @@ namespace eLib.Forms
                         using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                             {
                             CnnSS.Open ();
-                            intNoteA = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
+                            intNoteA = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
                             Db.strSQL = "INSERT INTO NoteNet (NoteA_ID, NoteB_ID) VALUES (@noteaid, @notebid)";
                             var cmd2 = new Microsoft.Data.SqlClient.SqlCommand (Db.strSQL, CnnSS);
                             cmd2.CommandType = CommandType.Text;
@@ -657,7 +657,7 @@ namespace eLib.Forms
         //Menu-Grid
         private void Menu_EditNote_Click (object sender, EventArgs e)
             {
-            if ((Grid6.SelectedRows [0].Index != -1) && (txtNote.Enabled == false))
+            if ((Grid6.SelectedRows[0].Index != -1) && (txtNote.Enabled == false))
                 {
                 SetEditNoteMode (2);
                 }
@@ -681,10 +681,10 @@ namespace eLib.Forms
             {
             try
                 {
-                if (Grid6.SelectedRows [0].Index >= 0)
+                if (Grid6.SelectedRows[0].Index >= 0)
                     {
-                    Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
-                    Note.DateTime = Grid6 [2, Grid6.SelectedRows [0].Index].Value.ToString ();
+                    Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
+                    Note.DateTime = Grid6[2, Grid6.SelectedRows[0].Index].Value.ToString ();
                     Note.PostpondNote (Note.Id, 0);
                     Note.GetSNotesFromDB ("all");
                     HighlightGridRows ();
@@ -698,10 +698,10 @@ namespace eLib.Forms
             {
             try
                 {
-                if (Grid6.SelectedRows [0].Index >= 0)
+                if (Grid6.SelectedRows[0].Index >= 0)
                     {
-                    Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
-                    Note.DateTime = Grid6 [2, Grid6.SelectedRows [0].Index].Value.ToString ();
+                    Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
+                    Note.DateTime = Grid6[2, Grid6.SelectedRows[0].Index].Value.ToString ();
                     Note.PostpondNote (Note.Id, 1);
                     Note.GetSNotesFromDB ("all");
                     HighlightGridRows ();
@@ -715,10 +715,10 @@ namespace eLib.Forms
             {
             try
                 {
-                if (Grid6.SelectedRows [0].Index >= 0)
+                if (Grid6.SelectedRows[0].Index >= 0)
                     {
-                    Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
-                    Note.DateTime = Grid6 [2, Grid6.SelectedRows [0].Index].Value.ToString ();
+                    Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
+                    Note.DateTime = Grid6[2, Grid6.SelectedRows[0].Index].Value.ToString ();
                     Note.PostpondNote (Note.Id, 7);
                     Note.GetSNotesFromDB ("all");
                     HighlightGridRows ();
@@ -752,7 +752,7 @@ namespace eLib.Forms
                 Grid6.Focus ();
                 if (Grid6.Rows.Count > 0)
                     {
-                    Grid6.Rows [0].Cells [1].Selected = true;
+                    Grid6.Rows[0].Cells[1].Selected = true;
                     ShowNote ();
                     if (Grid6.Width == intGridShrinkWidth)
                         {
@@ -775,9 +775,9 @@ namespace eLib.Forms
             {
             try
                 {
-                if (Grid6.SelectedRows [0].Index >= 0)
+                if (Grid6.SelectedRows[0].Index >= 0)
                     {
-                    Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
+                    Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
                     string result = Assign.DeleteNote (Note.Id, true); //true: get user confirmation
                     switch (result)
                         {
@@ -853,7 +853,7 @@ namespace eLib.Forms
                         }
                 case "Edit":
                         {
-                        if (Grid6.SelectedRows [0].Index != -1)
+                        if (Grid6.SelectedRows[0].Index != -1)
                             {
                             SetEditNoteMode (2);
                             }
@@ -875,10 +875,10 @@ namespace eLib.Forms
             {
             try
                 {
-                if (Grid6.SelectedRows [0].Index != -1)
+                if (Grid6.SelectedRows[0].Index != -1)
                     {
-                    SubProject.Id = (int) Grid6 [5, Grid6.SelectedRows [0].Index].Value;
-                    Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
+                    SubProject.Id = (int) Grid6[5, Grid6.SelectedRows[0].Index].Value;
+                    Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
                     Note.Type = "FocusNote"; //this signal tells NoteNet that must use ["tblNotesCount"]
                     this.Dispose ();
                     var frmMindmap = new frmNoteNetEditor ();
@@ -904,12 +904,12 @@ namespace eLib.Forms
         private void SelectTheNoteAndExit ()
             {
             //0 Project 1 SubProject 2 Datum 3 Note 4 Projects.ID(hide) 5 SubProjects.ID(hide) 6 Notes.ID(hide) 7 Done
-            Project.Name = Grid6 [0, Grid6.SelectedRows [0].Index].Value.ToString ();
-            Project.Id = (int) Grid6 [4, Grid6.SelectedRows [0].Index].Value;
-            SubProject.Name = Grid6 [1, Grid6.SelectedRows [0].Index].Value.ToString ();
-            SubProject.Id = (int) Grid6 [5, Grid6.SelectedRows [0].Index].Value;
-            Note.DateTime = Grid6 [2, Grid6.SelectedRows [0].Index].Value.ToString ();
-            Note.Id = (int) Grid6 [6, Grid6.SelectedRows [0].Index].Value;
+            Project.Name = Grid6[0, Grid6.SelectedRows[0].Index].Value.ToString ();
+            Project.Id = (int) Grid6[4, Grid6.SelectedRows[0].Index].Value;
+            SubProject.Name = Grid6[1, Grid6.SelectedRows[0].Index].Value.ToString ();
+            SubProject.Id = (int) Grid6[5, Grid6.SelectedRows[0].Index].Value;
+            Note.DateTime = Grid6[2, Grid6.SelectedRows[0].Index].Value.ToString ();
+            Note.Id = (int) Grid6[6, Grid6.SelectedRows[0].Index].Value;
             Client.List5Mode = "SubProjectNote";
             Client.DialogRequestParams = 16; //bit5: 00010000: 0:cancel 1:ok
             Dispose ();

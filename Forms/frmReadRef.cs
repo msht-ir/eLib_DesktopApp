@@ -27,7 +27,7 @@ namespace eLib
             {
             try
                 {
-                Db.DS.Tables ["tblRefPaths"].Clear ();
+                Db.DS.Tables["tblRefPaths"].Clear ();
                 using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                     {
                     CnnSS.Open ();
@@ -35,7 +35,7 @@ namespace eLib
                     Db.DASS.Fill (Db.DS, "tblRefPaths");
                     CnnSS.Close ();
                     }
-                ListPaths.DataSource = Db.DS.Tables ["tblRefPaths"];
+                ListPaths.DataSource = Db.DS.Tables["tblRefPaths"];
                 ListPaths.DisplayMember = "FilePath";
                 ListPaths.ValueMember = "FilePath";
                 ListPaths.SelectedIndex = -1;

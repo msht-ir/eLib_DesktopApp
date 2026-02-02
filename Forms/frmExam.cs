@@ -129,15 +129,15 @@ namespace eLib.Forms
             {
             try
                 {
-                if (gridComposition.SelectedCells [0].RowIndex >= 0)
+                if (gridComposition.SelectedCells[0].RowIndex >= 0)
                     {
                     //0ID, 1Exam_ID, 2TopicId, 3Topic, 4TopicNTests, 5TestsLevel
-                    int r = gridComposition.SelectedCells [0].RowIndex;
-                    int compid = Convert.ToInt32 (gridComposition.Rows [r].Cells [0].Value);
-                    int topicNtests = Convert.ToInt32 (gridComposition.Rows [r].Cells [4].Value);
-                    Test.Level = Convert.ToInt32 (gridComposition.Rows [r].Cells [5].Value);
-                    Topic.Id = Convert.ToInt32 (gridComposition.Rows [r].Cells [2].Value);
-                    switch (gridComposition.SelectedCells [0].ColumnIndex)
+                    int r = gridComposition.SelectedCells[0].RowIndex;
+                    int compid = Convert.ToInt32 (gridComposition.Rows[r].Cells[0].Value);
+                    int topicNtests = Convert.ToInt32 (gridComposition.Rows[r].Cells[4].Value);
+                    Test.Level = Convert.ToInt32 (gridComposition.Rows[r].Cells[5].Value);
+                    Topic.Id = Convert.ToInt32 (gridComposition.Rows[r].Cells[2].Value);
+                    switch (gridComposition.SelectedCells[0].ColumnIndex)
                         {
                         case 3:
                                 {
@@ -187,11 +187,11 @@ namespace eLib.Forms
             {
             try
                 {
-                if (gridComposition.SelectedCells [0].RowIndex >= 0)
+                if (gridComposition.SelectedCells[0].RowIndex >= 0)
                     {
                     //0ID, 1Exam_ID, 2TopicId, 3Topic, 4TopicNTests, 5TestsLevel
-                    int r = gridComposition.SelectedCells [0].RowIndex;
-                    ExamComposition.Id = Convert.ToInt32 (gridComposition.Rows [r].Cells [0].Value);
+                    int r = gridComposition.SelectedCells[0].RowIndex;
+                    ExamComposition.Id = Convert.ToInt32 (gridComposition.Rows[r].Cells[0].Value);
                     DialogResult myansw = MessageBox.Show ("Delete Exam-Composition?\n\nClick ( NO ) to EDIT", "eLib.Exams", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                     switch (myansw)
                         {
@@ -234,7 +234,7 @@ namespace eLib.Forms
                 int tmpNTests_txt = Convert.ToInt32 (txtNTests.Text);
                 for (int i = 0; i < gridComposition.Rows.Count; i++)
                     {
-                    tmpNTests_grd += Convert.ToInt32 (gridComposition.Rows [i].Cells [4].Value);
+                    tmpNTests_grd += Convert.ToInt32 (gridComposition.Rows[i].Cells[4].Value);
                     }
                 if (tmpNTests_grd == tmpNTests_txt)
                     {
@@ -306,24 +306,24 @@ namespace eLib.Forms
         private void RefreshExamComposition (int examid)
             {
             Testbank.GetExamComposition (examid);
-            gridComposition.DataSource = Db.DS.Tables ["tblExamComposition"];
+            gridComposition.DataSource = Db.DS.Tables["tblExamComposition"];
             for (int i = 0, loopTo = gridComposition.Columns.Count - 1; i <= loopTo; i++) //disable sort for column_haeders
                 {
-                gridComposition.Columns [i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                gridComposition.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                 }
             //[ExamComposition]: ID, Exam_ID, TopicId, Topic, TopicNTests, TestsLevel
-            gridComposition.Columns [0].Visible = false;   //ID
-            gridComposition.Columns [1].Visible = false;   //Exam_ID
-            gridComposition.Columns [2].Visible = false;   //TopicId
+            gridComposition.Columns[0].Visible = false;   //ID
+            gridComposition.Columns[1].Visible = false;   //Exam_ID
+            gridComposition.Columns[2].Visible = false;   //TopicId
             //gridComposition.Columns [5].Visible = false;   //TestsLevel
-            gridComposition.Columns [3].Width = 360;       //Topic
-            gridComposition.Columns [4].Width = 70;        //TopicNTests
-            gridComposition.Columns [5].Width = 50;        //TestsLevel
+            gridComposition.Columns[3].Width = 360;       //Topic
+            gridComposition.Columns[4].Width = 70;        //TopicNTests
+            gridComposition.Columns[5].Width = 50;        //TestsLevel
             int tmpNTests_grd = 0;
             int tmpNTests_txt = Convert.ToInt32 (txtNTests.Text);
             for (int i = 0; i < gridComposition.Rows.Count; i++)
                 {
-                tmpNTests_grd += Convert.ToInt32 (gridComposition.Rows [i].Cells [4].Value);
+                tmpNTests_grd += Convert.ToInt32 (gridComposition.Rows[i].Cells[4].Value);
                 }
             txtNTests.Text = tmpNTests_grd.ToString ();
             try

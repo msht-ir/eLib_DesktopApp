@@ -40,12 +40,12 @@ namespace eLib
                         {
                         this.Text = Project.Name;
                         Assign.GetSubProjects (Project.Id);
-                        cboSubproject.DataSource = Db.DS.Tables ["tblSubProject"];
+                        cboSubproject.DataSource = Db.DS.Tables["tblSubProject"];
                         cboSubproject.DisplayMember = "SubProjectName";
                         cboSubproject.ValueMember = "ID";
                         cboSubproject.SelectedValue = SubProject.Id;
                         txtNote.Text = "";
-                        Grid6.DataSource = Db.DS.Tables ["tblSNotes"];//GetNotes (SubProject.Id);                   
+                        Grid6.DataSource = Db.DS.Tables["tblSNotes"];//GetNotes (SubProject.Id);                   
                         ShowCalendar ();
                         ShowNote (Note.Id);
                         lblDone.Visible = true;
@@ -58,7 +58,7 @@ namespace eLib
                         this.Text = Project.Name;
                         cboSubproject.DataSource = null;
                         txtNote.Text = "";
-                        Grid6.DataSource = Db.DS.Tables ["tblSNotes"];//GetNotes (SubProject.Id);                   
+                        Grid6.DataSource = Db.DS.Tables["tblSNotes"];//GetNotes (SubProject.Id);                   
                         ShowCalendar ();
                         ShowNote (Note.Id);
                         lblDone.Visible = true;
@@ -68,12 +68,12 @@ namespace eLib
                         }
                 case "LinkNote":
                         {
-                        cboSubproject.DataSource = Db.DS.Tables ["tblLinks"];
+                        cboSubproject.DataSource = Db.DS.Tables["tblLinks"];
                         cboSubproject.DisplayMember = "PaperName";
                         cboSubproject.ValueMember = "LinkID"; //col7  {Papers.ID, PaperName, IsPaper, IsBook, IsManual, IsLecture, SubProject_ID, Links.ID AS LinkID, Imp1, Imp2, Imp3, ImR}
                         cboSubproject.SelectedValue = Link.Id;
                         txtNote.Text = "";
-                        Grid6.DataSource = Db.DS.Tables ["tblLNotes"]; //GetNotes (Link.Id);
+                        Grid6.DataSource = Db.DS.Tables["tblLNotes"]; //GetNotes (Link.Id);
                         ShowCalendar ();
                         ShowNote (Note.Id);
                         lblDone.Visible = false;
@@ -85,7 +85,7 @@ namespace eLib
                         {
                         cboSubproject.DataSource = null;
                         txtNote.Text = "";
-                        Grid6.DataSource = Db.DS.Tables ["tblLNotes"]; //GetNotes (Link.Id);
+                        Grid6.DataSource = Db.DS.Tables["tblLNotes"]; //GetNotes (Link.Id);
                         ShowCalendar ();
                         ShowNote (Note.Id);
                         lblDone.Visible = false;
@@ -95,12 +95,12 @@ namespace eLib
                         }
                 case "RefNote":
                         {
-                        cboSubproject.DataSource = Db.DS.Tables ["tblRefs"];
+                        cboSubproject.DataSource = Db.DS.Tables["tblRefs"];
                         cboSubproject.DisplayMember = "PaperName";
                         cboSubproject.ValueMember = "Papers.ID";
                         cboSubproject.SelectedValue = Ref.Id;
                         txtNote.Text = "";
-                        Grid6.DataSource = Db.DS.Tables ["tblRNotes"]; //GetNotes (Ref.Id);
+                        Grid6.DataSource = Db.DS.Tables["tblRNotes"]; //GetNotes (Ref.Id);
                         ShowCalendar ();
                         ShowNote (Note.Id);
                         lblDone.Visible = false;
@@ -112,7 +112,7 @@ namespace eLib
                         {
                         cboSubproject.DataSource = null;
                         txtNote.Text = "";
-                        Grid6.DataSource = Db.DS.Tables ["tblRNotes"]; //GetNotes (Ref.Id);
+                        Grid6.DataSource = Db.DS.Tables["tblRNotes"]; //GetNotes (Ref.Id);
                         ShowCalendar ();
                         ShowNote (Note.Id);
                         lblDone.Visible = false;
@@ -127,21 +127,21 @@ namespace eLib
         private void FormatGrid6Cols ()
             {
             //grid columns
-            Grid6.Columns [0].Visible = false; //ID
-            Grid6.Columns [1].Width = 120;     //NoteDatum
-            Grid6.Columns [2].Width = 230;     //Note
-            Grid6.Columns [3].Visible = false; //parent-id
-            Grid6.Columns [4].Visible = false; //parent-type
-            Grid6.Columns [5].Visible = false; //Rtl
-            Grid6.Columns [6].Visible = false; //Done(Accomplished)
-            Grid6.Columns [7].Visible = false; //Note.UserID 
-            Grid6.Columns [8].Visible = false; //shared 
+            Grid6.Columns[0].Visible = false; //ID
+            Grid6.Columns[1].Width = 120;     //NoteDatum
+            Grid6.Columns[2].Width = 230;     //Note
+            Grid6.Columns[3].Visible = false; //parent-id
+            Grid6.Columns[4].Visible = false; //parent-type
+            Grid6.Columns[5].Visible = false; //Rtl
+            Grid6.Columns[6].Visible = false; //Done(Accomplished)
+            Grid6.Columns[7].Visible = false; //Note.UserID 
+            Grid6.Columns[8].Visible = false; //shared 
             //focus on the selected note (ID = Note.Id)
             for (int r = 0; r < Grid6.Rows.Count; r++)
                 {
-                if ((int) Grid6 [0, r].Value == Note.Id)
+                if ((int) Grid6[0, r].Value == Note.Id)
                     {
-                    Grid6.CurrentCell = Grid6.Rows [r].Cells [1];
+                    Grid6.CurrentCell = Grid6.Rows[r].Cells[1];
                     }
                 }
             }
@@ -150,7 +150,7 @@ namespace eLib
             //when txtnote is disbaled: frm-dblclaick is used for enebling the txtnote
             try
                 {
-                if ((Note.Id != 0) & (txtNote.Enabled == false) & (Grid6.SelectedRows [0].Index >= 0))
+                if ((Note.Id != 0) & (txtNote.Enabled == false) & (Grid6.SelectedRows[0].Index >= 0))
                     {
                     txtDatum.Enabled = true;
                     txtNote.Enabled = true;
@@ -172,7 +172,7 @@ namespace eLib
                     case "SubProjectNote":
                     case "SubProjectNoteSearch":
                             {
-                            Db.DS.Tables ["tblSNotes"].Clear ();
+                            Db.DS.Tables["tblSNotes"].Clear ();
                             Db.strSQL = "SELECT ID, NoteDatum, Note, Parent_ID, ParentType, Rtl, Done, User_ID, Shared FROM Notes WHERE Parent_ID = " + parentid.ToString () + " AND ParentType = 1 ORDER BY NoteDatum ASC;";
                             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                                 {
@@ -181,13 +181,13 @@ namespace eLib
                                 Db.DASS.Fill (Db.DS, "tblSNotes");
                                 CnnSS.Close ();
                                 }
-                            Grid6.DataSource = Db.DS.Tables ["tblSNotes"];
+                            Grid6.DataSource = Db.DS.Tables["tblSNotes"];
                             break;
                             }
                     case "LinkNote":
                     case "LinkNoteSearch":
                             {
-                            Db.DS.Tables ["tblLNotes"].Clear ();
+                            Db.DS.Tables["tblLNotes"].Clear ();
                             Db.strSQL = "SELECT ID, NoteDatum, Note, Parent_ID, ParentType, Rtl, Done, User_ID, Shared FROM Notes WHERE Parent_ID = " + parentid.ToString () + " AND ParentType = 2 ORDER BY NoteDatum ASC;";
                             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                                 {
@@ -196,13 +196,13 @@ namespace eLib
                                 Db.DASS.Fill (Db.DS, "tblLNotes");
                                 CnnSS.Close ();
                                 }
-                            Grid6.DataSource = Db.DS.Tables ["tblLNotes"];
+                            Grid6.DataSource = Db.DS.Tables["tblLNotes"];
                             break;
                             }
                     case "RefNote":
                     case "RefNoteSearch":
                             {
-                            Db.DS.Tables ["tblRNotes"].Clear ();
+                            Db.DS.Tables["tblRNotes"].Clear ();
                             Db.strSQL = "SELECT ID, NoteDatum, Note, Parent_ID, ParentType, Rtl, Done, User_ID, Shared FROM Notes WHERE Parent_ID = " + parentid.ToString () + " AND ParentType = 3 ORDER BY NoteDatum ASC;";
                             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                                 {
@@ -211,13 +211,13 @@ namespace eLib
                                 Db.DASS.Fill (Db.DS, "tblRNotes");
                                 CnnSS.Close ();
                                 }
-                            Grid6.DataSource = Db.DS.Tables ["tblRNotes"];
+                            Grid6.DataSource = Db.DS.Tables["tblRNotes"];
                             break;
                             }
                     }
                 for (int i = 0, loopTo = Grid6.Columns.Count - 1; i <= loopTo; i++) //disable sort for column_haeders
                     {
-                    Grid6.Columns [i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                    Grid6.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                     }
                 FormatGrid6Cols ();
                 }
@@ -235,27 +235,27 @@ namespace eLib
                 //A: LOCATE
                 for (int r = 0; r < Grid6.Rows.Count; r++)
                     {
-                    if (Convert.ToInt32 (Grid6 [0, r].Value) == Note.Id)
+                    if (Convert.ToInt32 (Grid6[0, r].Value) == Note.Id)
                         {
                         Note.Index = r;
-                        Grid6.CurrentCell = Grid6.Rows [Note.Index].Cells [1];
+                        Grid6.CurrentCell = Grid6.Rows[Note.Index].Cells[1];
                         break;
                         }
                     }
                 //B: GetRowData
                 if (Grid6.Rows.Count == 0)
                     return;
-                if (Grid6.SelectedRows [0].Index == -1)
+                if (Grid6.SelectedRows[0].Index == -1)
                     return;
-                Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
-                Note.DateTime = Convert.ToString (Grid6 [1, Grid6.SelectedRows [0].Index].Value);
-                Note.NoteText = Convert.ToString (Grid6 [2, Grid6.SelectedRows [0].Index].Value);
-                Note.Rtl = Convert.ToBoolean (Grid6 [5, Grid6.SelectedRows [0].Index].Value);
+                Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
+                Note.DateTime = Convert.ToString (Grid6[1, Grid6.SelectedRows[0].Index].Value);
+                Note.NoteText = Convert.ToString (Grid6[2, Grid6.SelectedRows[0].Index].Value);
+                Note.Rtl = Convert.ToBoolean (Grid6[5, Grid6.SelectedRows[0].Index].Value);
                 //show frm lables
                 if ((Note.Type == "SubProjectNote") || (Note.Type == "SubProjectNoteSearch"))
                     {
                     lblDone.Visible = true;
-                    Note.Done = Convert.ToBoolean (Grid6 [6, Grid6.SelectedRows [0].Index].Value);
+                    Note.Done = Convert.ToBoolean (Grid6[6, Grid6.SelectedRows[0].Index].Value);
                     if (Note.Done == true)
                         {
                         lblDone.Text = "Done";
@@ -273,7 +273,7 @@ namespace eLib
                     }
                 if ((Note.Type == "RefNote") || (Note.Type == "RefNoteSearch"))
                     {
-                    Note.UserID = Convert.ToInt32 (Grid6 [7, Grid6.SelectedRows [0].Index].Value);
+                    Note.UserID = Convert.ToInt32 (Grid6[7, Grid6.SelectedRows[0].Index].Value);
                     if (User.Id == Note.UserID)
                         {
                         lblMine.Visible = true;
@@ -335,9 +335,9 @@ namespace eLib
                     {
                     case "SubProjectNote":
                             {
-                            for (int i = 0, loopTo = Db.DS.Tables ["tblSNotes"].Rows.Count - 1; i <= loopTo; i++)
+                            for (int i = 0, loopTo = Db.DS.Tables["tblSNotes"].Rows.Count - 1; i <= loopTo; i++)
                                 {
-                                tmpDate = Strings.Mid (Db.DS.Tables ["tblSNotes"].Rows [i] [1].ToString (), 1, 10);
+                                tmpDate = Strings.Mid (Db.DS.Tables["tblSNotes"].Rows[i][1].ToString (), 1, 10);
                                 if (Conversion.Val (tmpDate) > 0d)
                                     {
                                     MC1.AddBoldedDate (Conversions.ToDate (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
@@ -347,9 +347,9 @@ namespace eLib
                             }
                     case "RefNote":
                             {
-                            for (int i = 0, loopTo = Db.DS.Tables ["tblRNotes"].Rows.Count - 1; i <= loopTo; i++)
+                            for (int i = 0, loopTo = Db.DS.Tables["tblRNotes"].Rows.Count - 1; i <= loopTo; i++)
                                 {
-                                tmpDate = Strings.Mid (Db.DS.Tables ["tblRNotes"].Rows [i] [1].ToString (), 1, 10);
+                                tmpDate = Strings.Mid (Db.DS.Tables["tblRNotes"].Rows[i][1].ToString (), 1, 10);
                                 if (Conversion.Val (tmpDate) > 0d)
                                     {
                                     MC1.AddBoldedDate (Conversions.ToDate (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
@@ -359,9 +359,9 @@ namespace eLib
                             }
                     case "LinkNote":
                             {
-                            for (int i = 0, loopTo = Db.DS.Tables ["tblLNotes"].Rows.Count - 1; i <= loopTo; i++)
+                            for (int i = 0, loopTo = Db.DS.Tables["tblLNotes"].Rows.Count - 1; i <= loopTo; i++)
                                 {
-                                tmpDate = Strings.Mid (Db.DS.Tables ["tblLNotes"].Rows [i] [1].ToString (), 1, 10);
+                                tmpDate = Strings.Mid (Db.DS.Tables["tblLNotes"].Rows[i][1].ToString (), 1, 10);
                                 if (Conversion.Val (tmpDate) > 0d)
                                     {
                                     MC1.AddBoldedDate (Conversions.ToDate (Strings.Mid (tmpDate, 1, 4) + "/" + Strings.Mid (tmpDate, 6, 2) + "/" + Strings.Mid (tmpDate, 9, 2)));
@@ -379,7 +379,7 @@ namespace eLib
             }
         private void GetSubprojects (int projectid)
             {
-            Db.DS.Tables ["tblSubProject"].Clear ();
+            Db.DS.Tables["tblSubProject"].Clear ();
             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                 {
                 CnnSS.Open ();
@@ -390,9 +390,9 @@ namespace eLib
             }
         private static int CheckReadOnlyAccess ()
             {
-            foreach (DataRow R in Db.DS.Tables ["tblUserProject"].Rows)
+            foreach (DataRow R in Db.DS.Tables["tblUserProject"].Rows)
                 {
-                if (((int) R [0] == User.Id) && ((int) R [3] == Project.Id) && ((bool) R [4] == true))
+                if (((int) R[0] == User.Id) && ((int) R[3] == Project.Id) && ((bool) R[4] == true))
                     {
                     MessageBox.Show ("Notice: \n\n\nYou have ReadOnly access to this SubProject!", "eLib", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return 1;
@@ -454,7 +454,7 @@ namespace eLib
                     case "LinkNote":
                         //case "LinkNoteSearch":
                             {
-                            Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [cboSubproject.SelectedIndex] [7]); //7:Link.ID
+                            Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[cboSubproject.SelectedIndex][7]); //7:Link.ID
                             GetNotes (Link.Id);
                             break;
                             }
@@ -484,7 +484,7 @@ namespace eLib
                 {
                 this.Text = Project.Name;
                 GetSubprojects (Project.Id);
-                cboSubproject.DataSource = Db.DS.Tables ["tblSubProject"];
+                cboSubproject.DataSource = Db.DS.Tables["tblSubProject"];
                 cboSubproject.DisplayMember = "SubProjectName";
                 cboSubproject.ValueMember = "ID";
                 cboSubproject.SelectedValue = SubProject.Id;
@@ -527,7 +527,7 @@ namespace eLib
                             {
                             if (Grid6.CurrentRow.Index == -1) //if (Grid6.SelectedRows [0].Index == -1)
                                 return;
-                            Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
+                            Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
                             ShowNote (Note.Id);
                             e.SuppressKeyPress = true;
                             break;
@@ -556,7 +556,7 @@ namespace eLib
                 {
                 if (Grid6.CurrentRow.Index == -1) //if (Grid6.SelectedRows [0].Index == -1)
                     return;
-                Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
+                Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
                 ShowNote (Note.Id);
                 }
             catch
@@ -568,7 +568,7 @@ namespace eLib
             {
             if (Grid6.CurrentRow.Index == -1) //if (Grid6.SelectedRows [0].Index == -1)
                 return;
-            Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
+            Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
             ShowNote (Note.Id);
             txtDatum.Enabled = true;
             txtNote.Enabled = true;
@@ -655,8 +655,8 @@ namespace eLib
         private void txtNote_DragDrop (object sender, DragEventArgs e)
             {
             //get a single file path from dropped object
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            string strFilex = strFiles [0];
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            string strFilex = strFiles[0];
             var MyFile = new FileInfo (strFilex);
             if (MyFile.Extension == ".txt")
                 {
@@ -700,7 +700,7 @@ namespace eLib
             }
         private void txtDatum_Click (object sender, EventArgs e)
             {
-            if (Grid6.SelectedRows [0].Index == -1)
+            if (Grid6.SelectedRows[0].Index == -1)
                 {
                 Grid6.Focus ();
                 return;
@@ -777,11 +777,11 @@ namespace eLib
                 }
             else
                 {
-                Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
+                Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
                 Note.DateTime = Strings.Trim (txtDatum.Text);
                 if (Note.Type == "RefNote")
                     {
-                    Note.UserID = Convert.ToInt32 (Grid6 [7, Grid6.SelectedRows [0].Index].Value);
+                    Note.UserID = Convert.ToInt32 (Grid6[7, Grid6.SelectedRows[0].Index].Value);
                     }
                 else
                     {
@@ -842,7 +842,7 @@ namespace eLib
                             }
                     case "LinkNote":
                             {
-                            Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [cboSubproject.SelectedIndex] [7]); // 7:Link.ID
+                            Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[cboSubproject.SelectedIndex][7]); // 7:Link.ID
                             using (var CnnSS = new Microsoft.Data.SqlClient.SqlConnection (Db.CnnString))
                                 {
                                 Db.strSQL = "INSERT INTO Notes (NoteDatum, Note, Parent_ID, ParentType) VALUES (@notedatum, @note, @parentid, 2)";
@@ -878,7 +878,7 @@ namespace eLib
                             }
                     }
                 txtNote.Text = "";
-                Grid6.Rows [0].Selected = false;
+                Grid6.Rows[0].Selected = false;
                 ShowCalendar ();
                 Grid6.Focus ();
                 //
@@ -898,7 +898,7 @@ namespace eLib
             if (CheckReadOnlyAccess () == 1)
                 return;
             //Replace a Note
-            if (Grid6.SelectedRows [0].Index == -1)
+            if (Grid6.SelectedRows[0].Index == -1)
                 return;
             Client.DialogRequestParams = 2; //1:get Project 2:get SubProject 3:get Project or SubProject
             My.MyProject.Forms.frmChooseProject.ShowDialog ();
@@ -930,14 +930,14 @@ namespace eLib
             {
             if (CheckReadOnlyAccess () == 1)
                 return;
-            if (Grid6.SelectedRows [0].Index == -1)
+            if (Grid6.SelectedRows[0].Index == -1)
                 return;
             DialogResult myansw = MessageBox.Show ("Delete ?", "eLib", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
             if (myansw != DialogResult.OK)
                 return;
             try
                 {
-                Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
+                Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
                 switch (Note.Type)
                     {
                     case "SubProjectNote":
@@ -987,7 +987,7 @@ namespace eLib
                                 cmdx.Parameters.AddWithValue ("@id", Note.Id.ToString ());
                                 var i = cmdx.ExecuteNonQuery ();
                                 CnnSS.Close ();
-                                Link.Id = Conversions.ToInteger (Db.DS.Tables ["tblLinks"].Rows [cboSubproject.SelectedIndex] [7]); // 7:Link.ID
+                                Link.Id = Conversions.ToInteger (Db.DS.Tables["tblLinks"].Rows[cboSubproject.SelectedIndex][7]); // 7:Link.ID
                                 GetNotes (Link.Id);
                                 txtNote.Text = "";
                                 Grid6.Focus ();
@@ -1005,10 +1005,10 @@ namespace eLib
         private void Menu_Mindmap_Click (object sender, EventArgs e)
             {
             Note.Type = "SubProjectNote";
-            if (Grid6.SelectedRows [0].Index != -1)
+            if (Grid6.SelectedRows[0].Index != -1)
                 {
                 Note.ParentID = SubProject.Id = (int) cboSubproject.SelectedValue;
-                Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
+                Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
                 }
             Dispose ();
             var frmMindmap = new frmNoteNetEditor ();
@@ -1130,11 +1130,11 @@ namespace eLib
                 }
             else
                 {
-                Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
+                Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
                 Note.DateTime = Strings.Trim (txtDatum.Text);
                 if (Note.Type == "RefNote")
                     {
-                    Note.UserID = Convert.ToInt32 (Grid6 [7, Grid6.SelectedRows [0].Index].Value);
+                    Note.UserID = Convert.ToInt32 (Grid6[7, Grid6.SelectedRows[0].Index].Value);
                     }
                 else
                     {
@@ -1421,7 +1421,7 @@ ladd: xx bp (xx uL, in well: xx)
                     }
                 if (Grid6.CurrentRow.Index != -1)
                     {
-                    Note.Id = Convert.ToInt32 (Grid6 [0, Grid6.SelectedRows [0].Index].Value);
+                    Note.Id = Convert.ToInt32 (Grid6[0, Grid6.SelectedRows[0].Index].Value);
                     }
                 Dispose ();
                 }

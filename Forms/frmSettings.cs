@@ -15,15 +15,15 @@ namespace eLib
         private void Settings_Load (object sender, EventArgs e)
             {
             Db.ReadSettingsAndUsers ();
-            GridSettings.DataSource = Db.DS.Tables ["tblSettings"];
+            GridSettings.DataSource = Db.DS.Tables["tblSettings"];
             GridSettings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            GridSettings.Columns [0].Visible = false;    // ID
-            GridSettings.Columns [1].Visible = false;    // Header
-            GridSettings.Columns [2].Width = 160;        // Key
-            GridSettings.Columns [3].Width = 180;        // Value
-            GridSettings.Columns [4].Width = 250;        // Note
+            GridSettings.Columns[0].Visible = false;    // ID
+            GridSettings.Columns[1].Visible = false;    // Header
+            GridSettings.Columns[2].Width = 160;        // Key
+            GridSettings.Columns[3].Width = 180;        // Value
+            GridSettings.Columns[4].Width = 250;        // Note
             for (int k = 0, loopTo = GridSettings.Columns.Count - 1; k <= loopTo; k++)
-                GridSettings.Columns [k].SortMode = DataGridViewColumnSortMode.Programmatic;
+                GridSettings.Columns[k].SortMode = DataGridViewColumnSortMode.Programmatic;
             }
         private void GridSettings_CellDoubleClick (object sender, DataGridViewCellEventArgs e)
             {
@@ -38,23 +38,23 @@ namespace eLib
                 return;
             if (c != 3)
                 return;
-            string Keyx = Conversions.ToString (Db.DS.Tables ["tblsettings"].Rows [r] [2]);
-            string valx = Conversions.ToString (Db.DS.Tables ["tblsettings"].Rows [r] [3]);
+            string Keyx = Conversions.ToString (Db.DS.Tables["tblsettings"].Rows[r][2]);
+            string valx = Conversions.ToString (Db.DS.Tables["tblsettings"].Rows[r][3]);
             switch (r)
                 {
                 case 2: // ToggleY/N
                         {
-                        if (Db.DS.Tables ["tblSettings"].Rows [r] [3].ToString () == "1")
-                            Db.DS.Tables ["tblSettings"].Rows [r] [3] = "2";
+                        if (Db.DS.Tables["tblSettings"].Rows[r][3].ToString () == "1")
+                            Db.DS.Tables["tblSettings"].Rows[r][3] = "2";
                         else
-                            Db.DS.Tables ["tblSettings"].Rows [r] [3] = "1"; // using INPUTBOX
+                            Db.DS.Tables["tblSettings"].Rows[r][3] = "1"; // using INPUTBOX
                         break;
                         }
 
                 default:
                         {
                         valx = Interaction.InputBox ("Enter new Value for   " + Keyx, "Settings", valx);
-                        Db.DS.Tables ["tblSettings"].Rows [r] [3] = valx;
+                        Db.DS.Tables["tblSettings"].Rows[r][3] = valx;
                         break;
                         }
                 }
@@ -70,8 +70,8 @@ namespace eLib
                     Db.strSQL = "UPDATE Settings SET sttValue= @sttvalue WHERE ID = @ID";
                     var cmd = new Microsoft.Data.SqlClient.SqlCommand (Db.strSQL, CnnSS);
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue ("@sttvalue", Db.DS.Tables ["tblsettings"].Rows [r] [3]);
-                    cmd.Parameters.AddWithValue ("@ID", Db.DS.Tables ["tblSettings"].Rows [r] [0].ToString ());
+                    cmd.Parameters.AddWithValue ("@sttvalue", Db.DS.Tables["tblsettings"].Rows[r][3]);
+                    cmd.Parameters.AddWithValue ("@ID", Db.DS.Tables["tblSettings"].Rows[r][0].ToString ());
                     int i = cmd.ExecuteNonQuery ();
                     CnnSS.Close ();
                     }

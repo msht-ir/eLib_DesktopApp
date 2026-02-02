@@ -58,8 +58,8 @@ namespace eLib
                 Db.InstanceName = "SQLEXPRESS";
                 }
             PasswordTextBox.Visible = false;
-            Db.DS.Tables ["tblConnections"].Clear ();
-            GridCNN.DataSource = Db.DS.Tables ["tblConnections"];
+            Db.DS.Tables["tblConnections"].Clear ();
+            GridCNN.DataSource = Db.DS.Tables["tblConnections"];
             FileSystem.FileClose ();
             CnnFileRead ();
             }
@@ -95,9 +95,9 @@ namespace eLib
             }
         private void GridCNN_DragDrop (object sender, DragEventArgs e)
             {
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
-            FileInfo MyFile = new FileInfo (strFiles [0]);
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
+            FileInfo MyFile = new FileInfo (strFiles[0]);
             //if (MyFile.Extension.ToLower () == ".txt") //if (MyFile.Name.ToLower () == "elibcnn")
             FileSystem.FileClose ();
             FileSystem.FileOpen (1, eLibFile.strFilex, OpenMode.Input);
@@ -334,7 +334,7 @@ namespace eLib
         private void CnnFileRead ()
             {
             GridCNN.DataSource = null;
-            Db.DS.Tables ["tblConnections"].Clear ();
+            Db.DS.Tables["tblConnections"].Clear ();
             //1:LOCAL DBs
             if (!File.Exists (Client.eLibDataPath + "eLibA.mdf"))
                 {
@@ -355,7 +355,7 @@ namespace eLib
                 //FileSystem.FileOpen (2, eLibFile.cnnFilename + "_.txt", OpenMode.Output);
                 //notice: eLibcnn is encripted
                 string tmpxx = "";
-                Db.DS.Tables ["tblSecurityCodes"].Clear ();
+                Db.DS.Tables["tblSecurityCodes"].Clear ();
                 Client.FeedSecurityTable ();
                 while (!FileSystem.EOF (1))
                     {
@@ -381,7 +381,7 @@ namespace eLib
                         strLine = FileSystem.LineInput (1);
                         strDriveSerialNumber = Security.Decode (strLine);           //6 decode: clientSN hidden
                         tmpxx += Security.Decode (strLine) + "\n" + strLine + "\n\n";
-                        Db.DS.Tables ["tblConnections"].Rows.Add (strConnectionName, strConnectionAddress, strConnectionInitialCatalog, strConnectionUsername, strConnectionPassword, strDriveSerialNumber);
+                        Db.DS.Tables["tblConnections"].Rows.Add (strConnectionName, strConnectionAddress, strConnectionInitialCatalog, strConnectionUsername, strConnectionPassword, strDriveSerialNumber);
                         //FileSystem.WriteLine (2, strConnectionName);
                         //FileSystem.WriteLine (2, strConnectionAddress);
                         //FileSystem.WriteLine (2, strConnectionInitialCatalog);
@@ -391,7 +391,7 @@ namespace eLib
                         }
                     }
                 FileSystem.FileClose ();
-                GridCNN.DataSource = Db.DS.Tables ["tblConnections"];
+                GridCNN.DataSource = Db.DS.Tables["tblConnections"];
                 FormatGridCnn ();
                 }
             catch (Exception ex)
@@ -409,16 +409,16 @@ namespace eLib
             //GridCNN.Columns [3].Width = 120;
             //GridCNN.Columns [4].Width = 120;
             //GridCNN.Columns [5].Width = 30;
-            GridCNN.Columns [0].Width = 500;         // cnn name
-            GridCNN.Columns [1].Visible = false;     // cnn address
-            GridCNN.Columns [2].Visible = false;     // cnn initcat
-            GridCNN.Columns [3].Visible = false;     // cnn usr
-            GridCNN.Columns [4].Visible = false;     // cnn pwd
-            GridCNN.Columns [5].Visible = false;     // hdd sn
+            GridCNN.Columns[0].Width = 500;         // cnn name
+            GridCNN.Columns[1].Visible = false;     // cnn address
+            GridCNN.Columns[2].Visible = false;     // cnn initcat
+            GridCNN.Columns[3].Visible = false;     // cnn usr
+            GridCNN.Columns[4].Visible = false;     // cnn pwd
+            GridCNN.Columns[5].Visible = false;     // hdd sn
             //Disable sort for column_haeders
             for (int i = 0, loopTo = GridCNN.Columns.Count - 1; i <= loopTo; i++)
                 {
-                GridCNN.Columns [i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                GridCNN.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                 }
             GridCNN.Refresh ();
             }
@@ -446,11 +446,11 @@ namespace eLib
                 }
             else
                 {
-                for (int i = 0; i <= (Db.DS.Tables ["tblUsrs"].Rows.Count - 1); i++)
+                for (int i = 0; i <= (Db.DS.Tables["tblUsrs"].Rows.Count - 1); i++)
                     {
-                    if ((Db.DS.Tables ["tblUsrs"].Rows [i] [1].ToString () == strUser) & (Db.DS.Tables ["tblUsrs"].Rows [i] [2].ToString () == strPass))
+                    if ((Db.DS.Tables["tblUsrs"].Rows[i][1].ToString () == strUser) & (Db.DS.Tables["tblUsrs"].Rows[i][2].ToString () == strPass))
                         {
-                        if ((Convert.ToBoolean (Db.DS.Tables ["tblUsrs"].Rows [i] [3].ToString ())) == false)
+                        if ((Convert.ToBoolean (Db.DS.Tables["tblUsrs"].Rows[i][3].ToString ())) == false)
                             {
                             //an inactive user
                             PasswordTextBox.Text = " user account is inactive ";
@@ -463,18 +463,18 @@ namespace eLib
                             {
                             //user is active
                             User.Type = "User";
-                            User.Id = Conversions.ToInteger (Db.DS.Tables ["tblusrs"].Rows [i] [0]);
-                            User.Name = Conversions.ToString (Db.DS.Tables ["tblusrs"].Rows [i] [1]);
-                            User.Pass = Conversions.ToString (Db.DS.Tables ["tblusrs"].Rows [i] [2]);
-                            Client.SavedSN = Conversions.ToString (Db.DS.Tables ["tblusrs"].Rows [i] [4]);
-                            Client.Interface = Convert.ToInt32 (Db.DS.Tables ["tblusrs"].Rows [i] [13]);
-                            User.Accs = Conversions.ToInteger (Db.DS.Tables ["tblusrs"].Rows [i] [5]);
-                            User.FolderPapers = Convert.ToString (Db.DS.Tables ["tblUsrs"].Rows [i] [6]);
-                            User.FolderBooks = Convert.ToString (Db.DS.Tables ["tblUsrs"].Rows [i] [7]);
-                            User.FolderManuals = Convert.ToString (Db.DS.Tables ["tblUsrs"].Rows [i] [8]);
-                            User.FolderLectures = Convert.ToString (Db.DS.Tables ["tblUsrs"].Rows [i] [9]);
-                            User.FolderTemp = Convert.ToString (Db.DS.Tables ["tblUsrs"].Rows [i] [10]);
-                            User.FolderSaveACopy = Convert.ToString (Db.DS.Tables ["tblUsrs"].Rows [i] [11]);
+                            User.Id = Conversions.ToInteger (Db.DS.Tables["tblusrs"].Rows[i][0]);
+                            User.Name = Conversions.ToString (Db.DS.Tables["tblusrs"].Rows[i][1]);
+                            User.Pass = Conversions.ToString (Db.DS.Tables["tblusrs"].Rows[i][2]);
+                            Client.SavedSN = Conversions.ToString (Db.DS.Tables["tblusrs"].Rows[i][4]);
+                            Client.Interface = Convert.ToInt32 (Db.DS.Tables["tblusrs"].Rows[i][13]);
+                            User.Accs = Conversions.ToInteger (Db.DS.Tables["tblusrs"].Rows[i][5]);
+                            User.FolderPapers = Convert.ToString (Db.DS.Tables["tblUsrs"].Rows[i][6]);
+                            User.FolderBooks = Convert.ToString (Db.DS.Tables["tblUsrs"].Rows[i][7]);
+                            User.FolderManuals = Convert.ToString (Db.DS.Tables["tblUsrs"].Rows[i][8]);
+                            User.FolderLectures = Convert.ToString (Db.DS.Tables["tblUsrs"].Rows[i][9]);
+                            User.FolderTemp = Convert.ToString (Db.DS.Tables["tblUsrs"].Rows[i][10]);
+                            User.FolderSaveACopy = Convert.ToString (Db.DS.Tables["tblUsrs"].Rows[i][11]);
                             StartAssignForm ();
                             break;
                             }
@@ -487,7 +487,7 @@ namespace eLib
             var UACregister = default (int);
             for (int r = 0; r <= 15; r++)
                 {
-                if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables ["tblusrs"].Rows [Userid] [5 + r], true, false)))
+                if (Conversions.ToBoolean (Operators.ConditionalCompareObjectEqual (Db.DS.Tables["tblusrs"].Rows[Userid][5 + r], true, false)))
                     UACregister = (int) ((long) UACregister | (long) Math.Round (Math.Pow (2d, r)));
                 }
             User.Accs = UACregister;
@@ -535,36 +535,36 @@ namespace eLib
             {
             if (GridCNN.RowCount < 1)
                 return;
-            int r = GridCNN.SelectedCells [0].RowIndex;    // count from 0
-            int c = GridCNN.SelectedCells [0].ColumnIndex; // count from 0
+            int r = GridCNN.SelectedCells[0].RowIndex;    // count from 0
+            int c = GridCNN.SelectedCells[0].ColumnIndex; // count from 0
             if (r < 0 | c < 0)
                 return;
             lbl_status.Text = "connecting...";
             Application.DoEvents ();
-            switch (Strings.Trim (Conversions.ToString (GridCNN [0, r].Value)))
+            switch (Strings.Trim (Conversions.ToString (GridCNN[0, r].Value)))
                 {
                 case "Local Server: Lib A":
                         {
-                        Db.BackEnd = Strings.Trim (Conversions.ToString (GridCNN [1, r].Value)) + "; TrustServerCertificate=True;";
+                        Db.BackEnd = Strings.Trim (Conversions.ToString (GridCNN[1, r].Value)) + "; TrustServerCertificate=True;";
                         break;
                         }
                 case "Local Server: Lib B":
                         {
-                        Db.BackEnd = Strings.Trim (Conversions.ToString (GridCNN [1, r].Value)) + "; TrustServerCertificate=True;";
+                        Db.BackEnd = Strings.Trim (Conversions.ToString (GridCNN[1, r].Value)) + "; TrustServerCertificate=True;";
                         break;
                         }
                 default:
                         {
-                        Db.BackEnd = "Data Source=" + Strings.Trim (Conversions.ToString (GridCNN [1, r].Value)) + ";";
-                        Db.BackEnd += "Initial Catalog=" + Strings.Trim (Conversions.ToString (GridCNN [2, r].Value)) + ";";
-                        Db.BackEnd += "User ID=" + Strings.Trim (Conversions.ToString (GridCNN [3, r].Value)) + ";";
-                        Db.BackEnd += "Password=" + Strings.Trim (Conversions.ToString (GridCNN [4, r].Value)) + "; TrustServerCertificate=True;";
+                        Db.BackEnd = "Data Source=" + Strings.Trim (Conversions.ToString (GridCNN[1, r].Value)) + ";";
+                        Db.BackEnd += "Initial Catalog=" + Strings.Trim (Conversions.ToString (GridCNN[2, r].Value)) + ";";
+                        Db.BackEnd += "User ID=" + Strings.Trim (Conversions.ToString (GridCNN[3, r].Value)) + ";";
+                        Db.BackEnd += "Password=" + Strings.Trim (Conversions.ToString (GridCNN[4, r].Value)) + "; TrustServerCertificate=True;";
                         break;
                         }
                 }
-            Db.Server2Connect = Strings.Trim (Conversions.ToString (GridCNN [0, r].Value));
-            Db.ServerUid = Strings.Trim (Conversions.ToString (GridCNN [2, r].Value));      //in hidden col
-            Db.ServerPwd = Strings.Trim (Conversions.ToString (GridCNN [3, r].Value));      //in hidden col
+            Db.Server2Connect = Strings.Trim (Conversions.ToString (GridCNN[0, r].Value));
+            Db.ServerUid = Strings.Trim (Conversions.ToString (GridCNN[2, r].Value));      //in hidden col
+            Db.ServerPwd = Strings.Trim (Conversions.ToString (GridCNN[3, r].Value));      //in hidden col
             //Db.ServerPwd = Strings.Trim (Conversions.ToString (GridCNN [3, r].Value));    //in hidden col
             if (string.IsNullOrEmpty (Db.Server2Connect))
                 return;
@@ -617,7 +617,7 @@ namespace eLib
             }
         private void Menu_DeleteCnn_Click (object sender, EventArgs e)
             {
-            Db.DS.Tables ["tblConnections"].Clear ();
+            Db.DS.Tables["tblConnections"].Clear ();
             PasswordTextBox.Text = "";
             PasswordTextBox.Visible = false;
             //delete eLibcnn file
@@ -653,15 +653,15 @@ namespace eLib
             //copy and test eLibA
             if ((Db.CopyAndAttachLocalDB ("eLibA") == true) && (Db.CheckDBAttached2SqlServerExpress ("eLibA") == true))
                 {
-                Db.DS.Tables ["tblConnections"].Rows.Add ("Local Server: Lib A", @"Server=.\SQLEXPRESS; Initial Catalog=eLibA; Integrated Security = SSPI; TrustServerCertificate=True;", "", "", "", "");
+                Db.DS.Tables["tblConnections"].Rows.Add ("Local Server: Lib A", @"Server=.\SQLEXPRESS; Initial Catalog=eLibA; Integrated Security = SSPI; TrustServerCertificate=True;", "", "", "", "");
                 }
             //copy and test eLibB
             if ((Db.CopyAndAttachLocalDB ("eLibB") == true) && (Db.CheckDBAttached2SqlServerExpress ("eLibB") == true))
                 {
-                Db.DS.Tables ["tblConnections"].Rows.Add ("Local Server: Lib B", @"Server=.\SQLEXPRESS; Initial Catalog=eLibA; Integrated Security = SSPI; TrustServerCertificate=True;", "", "", "", "");
+                Db.DS.Tables["tblConnections"].Rows.Add ("Local Server: Lib B", @"Server=.\SQLEXPRESS; Initial Catalog=eLibA; Integrated Security = SSPI; TrustServerCertificate=True;", "", "", "", "");
                 }
             GridCNN.DataSource = null;
-            GridCNN.DataSource = Db.DS.Tables ["tblConnections"];
+            GridCNN.DataSource = Db.DS.Tables["tblConnections"];
             //format the grid
             FormatGridCnn ();
             }

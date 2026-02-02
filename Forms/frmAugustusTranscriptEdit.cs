@@ -79,9 +79,9 @@ namespace eLib.Forms
         //drop
         private void txtInfo_DragDrop (object sender, DragEventArgs e)
             {
-            string [] strFiles = (string []) e.Data.GetData (DataFormats.FileDrop, false);
-            eLibFile.strFilex = strFiles [0];
-            FileInfo MyFile = new FileInfo (strFiles [0]);
+            string[] strFiles = (string[]) e.Data.GetData (DataFormats.FileDrop, false);
+            eLibFile.strFilex = strFiles[0];
+            FileInfo MyFile = new FileInfo (strFiles[0]);
             string ext = MyFile.Extension.ToLower ();
             if ((ext == ".txt") || (ext == ".cs") || (ext == ".fasta") || (ext == ".r") || (ext == ".py"))
                 {
