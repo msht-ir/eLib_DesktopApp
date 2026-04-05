@@ -13,21 +13,6 @@ namespace eLib
     {
     static class Module1
         {
-        //TABLES
-        //public static DataTable tblConnections = new DataTable ();
-        //public static DataTable tblSettings = new DataTable ();
-        //public static DataTable tblusrs = new DataTable ();
-        //public static DataTable tblRefs = new DataTable ();
-        //public static DataTable tblLinks = new DataTable ();
-        //public static DataTable tblRefPaths = new DataTable ();
-        //public static DataTable tblUserProject = new DataTable ();
-        //public static DataTable tblProject = new DataTable ();
-        //public static DataTable tblProj_tmp = new DataTable ();
-        //public static DataTable tblProd_tmp = new DataTable ();
-        //public static DataTable tblProd_tmp2 = new DataTable ();
-        //public static DataTable tblAssignments = new DataTable ();
-        //public static DataTable tblSubProjects = new DataTable ();
-        //public static DataTable tblAssign_tmp = new DataTable (); // to Edit a Ref using frmImport 
         [STAThread]
         public static void Main ()
             {

@@ -830,17 +830,6 @@ namespace eLib.Forms
                         txtSearch.SelectionLength = txtSearch.TextLength;
                         break;
                         }
-                case "-exam":
-                        {
-                        WindowState = FormWindowState.Minimized;
-                        System.Windows.Forms.Form frm_CourseExamTest = new frmCourseExamTest ();
-                        frm_CourseExamTest.ShowDialog ();
-                        WindowState = FormWindowState.Normal;
-                        txtSearch.Text = "";
-                        //txtSearch.SelectionStart = 0;
-                        //txtSearch.SelectionLength = txtSearch.Text.Length;
-                        break;
-                        }
                 case "-quit":
                 case "-exit":
                         {
@@ -3446,8 +3435,8 @@ namespace eLib.Forms
                 {
                 Client.DialogRequestParams = 8; //BIT4(=8): 0:new, 1:Edit
                 Project.Id = Convert.ToInt32 (TreeA.SelectedNode.Tag);
-                Form AugustusLib = new frmAugustusLib ();
-                AugustusLib.ShowDialog ();
+                //Form AugustusLib = new frmAugustusLib ();
+                //AugustusLib.ShowDialog ();
                 }
             else
                 {
@@ -3459,8 +3448,8 @@ namespace eLib.Forms
                             {
                             //ok, read from Excel
                             Client.DialogRequestParams = 0;
-                            Form frmArrow = new Arrows ();
-                            frmArrow.ShowDialog ();
+                            //Form frmArrow = new Arrows ();
+                            //frmArrow.ShowDialog ();
                             break;
                             }
                     case DialogResult.No:
@@ -3472,8 +3461,8 @@ namespace eLib.Forms
                             if (Client.DialogRequestParams == 64) //bit7:2^6:64: a Project is selected from dialog
                                 {
                                 Client.DialogRequestParams = 8; //BIT4(=8): 0:new, 1:Edit
-                                Form AugustusLib = new frmAugustusLib ();
-                                AugustusLib.ShowDialog ();
+                                //Form AugustusLib = new frmAugustusLib ();
+                                //AugustusLib.ShowDialog ();
                                 }
                             break;
                             }

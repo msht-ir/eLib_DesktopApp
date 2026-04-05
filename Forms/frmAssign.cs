@@ -294,8 +294,8 @@ namespace eLib
                 {
                 Client.DialogRequestParams = 8; //BIT4(=8): 0:new, 1:Edit
                 Project.Id = (int) List3.SelectedValue;
-                Form AugustusLib = new frmAugustusLib ();
-                AugustusLib.ShowDialog ();
+                //Form AugustusLib = new frmAugustusLib ();
+                //AugustusLib.ShowDialog ();
                 }
             else
                 {
@@ -307,8 +307,8 @@ namespace eLib
                             {
                             //ok, read from Excel
                             Client.DialogRequestParams = 0;
-                            Form frmArrow = new Arrows ();
-                            frmArrow.ShowDialog ();
+                            //Form frmArrow = new Arrows ();
+                            //frmArrow.ShowDialog ();
                             break;
                             }
                     case DialogResult.No:
@@ -320,8 +320,8 @@ namespace eLib
                             if (Client.DialogRequestParams == 64) //bit7:2^6:64: a Project is selected from dialog
                                 {
                                 Client.DialogRequestParams = 8; //BIT4(=8): 0:new, 1:Edit
-                                Form AugustusLib = new frmAugustusLib ();
-                                AugustusLib.ShowDialog ();
+                                //Form AugustusLib = new frmAugustusLib ();
+                                //AugustusLib.ShowDialog ();
                                 }
                             break;
                             }
